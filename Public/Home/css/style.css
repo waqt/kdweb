@@ -367,9 +367,13 @@ h5{
 	line-height: 60px;
 	font-weight: 700;
 }
+
+.slider .sliderimg {
+	width: 150px;
+}
 .slider h2 {
 	font-family: 'lora', serif;
-	font-style: italic;
+/*	font-style: italic; */
 	color: #fff;
 	text-transform: capitalize;
 	font-size: 24px;

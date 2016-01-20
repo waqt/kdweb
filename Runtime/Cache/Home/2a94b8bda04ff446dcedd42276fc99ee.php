@@ -88,16 +88,17 @@
                 <div class="row">
                     <div class="col-md-4">
                         <div class="slider-img pull-right hidden-xs">
-                            <img src="/Public/Home/images/slider2.png" alt="" class="img-responsive">
+                            <img src="/Public/Home/images/slider3.png" alt="" class="img-responsive">
                         </div>
                     </div>
                     <div class="col-md-7 col-md-offset-1">
                         <div class="slider-content ">
+                            <!--<img class="sliderimg" src="/Public/Home/images/logo3.png" alt="logo">-->
                             <h1>快点</h1>
-                            <h2>让电器售后服务更简单</h2>
+                            <h2>电器售后服务解决方案专家</h2>
                             <ul class="top-link list-inline">
                                 <li><a href="#"><i class="fa fa-android"></i> Android</a></li>
-                                <li><a href="#"><i class="fa fa-apple"></i>Apple</a></li>
+                                <li><a href="#"><i class="fa fa-apple"></i>  Apple  </a></li>
                                 <!--<li><a href="#"><i class="fa fa-windows"></i> Windows</a></li>-->
                             </ul>
                         </div>
@@ -465,7 +466,7 @@
                             <div class="row">
                                 <div class="col-md-5 visible-md visible-lg wow fadeInUp" data-wow-delay=".9s" >
                                     <div class="item-img">
-                                        <img src="/Public/Home/images/slider/slider2.png" alt="" class="img-responsive">
+                                        <img src="/Public/Home/images/slider/slider3.png" alt="" class="img-responsive">
                                     </div>
                                 </div>
                                 <div class="col-md-7">
