@@ -57,7 +57,7 @@
                         </button>
                         <div class="navbar-brand">
                             <a href="#" class="page-scroll">
-                                <img class="img-responsive" src="/Public/Home/images/logo1.png" alt="logo">
+                                <img class="img-responsive" src="/Public/Home/images/logo2.png" alt="logo">
                             </a> 
                         </div>                   
                     </div><!--/ Logo end -->
