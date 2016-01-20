@@ -50,14 +50,14 @@
                     <!-- Logo start -->
                     <div class="navbar-header">
                         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                            <span class="sr-only">Toggle navigation</span>
+                            <span class="sr-only">KUAIDIAN navigation</span>
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
                         <div class="navbar-brand">
                             <a href="#" class="page-scroll">
-                                <img class="img-responsive" src="/Public/Home/images/kdlogo.jpg" alt="logo">
+                                <img class="img-responsive" src="/Public/Home/images/logo1.png" alt="logo">
                             </a> 
                         </div>                   
                     </div><!--/ Logo end -->
@@ -71,7 +71,7 @@
                             <li><a class="page-scroll" href="#benefit" >优势</a></li>
                             <!--<li><a class="page-scroll" href="#pricing" >pricing</a></li>-->
                             <li><a class="page-scroll" href="#contact" >联系我们</a></li>
-                            <li><a class="page-scroll" href="#contact" >后台管理</a></li>
+                            <li><a class="page-scroll" href="http://ikuaidian.com:8181/kdx/v2/index.php" >后台管理</a></li>
                         </ul>
                     </div><!--/ Navigation end -->
                 </div><!--/ Row end -->
