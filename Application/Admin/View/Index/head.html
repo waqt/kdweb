@@ -1,0 +1,49 @@
+      <header class="header black-bg">
+              <div class="sidebar-toggle-box">
+                  <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
+              </div>
+            <!--logo start-->
+            <a href="#" class="logo"><b>控制菜单</b></a>
+            <!--logo end-->
+            <div class="nav notify-row" id="top_menu">
+                <!--  notification start -->
+                <ul class="nav top-menu">
+                    <volist name='top_menu' id='vo'>
+                    <!-- settings start -->
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            <i class="{$vo.class}"></i>
+                            <span class="badge bg-theme">{$vo.number}</span>
+                        </a>
+                        <ul class="{$vo.ul}">
+                            <div class="notify-arrow notify-arrow-green"></div>
+                            <li>
+                                <p class="green">You have 4 pending tasks</p>
+                            </li>
+                            <li class="external">
+                                <a href="#">See All Tasks</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- settings end -->
+                    </volist>
+                    <!-- inbox dropdown end -->
+                </ul>
+                <!--  notification end -->
+            </div>
+            <div class="top-menu">
+            	<ul class="nav pull-right top-menu">
+                    <li><button class="logout" id="loginout">登出</a></li>
+            	</ul>
+            </div>
+        </header>
+        <script type="text/javascript">
+            $("#loginout").click(function(){
+                $.get(
+                    "__MODULE__/Login/loginout",
+                    function(data){
+                        alert(data['message']);
+                        window.location.href=data['jumpUrl'];
+                    });
+                });
+        </script>

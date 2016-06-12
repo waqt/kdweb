@@ -1,0 +1,60 @@
+     <aside>
+          <div id="sidebar"  class="nav-collapse ">
+              <!-- sidebar menu start-->
+              <ul class="sidebar-menu" id="nav-accordion">
+              
+              	  <p class="centered">
+                    <a href="#">
+                      <!--
+                      <img src="__ASSETS__/img/ui-sam.jpg" class="img-circle" width="60">
+                      -->
+                      <img src="{$user_info.logo}" id="user_logo" class="img-circle" width="60">
+                    </a>
+                  </p>
+              	  <h5 class="centered">
+                    <script type="text/javascript">
+                      document.write({$user_info.phone});
+                    </script> 
+                  </h5>
+                  <volist name='left_menu' id='vo' key='k'>
+                    <li class="sub-menu">
+                      <a  class="parent-a" href="javascript:;">
+                          <i class="{$vo.css_class}"></i>
+                          <span>{$vo.title}</span>
+                      </a>
+                      <ul class="sub">
+                        <volist name='vo.child_menu' id='vc' key='kc' class='child_list'>
+                          <li class='left_child_li' id='{$k}{$kc}' ><a id="{$vc.id}" class="left_child_menu" value='{$vc.module}/{$vc.action}' href="#" >{$vc.title}</a></li>
+                        </volist>
+                      </ul>
+                    </li>
+              	  </volist>	
+
+              </ul>
+              <!-- sidebar menu end-->
+          </div>
+      </aside>
+      <!--侧方子菜单active判定-->
+      <script type="text/javascript">
+        $('.left_child_li').click(function (){
+            //把之前已有的active去掉
+            $('.left_child_li').removeClass('active');
+            var id=$(this).attr("id");
+            //当前点击的li加上class
+            $("#"+id).addClass('active');
+        });
+      </script>
+      <!--头像显示判定-->
+       <script type="text/javascript">
+              jQuery(function(){
+                if($("#user_logo").attr("src")==""){
+                 $("#user_logo").attr("src","__ASSETS__/img/ui-logo.jpg")
+                }
+              });
+      </script> 
+      <script>
+      //custom select box
+        $(function(){
+            $("select.styled").customSelect();
+        });
+      </script>

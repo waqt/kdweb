@@ -1,0 +1,58 @@
+	   			<div class="span9">
+					<div class="row-fluid">
+						<div class="page-header">
+							<h3>
+								商户管理 <small>商户列表</small>
+							</h3>
+						</div>
+						<table class="table table-strtable table-striped table-bordered table-condensed">
+                              <thead>
+                              <tr>
+                                <th>序号</th>
+								<th>商户ID</th>
+								<th>商户名称</th>
+								<th>手机号</th>
+								<th>接单认证状态</th>
+								<th>负责人</th>
+								<th>标识码</th>
+								<th>品牌授权状态</th>
+								<th>地址</th>
+								<th><i class=" fa fa-edit"></i>操作</th>
+                              </tr>
+                              </thead>
+                              <tbody>
+								<volist name='merchant_list' id='ml' key='kc' >
+									<tr class="list-users">
+										<td>{$kc}</td>
+										<td>{$ml.mer_id}</td>
+										<td>{$ml.mer_name}</td>
+										<td>{$ml.herader_phone}</td>
+										<if condition="($ml.business_state eq '已认证')">
+											<td><span class="label label-success label-mini">{$ml.business_state}</span></td>
+										<elseif condition="($ml.business_state eq '认证中')"/>
+											<td><span class="label label-info label-mini">{$ml.business_state}</span></td>
+										<else />
+											<td><span class="label label-warning label-mini">{$ml.business_state}</span></td>
+										</if>
+										<td>{$ml.header_name}</td>
+										<td>{$ml.identification_code}</td>
+										<td>{$ml.brand_state}</td>
+										<td>{$ml.address}</td>
+										<td>
+											<button class="btn btn-warning btn-xs"><i class="fa fa-eye"></i>查看</button>
+										</td>
+									</tr>
+								</volist>
+                              </tbody>
+                          </table>
+                          <div class="pagination">
+								<li><a href="#">Prev</a></li>
+								<li class="active"><a href="#">1</a></li>
+								<li><a href="#">2</a></li>
+								<li><a href="#">3</a></li>
+								<li><a href="#">4</a></li>
+								<li><a href="#">Next</a></li>
+						</div>
+					</div>
+				</div>
+		</div>
