@@ -23,10 +23,13 @@ class MerchantController extends CommonController {
       $page = I('page');
       $limit = 10;
       $merchantLogic = new l\MerchantLogic();
-      $merchant_list=$merchantLogic->getMerchantList($area, $authorize_state, $appliance_id, $phone, $onlycode, $brand_name, $page, $limit);
+      $merchant_data=$merchantLogic->getMerchantList($area, $authorize_state, $appliance_id, $phone, $onlycode, $brand_name, $page, $limit);
+      $merchant_list=$merchant_data['datas'];
+      $list_count=$merchant_data['allcount'];
       $data['error_code']=$merchantLogic->getErrorCode();
       $data['error_message']=$merchantLogic->getErrorMessage();
       $this->assign('merchant_list', $merchant_list);
+      $this->assign('list_count',$list_count);
       $this->display();
   }
 
