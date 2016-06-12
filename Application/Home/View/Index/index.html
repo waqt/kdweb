@@ -41,7 +41,6 @@
     <![endif]-->
   </head>
   <body data-spy="scroll" data-target=".navbar-fixed-top" >
-    
 <!-- Header start -->
     <header id="header" role="banner" >
         <nav class="navbar navbar-default navbar-fixed-top"  id="tf-menu">
@@ -65,13 +64,13 @@
                         <ul class="nav navbar-nav navbar-right">
                             <li class="active"><a class="page-scroll" href="#slider-top" >首页</a></li>
                             <li><a class="page-scroll" href="#feature" >用户端</a></li>
-                            <li><a class="page-scroll" href="#process" >商户端</a></li>
+                            <li><a class="page-scroll" href="#process" >网点报名</a></li>
                             <li><a class="page-scroll" href="#about" >关于我们</a></li>
-                            <li><a class="page-scroll" href="#overview" >企业服务端</a></li>
+                            <li><a class="page-scroll" href="#overview" >企业合作</a></li>
                             <li><a class="page-scroll" href="#benefit" >优势</a></li>
                             <!--<li><a class="page-scroll" href="#pricing" >pricing</a></li>-->
                             <li><a class="page-scroll" href="#contact" >联系我们</a></li>
-                            <li><a class="page-scroll" href="http://ikuaidian.com:8181/kdx/v2/index.php" >后台管理</a></li>
+                            <li><a class="page-scroll" id="console-link" href="{:U('/Admin/Login/login')}" >后台管理</a></li>
                         </ul>
                     </div><!--/ Navigation end -->
                 </div><!--/ Row end -->
@@ -97,8 +96,8 @@
                             <h1>快点</h1>
                             <h2>电器售后服务解决方案专家</h2>
                             <ul class="top-link list-inline">
-                                <li><a href="#"><i class="fa fa-android"></i> Android</a></li>
-                                <li><a href="#"><i class="fa fa-apple"></i>  Apple  </a></li>
+                                <li><a href="http://a.app.qq.com/o/simple.jsp?pkgname=com.glavesoft.kd.app"><i class="fa fa-android"></i> Android </a></li>
+                                <li><a href="http://a.app.qq.com/o/simple.jsp?pkgname=com.glavesoft.kd.app"><i class="fa fa-apple"></i>  Apple  </a></li>
                                 <!--<li><a href="#"><i class="fa fa-windows"></i> Windows</a></li>-->
                             </ul>
                         </div>
@@ -682,13 +681,13 @@
     <!-- Bootstrap jQuery -->
     <script type="text/javascript" src="__JS__/bootstrap.min.js"></script>
     <!-- Style Switcher -->
-    <script type="text/javascript" src="__JS__/isotope.js"></script>
+    <!--<script type="text/javascript" src="__JS__/isotope.js"></script>-->
     <!-- Owl Carousel -->
     <script type="text/javascript" src="__JS__/owl.carousel.js"></script>
     <!-- PrettyPhoto -->
     <script type="text/javascript" src="__JS__/jquery.prettyPhoto.js"></script>
     <!-- Isotope -->
-    <script type="text/javascript" src="__JS__/isotope.js"></script>
+    <!--<script type="text/javascript" src="__JS__/isotope.js"></script>-->
     <!-- Wow Animation -->
     <script type="text/javascript" src="__JS__/wow.min.js"></script>
     <!-- SmoothScroll -->
@@ -704,6 +703,7 @@
     <!-- Google Map API Key Source -->
     
     <!-- Custom js -->
+    <script type="text/javascript" src="__ASSETS__/js/jquery.backstretch.min.js"></script>
     <script type="text/javascript" src="__JS__/custom.js"></script>
     <script>
         new WOW().init();

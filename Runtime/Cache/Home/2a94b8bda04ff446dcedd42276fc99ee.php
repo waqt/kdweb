@@ -8,30 +8,30 @@
 
     <!-- Mobile Specific Metas
   ================================================== -->
-    <link rel="icon" href="/Public/Home/images/kdlogo.jpg" type="image/x-icon"/>
+    <link rel="icon" href="/Public/images/kdlogo.jpg" type="image/x-icon"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
     <!-- CSS
   ================================================== -->
     <!-- Bootstrap -->
-    <link rel="stylesheet" href="/Public/Home/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/Public/css/bootstrap.min.css">
     <!-- FontAwesome -->
-    <link rel="stylesheet" href="/Public/Home/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/Public/css/font-awesome.min.css">
     <!-- Elegant icon font -->
-     <link rel="stylesheet" href="/Public/Home/css/line-icons.min.css">
+     <link rel="stylesheet" href="/Public/css/line-icons.min.css">
     <!-- Animation -->
-    <link rel="stylesheet" href="/Public/Home/css/animate.css">
+    <link rel="stylesheet" href="/Public/css/animate.css">
     <!-- Prettyphoto -->
-    <link rel="stylesheet" href="/Public/Home/css/prettyPhoto.css">
+    <link rel="stylesheet" href="/Public/css/prettyPhoto.css">
     <!-- Owl Carousel -->
-    <link rel="stylesheet" href="/Public/Home/css/owl.carousel.css">
-    <link rel="stylesheet" href="/Public/Home/css/owl.theme.css">
+    <link rel="stylesheet" href="/Public/css/owl.carousel.css">
+    <link rel="stylesheet" href="/Public/css/owl.theme.css">
     <!-- Scrolling nav css -->
-    <link rel="stylesheet" href="/Public/Home/css/scrolling-nav.css">
+    <link rel="stylesheet" href="/Public/css/scrolling-nav.css">
     <!-- Template styles-->
-    <link rel="stylesheet" href="/Public/Home/css/style.css">
+    <link rel="stylesheet" href="/Public/css/style.css">
     <!-- Responsive styles-->
-    <link rel="stylesheet" href="/Public/Home/css/responsive.css">
+    <link rel="stylesheet" href="/Public/css/responsive.css">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -41,7 +41,6 @@
     <![endif]-->
   </head>
   <body data-spy="scroll" data-target=".navbar-fixed-top" >
-    
 <!-- Header start -->
     <header id="header" role="banner" >
         <nav class="navbar navbar-default navbar-fixed-top"  id="tf-menu">
@@ -57,7 +56,7 @@
                         </button>
                         <div class="navbar-brand">
                             <a href="#" class="page-scroll">
-                                <img class="img-responsive" src="/Public/Home/images/logo2.png" alt="logo">
+                                <img class="img-responsive" src="/Public/images/logo2.png" alt="logo">
                             </a> 
                         </div>                   
                     </div><!--/ Logo end -->
@@ -65,13 +64,13 @@
                         <ul class="nav navbar-nav navbar-right">
                             <li class="active"><a class="page-scroll" href="#slider-top" >首页</a></li>
                             <li><a class="page-scroll" href="#feature" >用户端</a></li>
-                            <li><a class="page-scroll" href="#process" >商户端</a></li>
+                            <li><a class="page-scroll" href="#process" >网点报名</a></li>
                             <li><a class="page-scroll" href="#about" >关于我们</a></li>
-                            <li><a class="page-scroll" href="#overview" >企业服务端</a></li>
+                            <li><a class="page-scroll" href="#overview" >企业合作</a></li>
                             <li><a class="page-scroll" href="#benefit" >优势</a></li>
                             <!--<li><a class="page-scroll" href="#pricing" >pricing</a></li>-->
                             <li><a class="page-scroll" href="#contact" >联系我们</a></li>
-                            <li><a class="page-scroll" href="http://ikuaidian.com:8181/kdx/v2/index.php" >后台管理</a></li>
+                            <li><a class="page-scroll" id="console-link" href="<?php echo U('/Admin/Login/login');?>" >后台管理</a></li>
                         </ul>
                     </div><!--/ Navigation end -->
                 </div><!--/ Row end -->
@@ -88,17 +87,17 @@
                 <div class="row">
                     <div class="col-md-4">
                         <div class="slider-img pull-right hidden-xs">
-                            <img src="/Public/Home/images/slider3.png" alt="" class="img-responsive">
+                            <img src="/Public/images/slider3.png" alt="" class="img-responsive">
                         </div>
                     </div>
                     <div class="col-md-7 col-md-offset-1">
                         <div class="slider-content ">
-                            <!--<img class="sliderimg" src="/Public/Home/images/logo3.png" alt="logo">-->
+                            <!--<img class="sliderimg" src="/Public/images/logo3.png" alt="logo">-->
                             <h1>快点</h1>
                             <h2>电器售后服务解决方案专家</h2>
                             <ul class="top-link list-inline">
-                                <li><a href="#"><i class="fa fa-android"></i> Android</a></li>
-                                <li><a href="#"><i class="fa fa-apple"></i>  Apple  </a></li>
+                                <li><a href="http://a.app.qq.com/o/simple.jsp?pkgname=com.glavesoft.kd.app"><i class="fa fa-android"></i> Android </a></li>
+                                <li><a href="http://a.app.qq.com/o/simple.jsp?pkgname=com.glavesoft.kd.app"><i class="fa fa-apple"></i>  Apple  </a></li>
                                 <!--<li><a href="#"><i class="fa fa-windows"></i> Windows</a></li>-->
                             </ul>
                         </div>
@@ -143,7 +142,7 @@
                 </div>
 
                 <div class="col-md-4 col-sm-4 col-xs-4 visible-md visible-lg wow fadeInDown" data-wow-delay=".3s">
-                    <img src="/Public/Home/images/sec-img/img2.png" alt="" class="img-responsive">
+                    <img src="/Public/images/sec-img/img2.png" alt="" class="img-responsive">
                 </div>
 
                 <div class="col-md-4 col-sm-6">
@@ -321,40 +320,40 @@
                                     <div class="thumbnail">
                                         <div class="caption">
                                             <div class="caption-content">
-                                                <a data-rel="prettyPhoto" href="/Public/Home/images/overview/screen1.jpg" > <i class="fa fa-link"></i></a>
+                                                <a data-rel="prettyPhoto" href="/Public/images/overview/screen1.jpg" > <i class="fa fa-link"></i></a>
                                             </div>
                                         </div>
-                                         <img src="/Public/Home/images/overview/screen1.jpg" alt="" class="img-responsive">
+                                         <img src="/Public/images/overview/screen1.jpg" alt="" class="img-responsive">
                                     </div>
                                 </div> <!-- col end -->
                                 <div class="col-xs-12 col-sm-3 col-md-3"> 
                                     <div class="thumbnail">
                                         <div class="caption">
                                             <div class="caption-content">
-                                                <a data-rel="prettyPhoto" href="/Public/Home/images/overview/screen2.jpg"> <i class="fa fa-link"></i></a>
+                                                <a data-rel="prettyPhoto" href="/Public/images/overview/screen2.jpg"> <i class="fa fa-link"></i></a>
                                             </div>
                                         </div>
-                                         <img src="/Public/Home/images/overview/screen2.jpg" alt="" class="img-responsive">
+                                         <img src="/Public/images/overview/screen2.jpg" alt="" class="img-responsive">
                                     </div>
                                 </div> <!-- col end -->
                                 <div class="col-xs-12 col-sm-3 col-md-3"> 
                                     <div class="thumbnail">
                                         <div class="caption">
                                             <div class="caption-content">
-                                                <a data-rel="prettyPhoto" href="/Public/Home/images/overview/screen3.jpg"> <i class="fa fa-link"></i></a>
+                                                <a data-rel="prettyPhoto" href="/Public/images/overview/screen3.jpg"> <i class="fa fa-link"></i></a>
                                             </div>
                                         </div>
-                                         <img src="/Public/Home/images/overview/screen3.jpg" alt="" class="img-responsive">
+                                         <img src="/Public/images/overview/screen3.jpg" alt="" class="img-responsive">
                                     </div>
                                 </div> <!-- col end -->
                                 <div class="col-xs-12 col-sm-3 col-md-3"> 
                                     <div class="thumbnail">
                                         <div class="caption">
                                             <div class="caption-content">
-                                                <a data-rel="prettyPhoto" href="/Public/Home/images/overview/screen4.jpg"> <i class="fa fa-link"></i></a>
+                                                <a data-rel="prettyPhoto" href="/Public/images/overview/screen4.jpg"> <i class="fa fa-link"></i></a>
                                             </div>
                                         </div>
-                                         <img src="/Public/Home/images/overview/screen4.jpg" alt="" class="img-responsive">
+                                         <img src="/Public/images/overview/screen4.jpg" alt="" class="img-responsive">
                                     </div>
                                 </div> <!-- col end -->
                             </div> <!-- row end -->
@@ -366,40 +365,40 @@
                                     <div class="thumbnail">
                                         <div class="caption">
                                             <div class="caption-content">
-                                                <a data-rel="prettyPhoto" href="/Public/Home/images/overview/screen5.jpg"> <i class="fa fa-link"></i></a>
+                                                <a data-rel="prettyPhoto" href="/Public/images/overview/screen5.jpg"> <i class="fa fa-link"></i></a>
                                             </div>
                                         </div>
-                                         <img src="/Public/Home/images/overview/screen5.jpg" alt="" class="img-responsive">
+                                         <img src="/Public/images/overview/screen5.jpg" alt="" class="img-responsive">
                                     </div>
                                 </div> <!-- col end -->
                                 <div class="col-xs-12 col-sm-3 col-md-3"> 
                                     <div class="thumbnail">
                                         <div class="caption">
                                             <div class="caption-content">
-                                                <a data-rel="prettyPhoto" href="/Public/Home/images/overview/screen6.jpg"> <i class="fa fa-link"></i></a>
+                                                <a data-rel="prettyPhoto" href="/Public/images/overview/screen6.jpg"> <i class="fa fa-link"></i></a>
                                             </div>
                                         </div>
-                                         <img src="/Public/Home/images/overview/screen6.jpg" alt="" class="img-responsive">
+                                         <img src="/Public/images/overview/screen6.jpg" alt="" class="img-responsive">
                                     </div>
                                 </div> <!-- col end -->
                                 <div class="col-xs-12 col-sm-3 col-md-3"> 
                                     <div class="thumbnail">
                                         <div class="caption">
                                             <div class="caption-content">
-                                                <a data-rel="prettyPhoto" href="/Public/Home/images/overview/screen7.jpg"> <i class="fa fa-link"></i></a>
+                                                <a data-rel="prettyPhoto" href="/Public/images/overview/screen7.jpg"> <i class="fa fa-link"></i></a>
                                             </div>
                                         </div>
-                                         <img src="/Public/Home/images/overview/screen7.jpg" alt="" class="img-responsive">
+                                         <img src="/Public/images/overview/screen7.jpg" alt="" class="img-responsive">
                                     </div>
                                 </div> <!-- col end -->
                                 <div class="col-xs-12 col-sm-3 col-md-3"> 
                                     <div class="thumbnail">
                                         <div class="caption">
                                             <div class="caption-content">
-                                                <a data-rel="prettyPhoto" href="/Public/Home/images/overview/screen8.jpg"> <i class="fa fa-link"></i></a>
+                                                <a data-rel="prettyPhoto" href="/Public/images/overview/screen8.jpg"> <i class="fa fa-link"></i></a>
                                             </div>
                                         </div>
-                                         <img src="/Public/Home/images/overview/screen8.jpg" alt="" class="img-responsive">
+                                         <img src="/Public/images/overview/screen8.jpg" alt="" class="img-responsive">
                                     </div>
                                 </div> <!-- col end -->
                             </div> <!-- row end -->
@@ -409,10 +408,10 @@
                     </div> <!-- carousel-inner end -->
                     <!-- Controls -->
                       <a class="left carousel-control" href="#app-carousel" role="button" data-slide="prev">
-                        <span aria-hidden="true"><img src="/Public/Home/images/arrow-left.png" alt=""></span>
+                        <span aria-hidden="true"><img src="/Public/images/arrow-left.png" alt=""></span>
                       </a>
                       <a class="right carousel-control" href="#app-carousel" role="button" data-slide="next">
-                        <span  aria-hidden="true"> <img src="/Public/Home/images/arrow-right.png" alt=""></span>
+                        <span  aria-hidden="true"> <img src="/Public/images/arrow-right.png" alt=""></span>
                       </a>
                 </div>
             </div> <!-- row end  -->
@@ -466,7 +465,7 @@
                             <div class="row">
                                 <div class="col-md-5 visible-md visible-lg wow fadeInUp" data-wow-delay=".9s" >
                                     <div class="item-img">
-                                        <img src="/Public/Home/images/slider/slider3.png" alt="" class="img-responsive">
+                                        <img src="/Public/images/slider/slider3.png" alt="" class="img-responsive">
                                     </div>
                                 </div>
                                 <div class="col-md-7">
@@ -517,7 +516,7 @@
                 </div> <!-- col-md-8 end -->
                 <div class="col-md-5 wow fadeInRight hidden-sm " data-wow-delay=".3s">
                     <div class="flaoting-img">
-                        <img src="/Public/Home/images/app1.png" alt="" class="img-responsive">
+                        <img src="/Public/images/app1.png" alt="" class="img-responsive">
                     </div>
                 </div>
             </div>  <!-- rowr end  -->
@@ -533,42 +532,42 @@
                   <div id="client-carousel" class=" owl-carousel owl-theme text-center client-carousel">
                     <figure class="item client_logo">
                       <a href="#">
-                        <img src="/Public/Home/images/clients/client1.png" alt="client">
+                        <img src="/Public/images/clients/client1.png" alt="client">
                       </a>
                     </figure>
                     <figure class="item client_logo">
                       <a href="#">
-                        <img src="/Public/Home/images/clients/client2.png" alt="client">
+                        <img src="/Public/images/clients/client2.png" alt="client">
                       </a>
                     </figure>
                     <figure class="item client_logo">
                       <a href="#">
-                        <img src="/Public/Home/images/clients/client3.png" alt="client">
+                        <img src="/Public/images/clients/client3.png" alt="client">
                       </a>
                     </figure>
                     <figure class="item client_logo">
                       <a href="#">
-                        <img src="/Public/Home/images/clients/client4.png" alt="client">
+                        <img src="/Public/images/clients/client4.png" alt="client">
                       </a>
                     </figure>
                     <figure class="item client_logo">
                       <a href="#">
-                        <img src="/Public/Home/images/clients/client5.png" alt="client">
+                        <img src="/Public/images/clients/client5.png" alt="client">
                       </a>
                     </figure>
                     <figure class="item client_logo">
                       <a href="#">
-                        <img src="/Public/Home/images/clients/client6.png" alt="client">
+                        <img src="/Public/images/clients/client6.png" alt="client">
                       </a>
                     </figure>
                     <figure class="item client_logo">
                       <a href="#">
-                        <img src="/Public/Home/images/clients/client7.png" alt="client">
+                        <img src="/Public/images/clients/client7.png" alt="client">
                       </a>
                     </figure>
                     <figure class="item client_logo">
                       <a href="#">
-                        <img src="/Public/Home/images/clients/client8.png" alt="client">
+                        <img src="/Public/images/clients/client8.png" alt="client">
                       </a>
                     </figure>
                   </div><!-- Owl carousel end -->
@@ -637,7 +636,7 @@
                 <div class="col-md-12">
                     <div class="footer-content text-center">
                         <a href="#slider-part" class="page-scroll logo-title">
-                            <img src="/Public/Home/images/blackbg.png" alt="" class="img-responsive">
+                            <img src="/Public/images/blackbg.png" alt="" class="img-responsive">
                         </a>
                         <ul class="footer-socail list-inline">
                             <li><a href="#"><i class="fa fa-facebook"></i></a></li>
@@ -678,33 +677,34 @@
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <!-- initialize jQuery Library -->
-    <script type="text/javascript" src="/Public/Home/js/jquery.js"></script>
+    <script type="text/javascript" src="/Public/js/jquery.js"></script>
     <!-- Bootstrap jQuery -->
-    <script type="text/javascript" src="/Public/Home/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/Public/js/bootstrap.min.js"></script>
     <!-- Style Switcher -->
-    <script type="text/javascript" src="/Public/Home/js/isotope.js"></script>
+    <!--<script type="text/javascript" src="/Public/js/isotope.js"></script>-->
     <!-- Owl Carousel -->
-    <script type="text/javascript" src="/Public/Home/js/owl.carousel.js"></script>
+    <script type="text/javascript" src="/Public/js/owl.carousel.js"></script>
     <!-- PrettyPhoto -->
-    <script type="text/javascript" src="/Public/Home/js/jquery.prettyPhoto.js"></script>
+    <script type="text/javascript" src="/Public/js/jquery.prettyPhoto.js"></script>
     <!-- Isotope -->
-    <script type="text/javascript" src="/Public/Home/js/isotope.js"></script>
+    <!--<script type="text/javascript" src="/Public/js/isotope.js"></script>-->
     <!-- Wow Animation -->
-    <script type="text/javascript" src="/Public/Home/js/wow.min.js"></script>
+    <script type="text/javascript" src="/Public/js/wow.min.js"></script>
     <!-- SmoothScroll -->
-    <script type="text/javascript" src="/Public/Home/js/smooth-scroll.js"></script>
+    <script type="text/javascript" src="/Public/js/smooth-scroll.js"></script>
     <!-- Eeasing -->
-    <script type="text/javascript" src="/Public/Home/js/jquery.easing.1.3.js"></script>
+    <script type="text/javascript" src="/Public/js/jquery.easing.1.3.js"></script>
     <!-- Counter -->
-    <script type="text/javascript" src="/Public/Home/js/jquery.counterup.min.js"></script>
+    <script type="text/javascript" src="/Public/js/jquery.counterup.min.js"></script>
     <!-- Waypoints -->
-    <script type="text/javascript" src="/Public/Home/js/jquery.waypoints.min.js"></script>
+    <script type="text/javascript" src="/Public/js/jquery.waypoints.min.js"></script>
     <!-- Scrolling navigation -->
-    <script type="text/javascript" src="/Public/Home/js/scrolling-nav.js"></script>
+    <script type="text/javascript" src="/Public/js/scrolling-nav.js"></script>
     <!-- Google Map API Key Source -->
     
     <!-- Custom js -->
-    <script type="text/javascript" src="/Public/Home/js/custom.js"></script>
+    <script type="text/javascript" src="/Public/assets/js/jquery.backstretch.min.js"></script>
+    <script type="text/javascript" src="/Public/js/custom.js"></script>
     <script>
         new WOW().init();
     </script>
