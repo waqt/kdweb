@@ -25,7 +25,7 @@ class CustomRbac extends Rbac {
     static public function verifyUser($username,$password) {
         $data['phone']=$username;
         $data['password']=$password;
-        $req_url=LOGIN_AUTHENTICATION_URL;
+        $req_url=BASE_URL.LOGIN_AUTHENTICATION_URL;
         $result=request_post($req_url,$data);
         $result=json_decode($result,true);
         //addErrorLog('','','login_api_result',$result);

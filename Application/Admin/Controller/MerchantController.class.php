@@ -26,9 +26,11 @@ class MerchantController extends CommonController {
       $merchant_data=$merchantLogic->getMerchantList($area, $authorize_state, $appliance_id, $phone, $onlycode, $brand_name, $page, $limit);
       $merchant_list=$merchant_data['datas'];
       $list_count=$merchant_data['allcount'];
+      $pages=ceil($list_count/$limit);
       $data['error_code']=$merchantLogic->getErrorCode();
       $data['error_message']=$merchantLogic->getErrorMessage();
       $this->assign('merchant_list', $merchant_list);
+      $this->assign('pages',$pages);
       $this->assign('list_count',$list_count);
       $this->display();
   }

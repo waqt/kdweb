@@ -26,7 +26,7 @@ class ApplianceLogic extends BaseLogic {
         $data['fl_id']           =$fl_id; 
         $data['limit']           =$limit;                           //分页单页显示行数
         $data['token']           =session('user_info.token');
-        $req_url=APPLIANCE_LIST_URL;
+        $req_url=BASE_URL.APPLIANCE_LIST_URL;
 
         try{
             $result=request_post($req_url,$data);
@@ -41,4 +41,27 @@ class ApplianceLogic extends BaseLogic {
         $appliance_list = $result['data'];
         return $appliance_list;
     }  
+
+
+    /**
+     * 删除电器品类
+     * @param array $appliance_id 品类ID         
+     * @return array
+     */
+    public function delAppliance($appliance_id) {
+
+        $data['appliance_id']           =$appliance_id; 
+        $data['token']           =session('user_info.token');
+        $req_url=BASE_URL.DELETE_APPLIANCE_URL;
+
+        try{
+            $result=request_post($req_url,$data);
+            $result=json_decode($result,true);
+        }
+        catch(\Exception $e){
+            print $e->getMessage();
+            exit();
+        } 
+        return $result;
+    } 
 }

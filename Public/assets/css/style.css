@@ -1643,6 +1643,12 @@ PANELS CONFIGURATIONS
 	box-shadow: 0px 3px 2px #aab2bd;
 }
 
+/* showcase background */
+.inner-showback {
+    padding: 5px;
+    margin-bottom: 5px;
+}
+
 
 
 /* Calendar Events - Calendar.html*/

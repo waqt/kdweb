@@ -37,13 +37,3 @@
             	</ul>
             </div>
         </header>
-        <script type="text/javascript">
-            $("#loginout").click(function(){
-                $.get(
-                    "__MODULE__/Login/loginout",
-                    function(data){
-                        alert(data['message']);
-                        window.location.href=data['jumpUrl'];
-                    });
-                });
-        </script>

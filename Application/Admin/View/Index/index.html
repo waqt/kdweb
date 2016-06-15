@@ -10,20 +10,18 @@
     <title>快点电器服务后台管理系统</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="__ASSETS__/css/bootstrap.css" rel="stylesheet">
+    <link href="__ASSETS__/css/bootstrap.min.css" rel="stylesheet">
     <!--external css-->
-    <link href="__ASSETS__/font-awesome/css/font-awesome.css" rel="stylesheet" />
-    <link rel="stylesheet" type="text/css" href="__ASSETS__/css/zabuto_calendar.css">
-    <link rel="stylesheet" type="text/css" href="__ASSETS__/js/gritter/css/jquery.gritter.css" />
-    <link rel="stylesheet" type="text/css" href="__ASSETS__/lineicons/style.css">    
+    <link href="__ASSETS__/font-awesome/css/font-awesome.css" rel="stylesheet" />  
     
     <!-- Custom styles for this template -->
     <link href="__ASSETS__/css/style.css" rel="stylesheet">
     <link href="__ASSETS__/css/style-responsive.css" rel="stylesheet">
-    <link href="__ASSETS__/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- <script src="__ASSETS__/js/chart-master/Chart.js"></script> -->
-    <script src="__ASSETS__/js/jquery.js"></script>
+    <script src="__ASSETS__/js/jquery-1.8.3.min.js"></script>
+    <script src="__ASSETS__/js/jquery-3.0.0.min.js"></script>
+    <script src="__ASSETS__/js/bootstrap.min.js"></script>
     
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -63,7 +61,8 @@
       <!--footer start-->
       <footer class="site-footer">
           <div class="text-center">
-              2016 - Ikuaidian.com
+            <p class="text-right">
+            2016 - Ikuaidian.com      <strong>浙ICP备14033859号-1</strong></p>
               <a href="#" class="go-top">
                   <i class="fa fa-angle-up"></i>
               </a>
@@ -73,36 +72,38 @@
   </section>
 
     <!-- js placed at the end of the document so the pages load faster -->
-    <script src="__ASSETS__/js/jquery.js"></script>
-    <script src="__ASSETS__/js/jquery-1.8.3.min.js"></script>
-    <script src="__ASSETS__/js/bootstrap.min.js"></script>
     <script class="include" type="text/javascript" src="__ASSETS__/js/jquery.dcjqaccordion.2.7.js"></script>
     <script src="__ASSETS__/js/jquery.scrollTo.min.js"></script>
     <script src="__ASSETS__/js/jquery.nicescroll.js" type="text/javascript"></script>
     <script src="__ASSETS__/js/jquery.sparkline.js"></script>
+    <script src="__ASSETS__/js/jquery.pagination.js"></script>
+    
 
 
     <!--common script for all pages-->
     <script src="__ASSETS__/js/common-scripts.js"></script>
-    
-    <script type="text/javascript" src="__ASSETS__/js/gritter/js/jquery.gritter.js"></script>
-    <script type="text/javascript" src="__ASSETS__/js/gritter-conf.js"></script>
 
-    <!--script for this page-->
-    <script src="__ASSETS__/js/sparkline-chart.js"></script>    
-	<script src="__ASSETS__/js/zabuto_calendar.js"></script>
-  <script type="text/javascript"> 
+
+    <!--script for this page--> 
+    <script type="text/javascript"> 
       $(document).ready(function() { 
         $(".left_child_menu").click(function() { 
             var link=$(this).attr("value");
-            console.log(link);
-            $("#wrapper").load("__MODULE__/"+link); 
+            //console.log(link);
+            $("#wrapper").load("__MODULE__/"+link);
           }); 
         }); 
-  </script>	
-	
-	<script type="text/javascript">
-        $(document).ready(function () {
+
+      $("#loginout").click(function(){
+        $.get(
+                "__MODULE__/Login/loginout",
+                function(data){
+                      alert(data['message']);
+                      window.location.href=data['jumpUrl'];
+                });
+      });
+
+      $(document).ready(function () {
         var unique_id = $.gritter.add({
             // (string | mandatory) the heading of the notification
             title: '欢迎使用快点电器服务平台!',
@@ -121,42 +122,5 @@
         return false;
         });
 	</script>
-	
-	<script type="application/javascript">
-        $(document).ready(function () {
-            $("#date-popover").popover({html: true, trigger: "manual"});
-            $("#date-popover").hide();
-            $("#date-popover").click(function (e) {
-                $(this).hide();
-            });
-        
-            $("#my-calendar").zabuto_calendar({
-                action: function () {
-                    return myDateFunction(this.id, false);
-                },
-                action_nav: function () {
-                    return myNavFunction(this.id);
-                },
-                ajax: {
-                    url: "show_data.php?action=1",
-                    modal: true
-                },
-                legend: [
-                    {type: "text", label: "Special event", badge: "00"},
-                    {type: "block", label: "Regular event", }
-                ]
-            });
-        });
-        
-        
-        function myNavFunction(id) {
-            $("#date-popover").hide();
-            var nav = $("#" + id).data("navigation");
-            var to = $("#" + id).data("to");
-            console.log('nav ' + nav + ' to: ' + to.month + '/' + to.year);
-        }
-    </script>
-  
-
   </body>
 </html>

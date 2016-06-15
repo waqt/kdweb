@@ -9,20 +9,36 @@ use Admin\Logic as l;
 * 电器品类管理控制器
 */
 class ApplianceController extends CommonController {
+  /**
+     * 获取电器品类列表
+     * @param int $fl_id 父类ID
+     * @param int $page 分页页数
+     * @param int $limit 每页显示的条数         
+     * @return array
+  */  
   public function index(){
       $page = I('page');
+      $fl_id = I('fl_id');
       $limit = 10;
-      $ApplianceLogic = new l\ApplianceLogic();
-      $merchant_list=$merchantLogic->getMerchantList($area, $authorize_state, $appliance_id, $phone, $onlycode, $brand_name, $page, $limit);
-      $data['error_code']=$merchantLogic->getErrorCode();
-      $data['error_message']=$merchantLogic->getErrorMessage();
-      $this->assign('merchant_list', $merchant_list);
-      $this->display();
+      $applianceLogic = new l\ApplianceLogic();
+      $applianceData=$applianceLogic->getApplianceList($fl_id, $page, $limit);
+      $appliance_list=$applianceData['datas'];
+      $list_count=$applianceData['allcount'];
+      $pages=ceil($list_count/$limit);
+      $data['error_code']=$applianceLogic->getErrorCode();
+      $data['error_message']=$applianceLogic->getErrorMessage();
+      $this->assign('pages',$pages);
+      $this->assign('list_count',$list_count);
+      $this->assign('appliance_list', $appliance_list);
       $this->display();
   }
 
-  public function add_par(){
-    	return true;
+  public function addpar(){
+    	if(I('appliance-name')==null){
+        $this->display();
+      }else{
+         $applianceName=I('appliance-name');
+      }
     }
 
   public function add_son(){
@@ -30,6 +46,10 @@ class ApplianceController extends CommonController {
     }    
 
   public function del() {
-    return true;
+    $id=I('appliance_id');
+    $applianceLogic = new l\ApplianceLogic();
+    $result=$applianceLogic->delAppliance($id);
+    $data['message']=$result['message'];
+    $this->ajaxReturn($data,'JSON');
   }
 }

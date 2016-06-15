@@ -5,7 +5,7 @@
 								商户管理 <small>商户列表</small>
 							</h3>
 						</div>
-						<table class="table table-strtable table-striped table-bordered table-condensed">
+						<table id="Table-Result" class="table table-strtable table-striped table-bordered table-condensed">
                               <thead>
                               <tr>
                                 <th>序号</th>
@@ -45,14 +45,13 @@
 								</volist>
                               </tbody>
                           </table>
-                          <div class="pagination">
-								<li><a href="#">Prev</a></li>
-								<li class="active"><a href="#">1</a></li>
-								<li><a href="#">2</a></li>
-								<li><a href="#">3</a></li>
-								<li><a href="#">4</a></li>
-								<li><a href="#">Next</a></li>
-						</div>
+            			  <div class="pagination">
+                			<li><a href="#">上一页</a></li>
+                			<for start="1" end="$pages+1" step="1" name="i" >
+                  				<li ><a href="#">{$i}</a></li>
+                			</for>                
+                			<li><a href="#">下一页</a></li>
+            			  </div>
 					</div>
 				</div>
 		</div>
