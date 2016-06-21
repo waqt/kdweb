@@ -39,7 +39,7 @@
 										<td>{$ml.brand_state}</td>
 										<td>{$ml.address}</td>
 										<td>
-											<button class="btn btn-warning btn-xs"><i class="fa fa-eye"></i>查看</button>
+											<button class="btn btn-warning btn-xs view-detail"  value="{$ml.mer_id}"><i class="fa fa-eye"></i>查看</button>
 										</td>
 									</tr>
 								</volist>
@@ -55,3 +55,8 @@
 					</div>
 				</div>
 		</div>
+<script type="text/javascript" language="javascript">	
+    $(".view-detail").click(function(){
+      $("#wrapper").load("__MODULE__/Merchant/detail",{merchant_id: $(this).val()});
+    });
+</script>

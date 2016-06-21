@@ -1,0 +1,144 @@
+<div class="span9">
+    <div class="row-fluid">
+        <div class="row-fluid">
+            <div class="span3">
+              <h3>商户标识码</h3>
+              <p><span class="badge bg-info"> {$merchant.identification_code} </span></p>
+            </div>
+            <div class="span3">
+              <h3>商户名称</h3>
+              <p><span class="badge bg-info"> {$merchant.mer_name}</span></p>
+            </div>
+            <div class="span3">
+              <h3>认证状态</h3>
+				<if condition="($merchant.business_state eq '已认证')">
+					<p ><span  class="badge bg-success">{$merchant.business_state} </span></p>
+					<elseif condition="($merchant.business_state eq '认证中')"/>
+					<p ><span  class="badge bg-warning">{$merchant.business_state} </span></p>
+					<else />
+					<p ><span  class="badge badge-inverse2">{$merchant.business_state} </span></p>
+				</if>              
+            </div>
+            <div class="span3">
+              <h3>商户评分</h3>
+			  <p><span class="badge bg-important">{$merchant.avag_score}  </span></p>
+            </div>
+        </div>
+		<br />
+		
+		<!-- 商户详情 -->		  
+		<div class="row-fluid">
+			<div class="page-header-detail">
+				<h2>商户详情 </h2>
+			</div>
+			</br>
+			<div class="content-panel pn">
+				<div id="profile-01"></div>
+				<div class="goleft ml">
+					<h4>商户名称：{$merchant.mer_name}</h4></br>
+					<h4>负责人电话：{$merchant.header_phone}</h4></br>
+					<h4>负责人姓名：{$merchant.header_name}</h4></br>
+					<h4>
+						<p><i class="fa fa-home"></i>地址：{$merchant.address}</p>
+					</h4>
+					</br>
+					<h4>
+						<p>
+							<i class="fa fa-credit-card"></i> 账户余额: {$merchant.account_money} | 
+							<button class="btn btn-warning btn-xs view-account"  value="{$merchant.mer_id}"><i class="fa fa-eye"></i>查看账户
+							</button>
+						</p>
+					</h4>
+					</br>
+				 	<h4>	
+				  		<p>
+							<i class="fa fa-bar-chart-o"></i> 订单总数: {$merchant.order_num} |  
+							<i class="fa fa-comments-o"></i> 待派单数：{$merchant.order_wait_num} | 
+							<i class="fa fa-heart"></i> 评价数：{$merchant.comment_num} | 
+							<span class="badge bg-important"> 评分{$merchant.avag_score} </span> |
+							<button class="btn btn-warning btn-xs view-order"  value="{$merchant.mer_id}"><i class="fa fa-eye"></i>查看订单</button>
+				  		</p>
+				 	</h4>
+				 	</br>
+				</div>
+			</div>
+		</div>
+
+		<!-- 认证信息 -->
+		<div class="row-fluid">
+			<div class="page-header-detail">
+					<h2>认证信息 </h2>
+			</div>
+			</br>
+			<div class="content-panel pn">
+				<div class="goleft ml">
+								<if condition="($role eq 3000 )">
+									<button class="btn btn-success agree-auth"  value="{$merchant.mer_id}"><i class="fa fa-check"></i>通过认证</button>
+									<button class="btn btn-warning refuse-auth"  value="{$merchant.mer_id}"><i class="fa fa-close"></i>拒绝认证</button>
+									<button class="btn btn-info apply-auth"  value="{$merchant.mer_id}"><i class="fa fa-hand-o-right"></i>申请认证</button>
+								<elseif condition="($role eq 2001 )"/>
+									<button class="btn btn-info  apply-auth"  value="{$merchant.mer_id}"><i class="fa fa-hand-o-right"></i>申请认证</button>
+								</if>
+				</div>
+				</br>
+				<div class="goleft ml">
+						<h4>认证状态：
+							<if condition="($merchant.business_state eq '已认证')">
+								<span  class="label label-success">{$merchant.business_state} </span>
+							<elseif condition="($merchant.business_state eq '认证中')"/>
+								<span  class="label label-warning">{$merchant.business_state} </span>
+							<else />
+								<span  class="labele label-danger">{$merchant.business_state} </span>
+							</if>
+						</h4>
+						</br>
+				</div>
+				<div class="goleft ml">
+						<h4>
+						<i class="fa fa-file-image-o"></i> 身份证照片:
+						<a class="preview" href="{$merchant.header_positive_ID}"  title="IMG Reference"><img class="fancyzoom" src="{$merchant.header_positive_ID}" width="200"  /></a>
+						<a class="preview" href="{$merchant.header_opposite_ID}"  title="IMG Reference"><img class="fancyzoom" src="{$merchant.header_opposite_ID}" width="200"  /></a>
+						</h4>
+				</div>
+				<div class="goleft ml">
+						<h4>
+						<i class="fa fa-file-image-o"></i> 营业执照:
+						<a class="preview" href="{$merchant.business_pic}"  title="IMG Reference"><img class="fancyzoom" src="{$merchant.business_pic}" width="400"  /></a>
+						</h4>
+				</div>
+				</br>
+			</div>
+		</div>
+
+		<!-- 品牌授权信息 -->
+		<div class="row-fluid">
+			<div class="page-header-detail">
+					<h2>品牌授权信息 </h2>
+			</div>
+			<div class="content-panel pn">
+				<div class="goleft ml">
+						<h4>
+							品牌授权状态：{$merchant.brand_state} |
+								<button class="btn btn-warning view-apply" id="view-apply" value="{$merchant.mer_id}"><i class="fa fa-eye"></i>查看详情</button>
+						</h4>
+						</br>
+				</div>
+				<div class="goleft ml" id="brand-list">
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<script src="__ASSETS__/js/jquery.fancybox.js"></script>
+<link rel="stylesheet" href="__ASSETS__/css/jquery.fancybox.css"/>
+<script type="text/javascript">
+	 $(document).ready(function() {
+      	$("a.preview").fancybox();
+      });
+
+      $("#view-apply").click(function() { 
+           $("#brand-list").load("__MODULE__/Merchant/brandApplyList",{merchant_id: $(this).val()});
+        }); 
+</script>

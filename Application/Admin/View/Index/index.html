@@ -22,7 +22,6 @@
     <script src="__ASSETS__/js/jquery-1.8.3.min.js"></script>
     <script src="__ASSETS__/js/jquery-3.0.0.min.js"></script>
     <script src="__ASSETS__/js/bootstrap.min.js"></script>
-    
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -86,6 +85,7 @@
 
     <!--script for this page--> 
     <script type="text/javascript"> 
+
       $(document).ready(function() { 
         $(".left_child_menu").click(function() { 
             var link=$(this).attr("value");
@@ -95,12 +95,16 @@
         }); 
 
       $("#loginout").click(function(){
-        $.get(
+        if (!confirm("确认要登出吗？")) {
+            window.event.returnValue = false;
+        }else{
+          $.get(
                 "__MODULE__/Login/loginout",
                 function(data){
                       alert(data['message']);
                       window.location.href=data['jumpUrl'];
                 });
+            }
       });
 
       $(document).ready(function () {

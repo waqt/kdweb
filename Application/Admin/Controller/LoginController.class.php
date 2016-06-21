@@ -24,10 +24,16 @@ class LoginController extends Controller {
 		$login_logic = new l\LoginLogic();
 		$result = $login_logic->checkLogin(I('loginname'), I('password'), I('verify'));
 		if ($result == false) {
-			$data['success']=false;
-			$data['error_code']=$login_logic->getErrorCode();
-			$data['jumpUrl']=$login_logic->getJumpUrl();
-			$data['errorMsg']=$login_logic->getErrorMessage();
+			if($data!=null){
+				$data['success']=false;
+				$data['error_code']=$login_logic->getErrorCode();
+				$data['jumpUrl']=$login_logic->getJumpUrl();
+				$data['errorMsg']=$login_logic->getErrorMessage();
+			}else{
+				$data['success']=false;
+				$data['error_code']='500';
+				$data['errorMsg']='网络异常';
+			}
 			$this->ajaxReturn($data,'JSON');
 		} else {
 			$data['success']=true;

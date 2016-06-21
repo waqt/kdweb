@@ -54,6 +54,7 @@ class CommonController extends Controller {
             $this->assign('jumpUrl', __MODULE__ . C('USER_AUTH_GATEWAY'));
             $this->assign('waitSecond',3);
             header("Location:".__MODULE__."/Login");
+            exit();
         }
     }
 

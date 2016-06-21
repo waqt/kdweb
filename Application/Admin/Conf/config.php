@@ -22,11 +22,13 @@ return array(
 	'RBAC_USER_TABLE'           =>  'sys_role_user',
 	'RBAC_ACCESS_TABLE'         =>  'sys_access',
 	'RBAC_NODE_TABLE'           =>  'sys_node',
+	'OSS_ACCESS_KEY_ID'         =>  'aJCzSIJn3TFLjuEp',
+	'OSS_ACCESS_KEY_SECRET'     =>  '63BzvVOBSUhetWDkuXWgOzPK0WMQy9',
+	'OSS_ENDPOINT'              =>  'appliance.oss-cn-hangzhou.aliyuncs.com',
+	'OSS_BUCKET'                =>  'appliance',
+	
 
 	'URL_ROUTE_RULES' => array(
 
 		),
-
-    //接口URL配置文件
-    //'LOAD_EXT_CONFIG' => 'testConstUrl', 
 );

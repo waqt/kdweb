@@ -4,8 +4,7 @@
               <h3>
                 电器管理 <small>品类列表</small>
               </h3>
-              <a href="#" id="add-appliance-father" class="btn btn-success">添加电器大类</a>
-              <a href="#" id="add-appliance-son"  class="btn btn-success">添加电器小类</a>
+              <a href="#" id="add-appliance-father" class="btn btn-success">添加电器品类</a>
         </div>
         <div class="inner-showback">
             <!-- Split button -->
@@ -14,12 +13,9 @@
                 查看品类 <span class="caret"></span>
               </button>
               <ul class="dropdown-menu" >
-                <li><a href="#">空调</a></li>
-                <li><a href="#">洗衣机</a></li>
-                <li><a href="#">电视机</a></li>
-                <li><a href="#">冰箱</a></li>
-                <li><a href="#">厨卫电器</a></li>
-                <li><a href="#">小电器</a></li>
+                <volist name='father_list'  id='ApplianceFather' key='kc' >
+                  <li><a href="#" value='{$ApplianceFather.appliance_id}'>{$ApplianceFather.name}</a></li>
+                </volist>
               </ul>
             </div>               
         </div><!-- /showback -->
@@ -27,7 +23,6 @@
             <thead>
               <tr>
                 <th>序号</th>
-                <th style="display: none">ID</th>
                 <th>品类名称</th>
                 <th>商户端图标</th>
                 <th>商户端小图标</th>
@@ -41,7 +36,6 @@
                 <volist name='appliance_list' id='al' key='kc' >
                   <tr class="list-users">
                     <td>{$kc}</td>
-                    <td style="display: none">{$al.appliance_id}</td>
                     <td>{$al.name}</td>
                     <td>
                         <a class="preview" href="{$al.mclient_logo}"  title="IMG Reference"><img class="fancyzoom" src="{$al.mclient_logo}" width="30" hight="30" /></a>
@@ -85,6 +79,7 @@
     $("#add-appliance-father").click(function(){
       $("#wrapper").load("__MODULE__/Appliance/addpar");
     });
+
 
     function delAppliance(appliance_id){
         if (!confirm("确认要删除？")) {

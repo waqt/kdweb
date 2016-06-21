@@ -57,5 +57,64 @@ class MerchantLogic extends BaseLogic {
         $this->errorMessage = $result['message'];
         $merchant_list = $result['data'];
         return $merchant_list;
+    } 
+
+
+    /**
+     * 获取商户详情
+     * @param Int $merchant_id 商户id       
+     * @return array
+     */
+    public function getMerchantDetail($merchant_id) {
+        $data['mer_id']          =$merchant_id;                            //商户ID                         //分页单页显示行数
+        $data['token']           =session('user_info.token');
+
+        // API URL 管理员获取列表URL 与 商户获取列表URL
+        $req_url=BASE_URL.GET_MERCHANT_DETAIL;
+        try{
+            $result=request_post($req_url,$data);
+            $result=json_decode($result,true);
+        }
+        catch(\Exception $e){
+            print $e->getMessage();
+            exit();
+        } 
+        $this->errorCode = $result['status'];
+        $this->errorMessage = $result['message'];
+        $merchant_detail = $result['data'];
+        return $merchant_detail;
+    }
+
+    /**
+     * 获取商户详情
+     * @param Int $merchant_id 商户id
+     * @param Int $merchant_name 商户名称
+     * @param Int $merchant_phone 商户详情联系电话
+     * @param Int $handle_state 授权状态     
+     * @return array
+     */
+    public function getBrandApplyList($merchant_phone=null ,$merchant_id=null,
+     $merchant_name=null, $handle_state=null, $page=1, $limit=20) {
+        $data['phone']           =$merchant_phone;
+        $data['mer_name']        =$merchant_name;
+        $data['mer_id']          =$merchant_id;                            //商户ID 
+        $data['page']            =$page;            //分页单页显示行数
+        $data['limit']           =$limit;            //分页单页显示行数
+        $data['token']           =session('user_info.token');
+
+        // API URL 管理员获取列表URL 与 商户获取列表URL
+        $req_url=BASE_URL.GET_BRAND_APPLY_LIST;
+        try{
+            $result=request_post($req_url,$data);
+            $result=json_decode($result,true);
+        }
+        catch(\Exception $e){
+            print $e->getMessage();
+            exit();
+        } 
+        $this->errorCode = $result['status'];
+        $this->errorMessage = $result['message'];
+        $brand_apply_list = $result['data'];
+        return $brand_apply_list;
     }  
 }
