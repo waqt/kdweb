@@ -1,6 +1,6 @@
 <?php
-
-use OSS\Exception;
+use OSS as OSS;
+use OSS\Core\OssException;
 /*
  * http request tool
  */
@@ -100,34 +100,3 @@ function addErrorLog($action = null, $model = null, $data, $data_post = '') {
 }
 
 
-
-/**
-     * 阿里云Oss上传图片
-     * @param string $object   文件名称
-     * @param string $content
-*/
-function ImgOssUpload($picname, $content) {
-        $accessKeyId = C('OSS_ACCESS_KEY_ID');
-        $accessKeySecret = C('OSS_ACCESS_KEY_SECRET');
-        $endpoint = C('OSS_ENDPOINT');
-        $bucket = C('OSS_BUCKET');
-        $object = $picname;
-        //$options = array(OssClient::OSS_CHECK_MD5 => true);
-        Vendor('OSS.autoload');
-        try {
-            $ossClient = new OSS\OssClient($accessKeyId, $accessKeySecret, $endpoint);
-            $data['module'] = 'function';
-            $data['action'] = 'ImgOssUpload';
-            $data['dataname'] = "ExpectionNewossClient";
-            $data['data'] = $e->getMessage() ;
-            addErrorLog($data['action'],$data['module'],$data['dataname'],$data['data']);  
-        } catch (\Exception $e) {
-            throw new Exception();            
-            print $e->getMessage();
-            return false;
-        }
-          $ossClient->setTimeout(3600 /* seconds */);
-          $ossClient->setConnectTimeout(10 /* seconds */);
-          $ossClient->putObject($bucket, $object, $content);
-          return true;
-}

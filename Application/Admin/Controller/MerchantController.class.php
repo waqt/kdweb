@@ -5,14 +5,20 @@ use Admin\Controller\CommonController;
 use Admin\Logic as l;
 
 
-/**
-* 商户管理控制器
-*/
+/** 
+ * 类名称：MerchantController
+ * 创建人：LTJ
+ * 创建时间：2016年6月1日
+ * @version
+ */
 class MerchantController extends CommonController {
   public function index(){
       $this->display();
   }
 
+  /*
+  *商户列表
+  */
   public function lists(){
       $area = I('area');
       $authorize_state = I('authorize_state');
@@ -29,17 +35,22 @@ class MerchantController extends CommonController {
       $merchant_data=$merchantLogic->getMerchantList($area, $authorize_state, $appliance_id, $phone, $onlycode, $brand_name, $page, $limit);
       $merchant_list=$merchant_data['datas'];
       $list_count=$merchant_data['allcount'];
-      $pages=ceil($list_count/$limit);
+      $current=$merchant_data['current'];               //当前页
+      $pages=ceil($list_count/$limit); 
       
       $data['error_code']=$merchantLogic->getErrorCode();
       $data['error_message']=$merchantLogic->getErrorMessage();
       
       $this->assign('merchant_list', $merchant_list);
       $this->assign('pages',$pages);
+      $this->assign('current', $current);
       $this->assign('list_count',$list_count);
       $this->display();
   }
 
+  /*
+  *商户详情
+  */
   public function detail() {
     $merchantID=I('merchant_id');
     $merchantLogic = new l\MerchantLogic();
@@ -55,38 +66,33 @@ class MerchantController extends CommonController {
     **************/
     $this->assign('role',$role);
     $this->assign('merchant',$merchant_data);
-    /***************
-    $data['module'] = MODULE_NAME;
-    $data['action'] = ACTION_NAME;
-    $data['dataname'] ='merchant_id';
-    $data['data']=$merchant_data;
-    addErrorLog($data['action'],$data['module'],$data['dataname'],$data['data']);
-    *****************/
+
     $this->display();
-  }
-
-
-  public function brandApplyList() {
-    $merchantID=I('merchant_id');
-
-    $merchantLogic = new l\MerchantLogic();
-    $brandApplyData=$merchantLogic->getBrandApplyList(null,$merchantID);
-    $brandApplyList=$brandApplyData['datas'];
-
-    $role= session('user_info.role');
-    $this->assign('role',$role);
-    $this->assign('applyList',$brandApplyList);
-    $this->display();
-
   }
 
 
   public function agreeAuth() {
-    return true;
+    $merchantID=I('mer_id');
+
+    $merchantLogic = new l\MerchantLogic();
+    $result=$merchantLogic->agreeMerchantAuth($merchantID);
+
+    $data['mer_id']=$merchantID;
+    $data['status']=$result['status'];
+    $data['message']=$result['message'];
+    $this->ajaxReturn($data,'JSON');
   }
 
   public function refuseAuth() {
-    return true;
+    $merchantID=I('mer_id');
+
+    $merchantLogic = new l\MerchantLogic();
+    $result=$merchantLogic->refuseMerchantAuth($merchantID);
+
+    $data['mer_id']=$merchantID;
+    $data['status']=$result['status'];
+    $data['message']=$result['message'];
+    $this->ajaxReturn($data,'JSON');  
   }
 
   public function applyAuth() {

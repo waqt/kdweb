@@ -1,0 +1,59 @@
+				<h4><i class="fa fa-angle-right"></i> 已授权品牌</h4>
+				<table id="Table-Result" class="table table-strtable table-striped table-bordered table-condensed">
+                              <thead>
+                              <tr>
+                              	<th>序号</th>
+                                <th>品牌名称</th>
+								<th>授权状态</th>
+                              </tr>
+                              </thead>
+                              <tbody>
+								<volist name='achieveList' id='achieve' key='kc' >
+									<tr class="list-users">
+										<td>{$kc}</td>
+										<td>{$achieve.brand_name}</td>
+										<td><span  class="badge bg-info">已授权</span></td>
+									</tr>
+								</volist>
+                             </tbody>
+				</table>
+				</br>
+				<h4><i class="fa fa-angle-right"></i> 申请记录</h4>
+				<table id="Table-Result" class="table table-strtable table-striped table-bordered table-condensed">
+                              <thead>
+                              <tr>
+                                <th>商户名称</th>
+								<th>商户ID</th>
+								<th>申请时间</th>
+								<th>申请品牌</th>
+								<th>处理状态</th>
+								<th><i class=" fa fa-eye"></i>查看申请</th>
+                              </tr>
+                              </thead>
+                              <tbody>
+								<volist name='applyList' id='apply' key='kc' >
+									<tr class="list-users">
+										<td>{$apply.mer_name}</td>
+										<td>{$apply.mer_id}</td>
+										<td>{$apply.apply_date}</td>
+										<td>{$apply.brand_name}</td>
+										<if condition="($apply.is_handle eq 0)">
+											<td>等待处理</td>
+										<elseif condition="($apply.is_handle eq 1)"/>
+											<td>同意</td>
+										<else />
+											<td>拒绝</td>
+										</if>
+										<td>
+											<button class="btn btn-warning btn-xs view-apply-detail" value="{$apply.id}"><i class="fa fa-eye"></i>查看</button>
+										</td>
+									</tr>
+								</volist>
+                             </tbody>
+				</table>
+<script type="text/javascript">
+	var mer_id={$apply.mer_id};
+     $(".view-apply-detail").click(function() { 
+           	$("#brand-list").load("__MODULE__/BrandAuth/brandApplyDetail",{apply_id: $(this).val(), mer_id: mer_id});
+       });
+</script>

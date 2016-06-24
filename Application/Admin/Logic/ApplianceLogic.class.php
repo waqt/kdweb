@@ -23,6 +23,9 @@ class ApplianceLogic extends BaseLogic {
      */
     public function getApplianceList($fl_id=null, $page=1, $limit=10) {
 
+        if($page=='' || $page==null){
+            $page=1;
+        }
         $data['fl_id']           =$fl_id;
         $data['page']            =$page;    
         $data['limit']           =$limit;                           //分页单页显示行数
@@ -40,6 +43,7 @@ class ApplianceLogic extends BaseLogic {
         $this->errorCode = $result['status'];
         $this->errorMessage = $result['message'];
         $appliance_list = $result['data'];
+        $appliance_list['current']=$page;
         return $appliance_list;
     }
 
@@ -106,13 +110,15 @@ class ApplianceLogic extends BaseLogic {
      * @param array $input_name3 用户端图标控件          
      * @return array
      */
-    public function addAppliance($appliance_name, $input_name=null ,$input_name2=null ,$input_name3=null) {
+    public function addAppliance($appliance_name, $father_id=null, $input_name=null ,$input_name2=null ,$input_name3=null) {
 
-        $data['appliance_name']           =$appliance_name; 
-        $data['input_name']           =$input_name; 
-        $data['input_name2']           =$input_name2; 
-        $data['input_name3']           =$input_name3; 
-        $data['token']           =session('user_info.token');
+        $data['name']           =$appliance_name;
+        $data['father_id']      =$father_id;
+        $data['big_logo']       =$input_name; 
+        $data['small_logo']     =$input_name2; 
+        $data['middle_logo']    =$input_name3; 
+        $data['token']          =session('user_info.token');
+        addErrorLog('ApplianceLogic','add','data',$data);
         $req_url=BASE_URL.ADD_FATHER_APPLIANCE_URL;
 
         try{

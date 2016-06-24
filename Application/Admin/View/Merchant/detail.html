@@ -73,9 +73,9 @@
 			<div class="content-panel pn">
 				<div class="goleft ml">
 								<if condition="($role eq 3000 )">
-									<button class="btn btn-success agree-auth"  value="{$merchant.mer_id}"><i class="fa fa-check"></i>通过认证</button>
-									<button class="btn btn-warning refuse-auth"  value="{$merchant.mer_id}"><i class="fa fa-close"></i>拒绝认证</button>
-									<button class="btn btn-info apply-auth"  value="{$merchant.mer_id}"><i class="fa fa-hand-o-right"></i>申请认证</button>
+									<button class="btn btn-success " id="agree-auth" value="{$merchant.mer_id}"><i class="fa fa-check"></i>通过认证</button>
+									<button class="btn btn-warning" id="refuse-auth" value="{$merchant.mer_id}"><i class="fa fa-times"></i>取消认证</button>
+									<button class="btn btn-info" id="apply-auth" value="{$merchant.mer_id}"><i class="fa fa-hand-o-right"></i>申请认证</button>
 								<elseif condition="($role eq 2001 )"/>
 									<button class="btn btn-info  apply-auth"  value="{$merchant.mer_id}"><i class="fa fa-hand-o-right"></i>申请认证</button>
 								</if>
@@ -88,7 +88,7 @@
 							<elseif condition="($merchant.business_state eq '认证中')"/>
 								<span  class="label label-warning">{$merchant.business_state} </span>
 							<else />
-								<span  class="labele label-danger">{$merchant.business_state} </span>
+								<span  class="label label-danger">{$merchant.business_state} </span>
 							</if>
 						</h4>
 						</br>
@@ -118,7 +118,9 @@
 			<div class="content-panel pn">
 				<div class="goleft ml">
 						<h4>
-							品牌授权状态：{$merchant.brand_state} |
+							品牌授权状态：
+							<span  class="badge bg-info">{$merchant.brand_state}</span>
+							|
 								<button class="btn btn-warning view-apply" id="view-apply" value="{$merchant.mer_id}"><i class="fa fa-eye"></i>查看详情</button>
 						</h4>
 						</br>
@@ -129,16 +131,47 @@
 		</div>
 	</div>
 </div>
-
-
 <script src="__ASSETS__/js/jquery.fancybox.js"></script>
-<link rel="stylesheet" href="__ASSETS__/css/jquery.fancybox.css"/>
 <script type="text/javascript">
-	 $(document).ready(function() {
+	$(document).ready(function() {
       	$("a.preview").fancybox();
-      });
+     });
 
       $("#view-apply").click(function() { 
-           $("#brand-list").load("__MODULE__/Merchant/brandApplyList",{merchant_id: $(this).val()});
-        }); 
+           $("#brand-list").load("__MODULE__/BrandAuth/brandApplyList",{merchant_id: $(this).val()});
+        });
+
+      $("#agree-auth").click(function(){
+      		var mer_id={$merchant.mer_id};
+      		if (!confirm("确认认证该商家吗？")) {
+            	window.event.returnValue = false;
+        	}else{
+        		$.post(
+            	'__MODULE__/Merchant/agreeAuth',
+          		{
+            		"mer_id":mer_id,
+          		},
+          		function(data){
+            		alert(data['message']);
+             		$("#wrapper").load("__MODULE__/Merchant/detail",{merchant_id: data['mer_id']});
+          		});
+        	}
+      }); 
+
+      $("#refuse-auth").click(function(){
+      		var mer_id={$merchant.mer_id};
+      		if (!confirm("确认取消该商家认证吗？")) {
+            	window.event.returnValue = false;
+        	}else{
+        		$.post(
+            	'__MODULE__/Merchant/refuseAuth',
+          		{
+            		"mer_id":mer_id,
+          		},
+          		function(data){
+            		alert(data['message']);
+             		$("#wrapper").load("__MODULE__/Merchant/detail",{merchant_id: data['mer_id']});
+          		});
+        	}
+      }); 
 </script>

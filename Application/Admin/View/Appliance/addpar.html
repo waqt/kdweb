@@ -10,7 +10,7 @@
                           <div class="form-group">
                               <label class="col-sm-2 col-sm-2 control-label">品类名称</label>
                               <div class="col-sm-10">
-                                  <input type="text"  name="applianceName" id="applianceName" class="form-control round-form">
+                                  <input type="text" AUTOCOMPLETE="off" name="applianceName" id="applianceName" class="form-control round-form">
                               </div>
                           </div>
                  		  <div class="form-group">
@@ -60,69 +60,17 @@
             alert("HUH! No Files");
      });
 
-     function addAppliance(){
-     	var applianceName = $("#applianceName").val();
-     	var shdImg = $("#shd-photo").val();
-     	var shdImgLittle = $("#shd-photo-little").val();
-     	var yhdImg = $("#yhd-photo").val();
-     	var father_id = $("#appliance-father").find("option:selected").val();
-     	if(applianceName == ""){
-     			$("#applianceName").tips({
-					side : 2,
-					msg : '品类名称不得为空',
-					bg : '#AE81FF',
-					time : 3
-				});
-     	}else if(shdImg =="" &&  shdImgLittle=="" && yhdImg==""){
-     			$("#shd-photo").tips({
-					side : 2,
-					msg : '至少添加一个图标',
-					bg : '#AE81FF',
-					time : 3
-				});
-     	}else{
-     	  $.post(
-     		'__MODULE__/Appliance/addpar',
-     		{
-				"appliance-name":applianceName,
-				"img1":shdImg,
-				"img2":shdImgLittle,
-				"img3":yhdImg,
-				"father_id":father_id
-			},
-			function(data){
-				if(data['success']==false){
-						if(data['error_code']==10001){
-								$("#shd-photo").tips({
-									side : 1,
-									msg : data['message'],
-									bg : '#FF5080',
-									time : 15
-								});
-							}
-						if(data['error_code']==10002){
-								alert(data['message']);
-						}	
-				}else if(data['success']==true){
-					alert(data['message']);
-					console.log(data['img_url']);
-					 $("#wrapper").load("__MODULE__/Appliance");
-				}
-			});
-		}
-
-     }
 
     function cancel(){
-					 $("#wrapper").load("__MODULE__/Appliance");
+			$("#wrapper").load("__MODULE__/Appliance");
 	     }
 
 
 	var options = {  
    		//target: 'data',          //把服务器返回的内容放入id为output的元素中      
-   		beforeSubmit: showRequest ,  //提交前的回调函数
-   		success: showResponse,
-   		/*************  
+   		beforeSubmit: validate,  //提交前的回调函数
+   		//success: showResponse,
+   		/*************/  
    		success: function(data){
 				if(data['success']==false){
 						if(data['error_code']==10001){
@@ -137,12 +85,11 @@
 								alert(data['message']);
 						}	
 				}else if(data['success']==true){
-					alert(data['message']);
-					console.log(data['img_url']);
-					 $("#wrapper").load("__MODULE__/Appliance");
+					alert(data['message']);	
+					$("#wrapper").load("__MODULE__/Appliance");
 				}
 			},      //提交后的回调函数  
-		*****************/
+		/*****************/
    		url: '__MODULE__/Appliance/addpar',                 //默认是form的action， 如果申明，则会覆盖  
    		type: 'post',               //默认是form的method（get or post），如果申明，则会覆盖  
    		dataType: 'json',           //html(默认), xml, script, json...接受服务端返回的类型  

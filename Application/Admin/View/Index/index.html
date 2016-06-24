@@ -16,6 +16,7 @@
     
     <!-- Custom styles for this template -->
     <link href="__ASSETS__/css/style.css" rel="stylesheet">
+    <link href="__ASSETS__/css/jquery.fancybox.css" rel="stylesheet">
     <link href="__ASSETS__/css/style-responsive.css" rel="stylesheet">
 
     <!-- <script src="__ASSETS__/js/chart-master/Chart.js"></script> -->
@@ -75,7 +76,6 @@
     <script src="__ASSETS__/js/jquery.scrollTo.min.js"></script>
     <script src="__ASSETS__/js/jquery.nicescroll.js" type="text/javascript"></script>
     <script src="__ASSETS__/js/jquery.sparkline.js"></script>
-    <script src="__ASSETS__/js/jquery.pagination.js"></script>
     
 
 
@@ -85,7 +85,6 @@
 
     <!--script for this page--> 
     <script type="text/javascript"> 
-
       $(document).ready(function() { 
         $(".left_child_menu").click(function() { 
             var link=$(this).attr("value");
@@ -98,8 +97,8 @@
         if (!confirm("确认要登出吗？")) {
             window.event.returnValue = false;
         }else{
-          $.get(
-                "__MODULE__/Login/loginout",
+          $.post(
+                "__MODULE__/Merchant/loginout",
                 function(data){
                       alert(data['message']);
                       window.location.href=data['jumpUrl'];

@@ -1,0 +1,108 @@
+<div class="span9">
+	<div class="row-fluid">
+		<div class="page-header">
+				<h3>
+					商户管理 <small>品牌授权申请</small>
+				</h3>
+		</div>
+		<div class="content-panel pn">
+			<div class="goleft ml">
+				<h4>商户名称：{$applyDetail.mer_name}</h4></br>
+				<h4>负责人电话：{$applyDetail.header_phone}</h4></br>
+				<h4>申请时间：{$applyDetail.created_at}</h4></br>
+				<h4>申请品牌：{$applyDetail.brand_name}</h4></br>
+				<h4>申请理由：{$applyDetail.reason}</h4></br>
+				<h4>处理结果：
+  					<if condition="($applyDetail.is_handle eq 0)">
+      					<span  class="label label-success"> 申请中 </span>
+  					<elseif condition="($applyDetail.is_handle eq 1)"/>
+      					<span  class="label label-warning">同意 </span>
+  					<else />
+      					<span  class="label label-danger">拒绝</span>
+  					</if>
+				</h4>
+				</br>
+			</div>
+			<div class="centered" id="apply-photo">
+				<h4>证书照片</h4>
+    			<volist name='applyPicList' id='apl' key='kc'>
+      				<h4>
+        				<a class='preview' href='{$apl|trim}'  title='IMG Reference'>
+          				<img class='fancyzoom' src='{$apl|trim}' width='350'/>
+        				</a>
+      				</h4>
+    			</volist>
+			</div>
+			<div class="theme-popover centered" style="display: none;">
+     			<div class="theme-poptit">
+          		<a href="javascript:;" title="关闭" class="close">×</a>
+          			<h3>拒绝品牌授权</h3>
+     			</div>
+    			<div class="form-panel">
+           			<form class="form-horizontal style-form">
+                        <div class="form-group">
+                              <label class="col-sm-2 col-sm-2 control-label">拒绝理由</label>
+                              <div class="col-sm-10">
+                                  <input type="text" AUTOCOMPLETE="off" name="reason" id="reason" class="form-control round-form">
+                              </div>
+                        </div>
+                        </br>
+                        <div class="form-actions">
+								<input type="button"  id="confirm-disagree"
+									class="btn btn-success" value="确认" /> 
+						</div>
+           			</form>
+     			</div>
+			</div>
+			</br>
+			<div class="centered">
+				<if condition="($role eq 3000 )">
+					<button class="btn btn-success " id="agree-auth" value=""><i class="fa fa-check"></i>同意并授权</button>
+					<button class="btn btn-warning" id="disagree-apply" value="{$applyDetail.id}"><i class="fa fa-times"></i>拒绝</button>
+					<button class="btn btn-info" id="retrun-back" value="{$mer_id}"><i class="fa fa-hand-o-right"></i>返回</button>
+				<elseif condition="($role eq 2001 )"/>
+					<button class="btn btn-info  apply-auth" id="retrun-back" value="{$mer_id}"><i class="fa fa-hand-o-right"></i>返回</button>
+				</if>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="theme-popover-mask"></div>
+<script src="__ASSETS__/js/jquery.fancybox.js"></script>
+<script type="text/javascript">
+     var apply_id={$applyDetail.id};
+     var mer_id={$mer_id};
+
+
+     jQuery(document).ready(function($) {
+     	$("a.preview").fancybox();
+		$('#disagree-apply').click(function(){
+				$('.theme-popover-mask').fadeIn(100);
+				$('.theme-popover').slideDown(200);
+		})
+			$('.theme-poptit .close').click(function(){
+				$('.theme-popover-mask').fadeOut(100);
+				$('.theme-popover').slideUp(200);
+		})
+
+	})
+
+
+     $("#retrun-back").click(function() { 
+          $("#wrapper").load("__MODULE__/BrandAuth/lists");
+     });
+
+     $("#confirm-disagree").click(function(){
+     			var reason=$("#reason").val();
+        		$.post(
+            	'__MODULE__/BrandAuth/disagree',
+          		{
+            		"apply_id":apply_id,
+            		"reason": reason
+          		},
+          		function(data){
+            		alert(data['message']);
+             		$("#wrapper").load("__MODULE__/BrandAuth/detail",{apply_id: apply_id, mer_id: mer_id});
+          		});
+      }); 
+</script>

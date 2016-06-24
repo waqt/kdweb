@@ -33,4 +33,28 @@
 
 	//商户品牌授权申请列表
 	const GET_BRAND_APPLY_LIST = 'web-brand/apply-brand-list';
+
+	//商户已授权品牌
+	const GET_ACHIEVE_BRAND_LIST = 'web-brand/achieve-brand-list';
+
+	//商户品牌申请详情
+	const GET_BRAND_APPLY_DETAIL = 'web-brand/brand-detail-info';
+
+	//拒绝品牌授权
+	const DISAGREE_BRAND_APPLY = 'web-brand/save-refund';
+
+	//同意商户认证
+	const AGREE_MERCHANT_AUTH = 'web-merchants/agree-merchant-authorize';
+
+	//取消商户认证
+	const REFUSE_MERCHANT_AUTH = 'web-merchants/refund-merchant-authorize';
+
+	//品牌列表
+	const GET_BRAND_LIST = 'web-brand/brand-page-list';
+
+	//删除品牌
+	const DELETE_BRAND_URL = 'web-brand/delete-brand';
+
+	//添加品牌
+	const ADD_BRAND_URL = 'web-brand/insert-brand';
 ?>

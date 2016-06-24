@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="__ASSETS__/css/tcdPageCode.css"/>
 <div class="span9">
     <div class="row-fluid">
         <div class="page-header">
@@ -53,28 +54,24 @@
                     </if>
                     <td>{$al.fathername}</td>
                     <td>
-                      <button class="btn btn-warning btn-xs" onclick="delAppliance({$al.appliance_id}); return false"><i class="fa fa-trash"></i>删除</button>
+                      <button class="btn btn-warning btn-xs" onclick="delAppliance({$al.appliance_id}); return false"><i class="fa fa-trash-o"></i> 删除</button>
                     </td>
                   </tr>
                 </volist>
               </tbody>
             </table>
-            <div id="Pagination" class="right flickr"></div> 
-            <div class="pagination">
-                <li><a href="#">上一页</a></li>
-                <for start="1" end="$pages+1" step="1" name="i" >
-                  <li ><a href="#">{$i}</a></li>
-                </for>                
-                <li><a href="#">下一页</a></li>
-            </div>
+            <div id="Pagination" class="tcdPageCode">
+                            
+            </div> 
           </div>
         </div>
     </div>
-<script src="__ASSETS__/js/jquery.imagePreview.js"></script>
+<script src="__ASSETS__/js/jquery.page.js"></script>
+<script src="__ASSETS__/js/jquery.fancybox.js"></script>
 <script type="text/javascript">
-   $("a.preview").mouseover(function(){
-      $(this).preview();
-    });
+    $(document).ready(function() {
+        $("a.preview").fancybox();
+     });
 
     $("#add-appliance-father").click(function(){
       $("#wrapper").load("__MODULE__/Appliance/addpar");
@@ -96,4 +93,26 @@
           });
         }
     }
+
+      $(function(){
+    //这是一个非常简单的demo实例，让列表元素分页显示
+    //回调函数的作用是显示对应分页的列表项内容
+    //回调函数在用户每次点击分页链接的时候执行
+    //参数page_index{int整型}表示当前的索引页
+        var totalpage = {$pages};
+        var current ={$current};
+        $(".tcdPageCode").createPage({
+            pageCount:totalpage,
+            current: current,
+            backFn:function(p){
+                //console.log(p);
+                loadpage(p);
+            }
+        });
+
+    });
+
+  function loadpage(p){
+    $("#wrapper").load("__MODULE__/Appliance/index", {page:p});
+  }
 </script>

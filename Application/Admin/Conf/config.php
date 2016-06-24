@@ -24,8 +24,9 @@ return array(
 	'RBAC_NODE_TABLE'           =>  'sys_node',
 	'OSS_ACCESS_KEY_ID'         =>  'aJCzSIJn3TFLjuEp',
 	'OSS_ACCESS_KEY_SECRET'     =>  '63BzvVOBSUhetWDkuXWgOzPK0WMQy9',
-	'OSS_ENDPOINT'              =>  'appliance.oss-cn-hangzhou.aliyuncs.com',
+	'OSS_ENDPOINT'              =>  'oss-cn-hangzhou.aliyuncs.com',
 	'OSS_BUCKET'                =>  'appliance',
+	'OSS_FILE_PREFIX'           =>  'http://appliance.oss-cn-hangzhou.aliyuncs.com',
 	
 
 	'URL_ROUTE_RULES' => array(
