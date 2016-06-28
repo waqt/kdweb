@@ -47,12 +47,14 @@
       </div>
 <div class="centered">
 		<if condition="($role eq 3000 )">
-				<button class="btn btn-success " id="agree-auth" value=""><i class="fa fa-check"></i>同意并授权</button>
+        <button class="btn btn-success" id="agree-auth-button" value="{$mer_id}"><i class="fa fa-check"></i>同意并授权</button>
 				<button class="btn btn-warning" id="disagree-apply" value="{$applyDetail.id}"><i class="fa fa-times"></i>拒绝</button>
 				<button class="btn btn-info" id="retrun-back" value="{$mer_id}"><i class="fa fa-hand-o-right"></i>返回</button>
 				<elseif condition="($role eq 2001 )"/>
 				<button class="btn btn-info  apply-auth" id="retrun-back" value="{$mer_id}"><i class="fa fa-hand-o-right"></i>返回</button>
 		</if>
+</div>
+<div id="edit-brand">
 </div>
 <script src="__ASSETS__/js/jquery.fancybox.js"></script>
 <script type="text/javascript">
@@ -71,11 +73,16 @@
 
      var apply_id={$applyDetail.id};
      var mer_id={$mer_id};
+     console.log("apply_id="+apply_id+"mer_id="+mer_id);
 
 
      $("#retrun-back").click(function() { 
            $("#brand-list").load("__MODULE__/BrandAuth/brandApplyList",{merchant_id: $(this).val()});
      });
+
+     $("#agree-auth-button").click(function() { 
+          $("#edit-brand").load("__MODULE__/BrandAuth/showBrand",{apply_id: apply_id, mer_id: mer_id});
+     }); 
 
      $("#confirm-disagree").click(function(){
           var reason=$("#reason").val();
@@ -89,5 +96,6 @@
                 alert(data['message']);
                 $("#brand-list").load("__MODULE__/BrandAuth/brandApplyDetail",{apply_id: apply_id, mer_id: mer_id});
               });
-      });  
+      });
+
 </script>

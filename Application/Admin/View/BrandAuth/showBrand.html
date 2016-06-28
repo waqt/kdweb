@@ -7,22 +7,26 @@
 	<div class="content-panel pn">
 		<div class="goleft ml">
 			<h3>已授权品牌</h3>
-			<p id="my-list">
-			<volist name='achieveList' id='achieve' key='al' >
-				<div class="achieve-list">
+			<p >
+				<div id="my-list"/>
+				<volist name='achieveList' id='achieve' key='al' >
+					<div class="achieve-list">
 						<input name="chkItem" class="list-child" checked="checked" type="checkbox" value="{$achieve.brand_id}" />
 						<span  class="label label-success">{$achieve.brand_name}</span>
-				</div>
-			</volist>
+					</div>
+				</volist>
 			</p>
 			<br/>
-			<div class="form-group">
-				<label class="col-sm-2 col-sm-2 control-label"><strong>意见</strong></label>
-				<div class="col-sm-10">
-                 	<input type="text" AUTOCOMPLETE="off" name="reason" id="reason" class="form-control round-form reason-form">
+			<div class="form-horizontal style-form" >
+				<div class="form-group">
+					<label class="col-sm-2 col-sm-2 control-label"><strong>意见</strong></label>
+					<div class="col-sm-10">
+                 		<input type="text" AUTOCOMPLETE="off" name="reason" id="reason" class="form-control round-form reason-form">
+            		</div>
             	</div>
-            </div>
-			<button class="btn btn-warning " id="save-brand" ><i class="fa fa-eye"></i>保存品牌</button>
+				<button class="btn btn-warning " id="save-brand" ><i class="fa fa-eye"></i>保存品牌</button>
+				<button class="btn btn-info " id="cancel-agree" ><i class="fa fa-mail-reply"></i>返回</button>
+			</div>
 		</div>
 		<hr/>
 		<div class="goleft ml">
@@ -40,6 +44,9 @@
 <script type="text/javascript" src="__ASSETS__/js/jquery.ezmark.min.js"></script>
 <script type="text/javascript">
 	var apply_id={$apply_id};
+	var mer_id={$mer_id};
+
+	console.log("apply_id="+apply_id+"mer_id="+mer_id);
 
 	$(function() {
 		$('input[type="checkbox"]').ezMark();
@@ -49,7 +56,6 @@
 		var brandId=$(this).attr('id');
 		var brandName=$(this).attr('value');
 		$("#my-list").after("<div class='achieve-list'><input name='chkItem' class='list-child' checked='checked' type='checkbox' value='"+brandId+"'/><span  class='label label-success'>"+brandName+"</span></div>");
-		$('input[type="checkbox"]').ezMark();
 	});
 
 	$("#save-brand").click(function(){
@@ -72,8 +78,7 @@
           		});
 	});
 
-	var apply_id={$apply_id};
-     $(".view-apply-detail").click(function() { 
-           	$("#brand-list").load("__MODULE__/BrandAuth/brandApplyDetail",{apply_id: $(this).val(), mer_id: mer_id});
+     $("#cancel-agree").click(function() { 
+           	$("#wrapper").load("__MODULE__/BrandAuth/detail",{apply_id: apply_id, mer_id: mer_id});
        });
 </script>

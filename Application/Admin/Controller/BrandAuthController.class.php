@@ -141,6 +141,7 @@ class BrandAuthController extends CommonController {
 
     $role= session('user_info.role');
     $this->assign('apply_id',$applyId);
+    $this->assign('mer_id',$merId);
     $this->assign('role',$role);
     $this->assign('brandList',$brandList);
     $this->assign('achieveList',$achieveBrandList);
