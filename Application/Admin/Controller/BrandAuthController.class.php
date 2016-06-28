@@ -152,11 +152,11 @@ class BrandAuthController extends CommonController {
     $reason=I('reason');
     $brandList=I('agree-list');
 
-    addErrorLog('BrandAuth','agree','agreeBrand',$brandList);
+    addErrorLog('BrandAuth','agree','applyId',$applyId);
 
     $brandAuthLogic = new l\BrandAuthLogic();
 
-    $result=$brandLogic->agreeBrand($applyId, $brandList, $reason);
+    $result=$brandAuthLogic->agreeBrand($applyId, $brandList, $reason);
 
     $data['status']=$result['status'];
     $data['message']=$result['message'];
