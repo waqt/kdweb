@@ -141,7 +141,7 @@ class BrandAuthLogic extends BaseLogic {
         $data['reason']          =$reason;
         $data['token']           =session('user_info.token');
 
-        addErrorLog('BrandAuth','logic','agreeBrand',$brandList);
+        //addErrorLog('BrandAuth','logic','agreeBrand',$brandList);
 
         // API URL 管理员获取列表URL 与 商户获取列表URL
         $req_url=BASE_URL.AGREE_BRAND_APPLY;

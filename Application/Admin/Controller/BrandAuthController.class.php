@@ -147,16 +147,23 @@ class BrandAuthController extends CommonController {
     $this->display();
   }
 
-    public function agree() {
+  
+
+  public function agree() {
     $applyId=I('apply_id');
     $reason=I('reason');
     $brandList=I('agree-list');
+    $brands=array();
+    for ($i= 0;$i< count($brandList); $i++){ 
+      $brands[$i]['id']= $brandList[$i]; 
+    } 
 
-    addErrorLog('BrandAuth','agree','applyId',$applyId);
+    $brands=json_encode($brands);
+    //addErrorLog('BrandAuth','agree','brands',$brands);
 
     $brandAuthLogic = new l\BrandAuthLogic();
 
-    $result=$brandAuthLogic->agreeBrand($applyId, $brandList, $reason);
+    $result=$brandAuthLogic->agreeBrand($applyId, $brands, $reason);
 
     $data['status']=$result['status'];
     $data['message']=$result['message'];
