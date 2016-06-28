@@ -119,7 +119,7 @@ class ApplianceLogic extends BaseLogic {
         $data['middle_logo']    =$input_name3; 
         $data['token']          =session('user_info.token');
         addErrorLog('ApplianceLogic','add','data',$data);
-        $req_url=BASE_URL.ADD_FATHER_APPLIANCE_URL;
+        $req_url=BASE_URL.ADD_APPLIANCE_URL;
 
         try{
             $result=request_post($req_url,$data);

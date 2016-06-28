@@ -65,6 +65,8 @@
 				</if>
 			</div>
 		</div>
+    <div id="edit-brand">
+    </div>
 	</div>
 </div>
 <div class="theme-popover-mask"></div>
@@ -90,6 +92,11 @@
 
      $("#retrun-back").click(function() { 
           $("#wrapper").load("__MODULE__/BrandAuth/lists");
+     });
+
+
+     $("#agree-auth").click(function() { 
+          $("#edit-brand").load("__MODULE__/BrandAuth/showBrand",{apply_id: apply_id, mer_id: mer_id});
      });
 
      $("#confirm-disagree").click(function(){

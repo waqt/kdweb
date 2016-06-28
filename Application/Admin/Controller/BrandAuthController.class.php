@@ -80,8 +80,7 @@ class BrandAuthController extends CommonController {
     $brandApplyData=$brandAuthLogic->getBrandApplyList(null,$merchantID);
     $brandApplyList=$brandApplyData['datas'];
 
-    $brandAchieveData=$brandAuthLogic->getAchieveBrandList($merchantID);
-    $brandAchieveList=$brandAchieveData['data'];
+    $brandAchieveList=$brandAuthLogic->getAchieveBrandList($merchantID);
 
     $role= session('user_info.role');
     $this->assign('role',$role);
@@ -124,6 +123,41 @@ class BrandAuthController extends CommonController {
     $result=$brandAuthLogic->disagreeApply($applyId, $reason);
 
     $data['mer_id']=$merId;
+    $data['status']=$result['status'];
+    $data['message']=$result['message'];
+    $this->ajaxReturn($data,'JSON');  
+  }
+
+  public function showBrand() {
+    $applyId=I('apply_id');
+    $merId=I('mer_id');
+
+    $brandAuthLogic = new l\BrandAuthLogic();
+    $brandLogic = new l\BrandLogic();
+
+    $brandList=$brandLogic->getAllBrandList();
+    $achieveBrandList=$brandAuthLogic->getAchieveBrandList($merId);
+
+
+    $role= session('user_info.role');
+    $this->assign('apply_id',$applyId);
+    $this->assign('role',$role);
+    $this->assign('brandList',$brandList);
+    $this->assign('achieveList',$achieveBrandList);
+    $this->display();
+  }
+
+    public function agree() {
+    $applyId=I('apply_id');
+    $reason=I('reason');
+    $brandList=I('agree-list');
+
+    addErrorLog('BrandAuth','agree','agreeBrand',$brandList);
+
+    $brandAuthLogic = new l\BrandAuthLogic();
+
+    $result=$brandLogic->agreeBrand($applyId, $brandList, $reason);
+
     $data['status']=$result['status'];
     $data['message']=$result['message'];
     $this->ajaxReturn($data,'JSON');  

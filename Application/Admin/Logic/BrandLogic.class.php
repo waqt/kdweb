@@ -32,7 +32,7 @@ class BrandLogic extends BaseLogic {
         $data['page']            =$page;    
         $data['limit']           =$limit;                           //分页单页显示行数
         $data['token']           =session('user_info.token');
-        $req_url=BASE_URL.GET_BRAND_LIST;
+        $req_url=BASE_URL.GET_BRAND_LIST_PAGE;
 
         try{
             $result=request_post($req_url,$data);
@@ -46,6 +46,29 @@ class BrandLogic extends BaseLogic {
         $this->errorMessage = $result['message'];
         $list = $result['data'];
         $list['current']=$page;
+        return $list;
+    }
+
+    /**
+     * 获取所有电器品牌列表       
+     * @return array
+     */
+    public function getAllBrandList() {
+        //分页单页显示行数
+        $data['token']           =session('user_info.token');
+        $req_url=BASE_URL.GET_BRAND_LIST;
+
+        try{
+            $result=request_post($req_url,$data);
+            $result=json_decode($result,true);
+        }
+        catch(\Exception $e){
+            print $e->getMessage();
+            exit();
+        } 
+        $this->errorCode = $result['status'];
+        $this->errorMessage = $result['message'];
+        $list = $result['data'];
         return $list;
     }
 

@@ -11,11 +11,11 @@ namespace Admin\Logic;
 use Lib\Log;
 
 /**
-* 商户列表控制Logic
+* 菜单列表控制Logic
 */
-class MerchantLogic extends BaseLogic {
+class OrderLogic extends BaseLogic {
     /**
-     * 获取商户列表
+     * 获取订单列表
      * @param String $area 用户所在区域
      * @param int $authorize_state 商户认证状态
      * @param int $appliance_id 商户技能品类  
@@ -26,7 +26,7 @@ class MerchantLogic extends BaseLogic {
      * @param int $limit 每页显示的条数         
      * @return array
      */
-    public function getMerchantList($area=null, $authorize_state=null, $appliance_id=null,
+    public function getOrderList($area=null, $authorize_state=null, $appliance_id=null,
                                     $phone=null, $onlycode=null, $brand_name=null,$page=1,
                                     $limit=10) {
         if($page=='' || $page==null){
@@ -44,9 +44,11 @@ class MerchantLogic extends BaseLogic {
 
         // API URL 管理员获取列表URL 与 商户获取列表URL
         if(!empty($_SESSION[C('ADMIN_AUTH_KEY')])){
-            $req_url=BASE_URL.ADMIN_GET_MERCHANT_URL;
-        }else{
-            $req_url=BASE_URL.MER_GET_MERCHANT_URL;
+            $req_url=BASE_URL.ADMIN_GET_ORDER_URL;
+        }else if($_SESSION[C('USER_AUTH_KEY')]=='2001'){
+            $req_url=BASE_URL.MER_GET_ORDER_URL;
+        }else if($_SESSION[C('USER_AUTH_KEY')]=='3002'){
+            $req_url=BASE_URL.SALE_GET_ORDER_URL;
         }
         try{
             $result=request_post($req_url,$data);

@@ -60,8 +60,8 @@
       <!--main content end-->
       <!--footer start-->
       <footer class="site-footer">
-          <div class="text-center">
-            <p class="text-right">
+          <div class="centered">
+            <p class="centered">
             2016 - Ikuaidian.com      <strong>浙ICP备14033859号-1</strong></p>
               <a href="#" class="go-top">
                   <i class="fa fa-angle-up"></i>
@@ -90,7 +90,16 @@
             var link=$(this).attr("value");
             //console.log(link);
             $("#wrapper").load("__MODULE__/"+link);
-          }); 
+         });             
+
+        //检查菜单是否有子菜单，若没有则获取页面
+        $(".left_parent_menu").click(function() { 
+            if(!$(this).closest('.sub-menu').children('ul').children('li').length) {
+                var link=$(this).attr("value");
+                //console.log(link);
+                $("#wrapper").load("__MODULE__/"+link);
+              }
+            });
         }); 
 
       $("#loginout").click(function(){
@@ -106,24 +115,6 @@
             }
       });
 
-      $(document).ready(function () {
-        var unique_id = $.gritter.add({
-            // (string | mandatory) the heading of the notification
-            title: '欢迎使用快点电器服务平台!',
-            // (string | mandatory) the text inside the notification
-            text: '通过快点后台管理系统，您可以更方便的管理订单，财务和商户信息.赶快下载APP注册成为快点商户吧！ <a href="http://www.ikuaidian.com" target="_blank" style="color:#ffd777">Ikuaidian.com</a>.',
-            // (string | optional) the image to display on the left
-            image: '__ASSETS__/img/ui-sam.jpg',
-            // (bool | optional) if you want it to fade out on its own or just sit there
-            sticky: true,
-            // (int | optional) the time you want it to be alive for before fading out
-            time: '',
-            // (string | optional) the class name you want to apply to that specific message
-            class_name: 'my-sticky-class'
-        });
-
-        return false;
-        });
 	</script>
   </body>
 </html>

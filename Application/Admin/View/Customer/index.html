@@ -1,0 +1,67 @@
+<link rel="stylesheet" href="__ASSETS__/css/tcdPageCode.css"/>
+	   			<div class="span9">
+					<div class="row-fluid">
+						<div class="page-header">
+							<h3>
+								用户管理 <small>用户列表</small>
+							</h3>
+						</div>
+						<table id="Table-Result" class="table table-strtable table-striped table-bordered table-condensed">
+                              <thead>
+                              <tr>
+                                <th>序号</th>
+								<th>用户ID</th>
+								<th>用户姓名</th>
+								<th>用户电话</th>
+								<th><i class=" fa fa-edit"></i>操作</th>
+                              </tr>
+                              </thead>
+                              <tbody>
+								<volist name='customer_list' id='cl' key='kc' >
+									<tr class="list-users">
+										<td>{$kc}</td>
+										<td>{$cl.user_id}</td>
+										<td>{$cl.name}</td>
+										<td>{$cl.phone}</td>
+										<td>
+											<button class="btn btn-warning btn-xs view-detail"  value="{$cl.user_id}"><i class="fa fa-eye"></i>查看</button>
+										</td>
+									</tr>
+								</volist>
+                              </tbody>
+                          </table>
+                          <div id="Pagination" class="tcdPageCode">
+                          	
+                          </div> 
+					</div>
+				</div>
+		</div>
+<script src="__ASSETS__/js/jquery.page.js"></script>
+<script type="text/javascript" language="javascript">	
+    $(".view-detail").click(function(){
+      $("#wrapper").load("__MODULE__/Customer/detail",{customer_id: $(this).val()});
+    });
+
+
+	$(function(){
+		//这是一个非常简单的demo实例，让列表元素分页显示
+		//回调函数的作用是显示对应分页的列表项内容
+		//回调函数在用户每次点击分页链接的时候执行
+		//参数page_index{int整型}表示当前的索引页
+		var totalpage = {$pages};
+		var current = {$current};
+    	$(".tcdPageCode").createPage({
+        	pageCount:totalpage,
+        	current:current,
+        	backFn:function(p){
+            	loadpage(p);
+        	}
+    	});
+
+	});
+
+	function loadpage(p){
+		$("#wrapper").load("__MODULE__/Customer/index",{page:p});
+	}
+
+</script>

@@ -72,7 +72,7 @@ class BrandAuthLogic extends BaseLogic {
         } 
         $this->errorCode = $result['status'];
         $this->errorMessage = $result['message'];
-        $achieve_brand_list = $result;
+        $achieve_brand_list = $result['data'];
         return $achieve_brand_list;
     }
 
@@ -104,7 +104,8 @@ class BrandAuthLogic extends BaseLogic {
 
        /**
      * 拒绝商户认证
-     * @param Int $merchant_id 商户id       
+     * @param  Int $applyId 申请id
+     * @param  array $reason 意见理由        
      * @return array
      */
     public function disagreeApply($applye_id, $reason=null) {
@@ -114,6 +115,34 @@ class BrandAuthLogic extends BaseLogic {
 
         // API URL 管理员获取列表URL 与 商户获取列表URL
         $req_url=BASE_URL.DISAGREE_BRAND_APPLY;
+        try{
+            $result=request_post($req_url,$data);
+            $result=json_decode($result,true);
+        }
+        catch(\Exception $e){
+            print $e->getMessage();
+            exit();
+        } 
+        $this->errorCode = $result['status'];
+        $this->errorMessage = $result['message'];
+        return $result;
+    }
+
+    /**
+     * 同意商户认证
+     * @param  Int $applyId 申请id
+     * @param  array $brandList 授权品牌列表
+     * @param  array $reason 意见理由           
+     * @return array
+     */
+    public function agreeBrand($applyId, $brandList=null, $reason=null) {
+        $data['apply_brand_id']  =$applyId;
+        $data['brand_id']        =$brandList;                   //申请ID                        //分页单页显示行数
+        $data['reason']          =$reason;
+        $data['token']           =session('user_info.token');
+
+        // API URL 管理员获取列表URL 与 商户获取列表URL
+        $req_url=BASE_URL.AGREE_BRAND_APPLY;
         try{
             $result=request_post($req_url,$data);
             $result=json_decode($result,true);

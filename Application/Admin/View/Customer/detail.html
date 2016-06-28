@@ -1,0 +1,29 @@
+<div class="span9">
+	<div class="row-fluid">
+		<div class="page-header">
+				<h3>
+					用户管理 <small>用户详情</small>
+				</h3>
+		</div>
+		<div class="content-panel pn">
+			<div class="goleft ml">
+				<h4>用户姓名：{$customer.user_name}</h4></br>
+				<h4>用户电话：{$customer.phone}</h4></br>
+				<h4>用户地址：{$customer.address}</h4></br>
+				<h4>用户订单：{$customer.order_nums} |
+          <button class="btn btn-warning btn-xs view-order"  value="{$customer.phone}"><i class="fa fa-eye"></i>查看订单</button>
+        </h4></br>
+		</div>
+	</div>
+</div>
+<script src="__ASSETS__/js/jquery.fancybox.js"></script>
+<script type="text/javascript">
+     var apply_id={$applyDetail.id};
+     var mer_id={$mer_id};
+
+
+     $(document).ready(function() {
+     	$("a.preview").fancybox();
+      });
+ 
+</script>

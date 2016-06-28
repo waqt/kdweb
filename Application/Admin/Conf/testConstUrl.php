@@ -7,12 +7,6 @@
 	//登录验证接口
 	const LOGIN_AUTHENTICATION_URL = 'web-login/login';
 
-	//管理员获取商户列表接口
-	const ADMIN_GET_MERCHANT_URL  =  'web-merchants/merchants-lists';
-
-	//服务商获取商户列表接口
-	const MER_GET_MERCHANT_URL  =  'web-merchants/myself-list';
-
 	/**
 	 *电器品类管理
 	 */
@@ -25,9 +19,12 @@
 	//获取电器品类（父类)接口
 	const APPLIANCE_FATHER_LIST_URL = 'web-appliance/appliance-father-list';
 
-	//添加电器父类
-	const ADD_FATHER_APPLIANCE_URL = 'web-appliance/insert-father-appliance';
+	//添加电器品类
+	const ADD_APPLIANCE_URL = 'web-appliance/insert-appliance';
 
+	/*
+	* 商户管理
+	*/
 	//获取商户详情
 	const GET_MERCHANT_DETAIL = 'web-merchants/merchant-info';
 
@@ -43,18 +40,55 @@
 	//拒绝品牌授权
 	const DISAGREE_BRAND_APPLY = 'web-brand/save-refund';
 
+	//同意品牌授权
+	const AGREE_BRAND_APPLY = 'web-brand/save-agree';
+
 	//同意商户认证
 	const AGREE_MERCHANT_AUTH = 'web-merchants/agree-merchant-authorize';
 
 	//取消商户认证
 	const REFUSE_MERCHANT_AUTH = 'web-merchants/refund-merchant-authorize';
 
+	//管理员获取商户列表接口
+	const ADMIN_GET_MERCHANT_URL  =  'web-merchants/merchants-lists';
+
+	//服务商获取商户列表接口
+	const MER_GET_MERCHANT_URL  =  'web-merchants/myself-list';
+
+
+	/*
+	* 品牌管理
+	*/
 	//品牌列表
-	const GET_BRAND_LIST = 'web-brand/brand-page-list';
+	const GET_BRAND_LIST_PAGE = 'web-brand/brand-page-list';
+
+	//品牌列表无分页
+	const GET_BRAND_LIST = 'web-brand/brand-list';
 
 	//删除品牌
 	const DELETE_BRAND_URL = 'web-brand/delete-brand';
 
 	//添加品牌
 	const ADD_BRAND_URL = 'web-brand/insert-brand';
+
+	/*
+	* 用户管理
+	*/
+	//获取用户列表
+	const GET_CUSTOMER_LIST_URL = 'web-users/user-lists';
+
+	//获取用户列表
+	const GET_CUSTOMER_DETAIL_URL = 'web-users/user-detail';
+
+	/*
+	* 订单管理
+	*/
+	//管理员获取订单列表接口
+	const ADMIN_GET_ORDER_URL  =  'web-orders/admin-order-lists';
+
+	//服务商获取订单列表接口
+	const MER_GET_ORDER_URL  =  'web-orders/merchant-order-lists';
+
+	//服务商获取订单列表接口
+	const SALE_GET_ORDER_URL  =  'web-orders/saleor-order-lists';
 ?>
