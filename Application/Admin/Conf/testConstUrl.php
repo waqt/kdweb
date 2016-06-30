@@ -91,4 +91,7 @@
 
 	//服务商获取订单列表接口
 	const SALE_GET_ORDER_URL  =  'web-orders/saleor-order-lists';
+
+	//服务商获取订单列表接口
+	const GET_ORDER_DETAIL  =  'web-orders/order-detail-info';
 ?>

@@ -2581,3 +2581,8 @@ display:;
     display:inline-block;
 }
 
+.order-detail-list h4{
+    width: 30%;
+    display:inline-block;
+}
+

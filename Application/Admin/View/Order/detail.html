@@ -1,0 +1,169 @@
+<div class="span9">
+    <div class="row-fluid">
+        <div class="row-fluid">
+            <div class="span3">
+              <h3>业务类型</h3>
+              <p><span class="badge bg-info"> {$orderDetail.order_type} </span></p>
+            </div>
+            <div class="span3">
+              <h3>订单编号</h3>
+              <p><span class="badge bg-info"> {$orderDetail.order_code} </span></p>
+            </div>
+            <div class="span3">
+              <h3>订单状态</h3>
+              	<p><span class="badge bg-info"> {$orderDetail.order_step} </span></p>
+            </div>
+            <div class="span3">
+              <h3>支付状态</h3>
+			  <p><span class="badge bg-warning">{$orderDetail.pay_status}  </span></p>
+            </div>
+        </div>
+		<br />
+		
+		<!-- 订单详情 -->		  
+		<div class="row-fluid">
+			<div class="page-header-detail">
+				<h2>订单详情 </h2>
+			</div>
+			</br>
+			<div class="content-panel pn">
+				<div class="goleft ml">
+					<div class="order-detail-list">
+						<h4>
+							电器品类：{$orderDetail.appliance_name}
+						</h4>
+						<h4>
+							电器品牌：{$orderDetail.brand_name}
+						</h4>
+						<h4>
+							<i class="fa fa-wrench"></i> 故障类型: {$orderDetail.break_type}
+						</h4>
+					</div>
+					</br>
+					<div class="order-detail-list">
+						<h4>
+							故障描述：{$orderDetail.break_describe}
+						</h4>
+					</div>
+					</br>
+					<h4>订单预约时间：{$orderDetail.repair_time}</h4></br>
+					<h4>订单生成时间：{$orderDetail.created_at}</h4></br>
+					<div class="order-detail-list">
+						<h4>
+							<i class="fa fa-home"></i> 用户地址：{$orderDetail.user_address}
+						</h4>
+						<h4>
+							<i class="fa fa-phone"></i> 用户电话：{$orderDetail.user_phone}
+						</h4>
+					</div>
+					</br>
+				 	<h4>	
+				  		<p>
+							<i class="fa fa-heart"></i> 评分：
+							<span class="badge bg-important"> {$orderDetail.avag_score} </span> |
+							用户评价：{$orderDetail.content}
+				  		</p>
+				 	</h4>
+				 	</br>
+				</div>
+			</div>
+		</div>
+
+		<!-- 认证信息 -->
+		<div class="row-fluid">
+			<div class="page-header-detail">
+					<h2>服务信息 </h2>
+			</div>
+			</br>
+			<div class="content-panel pn">
+				<div class="goleft ml">
+					<div class="order-detail-list">
+						<h4>
+							<i class="fa fa-home"></i> 服务商户：{$orderDetail.mer_name} |
+							<button class="btn btn-warning btn-xs view-order"  onclick="viewMerchant({$orderDetail.mer_id}); return false"><i class="fa fa-eye"></i>查看商户</button>
+						</h4>
+						<h4>
+							<i class="fa fa-user"></i> 服务师傅：{$orderDetail.staff_name}
+						</h4>
+					</div>
+					</br>
+					<div class="order-detail-list">
+						<h4>
+							服务方式：{$orderDetail.service_type}
+						</h4>
+						<h4>
+							<i class="fa fa-cny"></i> 收费总计：{$orderDetail.total_price} 元
+						</h4>
+					</div>
+					</br>
+					<h4>
+							服务备注：{$orderDetail.service_remark}
+					</h4>
+					</br>
+					<h4>
+						<p>
+							<i class="fa fa-credit-card"></i> 清洗保养产品: {$orderDetail.produce_name} | 
+							<button class="btn btn-warning btn-xs view-account"  onclick="viewProduct({$orderDetail.produce_id}); return false"><i class="fa fa-eye"></i>查看商品详情
+							</button>
+						</p>
+					</h4>
+					</br>
+					<div class="order-detail-list">
+						<h4>
+							上门检测费：{$orderDetail.check_price} 元
+						</h4>
+						<h4>
+							上门检测费(预报价)：{$orderDetail.virtual_check_price} 元
+						</h4>
+					</div>
+					</br>
+					<div class="order-detail-list">
+						<h4>
+							维修费：{$orderDetail.repair_price} 元
+						</h4>
+						<h4>
+							维修费(预报价)：{$orderDetail.virtual_repair_price} 元
+						</h4>
+					</div>
+					</br>
+					<div class="order-detail-list">
+						<h4>
+							配件费：{$orderDetail.hardware_price} 元
+						</h4>
+						<h4>
+							配件费(预报价)：{$orderDetail.virtual_hardware_price} 元
+						</h4>
+					</div>
+					</br>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script src="__ASSETS__/js/jquery.fancybox.js"></script>
+<script type="text/javascript">
+	if({$condition}!=null){
+		var condition={$condition};
+	}
+
+	function viewMerchant(mer_id){
+      $("#wrapper").load("__MODULE__/Merchant/detail",{merchant_id: mer_id});
+    }
+
+      $("#agree-auth").click(function(){
+      		var mer_id={$merchant.mer_id};
+      		if (!confirm("确认认证该商家吗？")) {
+            	window.event.returnValue = false;
+        	}else{
+        		$.post(
+            	'__MODULE__/Merchant/agreeAuth',
+          		{
+            		"mer_id":mer_id,
+          		},
+          		function(data){
+            		alert(data['message']);
+             		$("#wrapper").load("__MODULE__/Merchant/detail",{merchant_id: data['mer_id']});
+          		});
+        	}
+      });  
+</script>

@@ -107,7 +107,7 @@
             window.event.returnValue = false;
         }else{
           $.post(
-                "__MODULE__/Merchant/loginout",
+                "__MODULE__/Login/loginout",
                 function(data){
                       alert(data['message']);
                       window.location.href=data['jumpUrl'];

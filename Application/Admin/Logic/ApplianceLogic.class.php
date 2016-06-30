@@ -112,12 +112,12 @@ class ApplianceLogic extends BaseLogic {
      */
     public function addAppliance($appliance_name, $father_id=null, $input_name=null ,$input_name2=null ,$input_name3=null) {
 
-        $data['name']           =$appliance_name;
-        $data['father_id']      =$father_id;
-        $data['big_logo']       =$input_name; 
-        $data['small_logo']     =$input_name2; 
-        $data['middle_logo']    =$input_name3; 
-        $data['token']          =session('user_info.token');
+        $data['name']        =$appliance_name;
+        $data['father_id']   =$father_id;
+        $data['big_logo']    =$input_name; 
+        $data['small_logo']  =$input_name2; 
+        $data['middle_logo'] =$input_name3; 
+        $data['token']       =session('user_info.token');
         addErrorLog('ApplianceLogic','add','data',$data);
         $req_url=BASE_URL.ADD_APPLIANCE_URL;
 

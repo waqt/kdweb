@@ -17,23 +17,38 @@ class OrderController extends CommonController {
   *用户列表
   */
   public function index(){
-      $phone = I('phone');
-      $page = I('page');
-      $limit = 10;
+      /********
+      $order_type  = I('order_type');         //订单业务类型
+      $order_state = I('order_state');        //订单状态
+      $appliance   = I('appliance');          //订单品类
+      $pay_state   = I('pay_state');          //订单支付状态
+      $brand       = I('brand');              //电器品牌
+      $city        = I('city');               //订单所在区域
+      $order_code  = I('order_code');         //订单编号
+      $user_phone  = I('user_phone');         //用户手机号
+      $mer_phone   = I('mer_phone');          //商户手机号
+      $staff_phone = I('staff_phone');        //师傅手机号
+      $buy_address = I('buy_address');        //购买地址（销售商）
+      ***********/
+      $condition   = I('condition');
+      $page        = I('page');
+      $limit       = 10;
+
+      $condition['page'] =$page;
       
 
-      $customerLogic = new l\CustomerLogic();
+      $orderLogic = new l\OrderLogic();
       //API 获取用户数据
-      $customer_data=$customerLogic->getCustomerList($phone, $page, $limit);
-      $customer_list=$customer_data['datas'];
-      $list_count=$customer_data['allcount'];
-      $current=$customer_data['current'];               //当前页
+      $orderData=$orderLogic->getOrderList($condition, $page, $limit);
+
+      $ordetrList=$orderData['datas'];
+      $list_count=$orderData['allcount'];
+      $current=$orderData['current'];               //当前页
       $pages=ceil($list_count/$limit); 
       
-      $data['error_code']=$customerLogic->getErrorCode();
-      $data['error_message']=$customerLogic->getErrorMessage();
       
-      $this->assign('customer_list', $customer_list);
+      $this->assign('condition', $condition);
+      $this->assign('ordetrList', $ordetrList);
       $this->assign('pages',$pages);
       $this->assign('current', $current);
       $this->assign('list_count',$list_count);
@@ -41,15 +56,18 @@ class OrderController extends CommonController {
   }
 
   /*
-  *用户详情
+  *订单详情
   */
   public function detail() {
-    $customerID=I('customer_id');
-    $customerLogic = new l\CustomerLogic();
-    $customer=$customerLogic->getCustomerDetail($customerID);
-    //addErrorLog('customer','detail','customer',$customerID);
+    $orderID=I('order_id');
+    $condition   = I('condition');
 
-    $this->assign('customer',$customer);
+    $orderLogic = new l\OrderLogic();
+    $orderDetail=$orderLogic->getOrderDetail($orderID);
+    //addErrorLog('customer','detail','customer',$customerID);
+    
+    $this->assign('conditon',$condition);
+    $this->assign('orderDetail',$orderDetail);
 
     $this->display();
   }

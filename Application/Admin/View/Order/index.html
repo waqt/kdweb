@@ -1,0 +1,111 @@
+<link rel="stylesheet" href="__ASSETS__/css/tcdPageCode.css"/>
+<div class="span9">
+    <div class="row-fluid">
+        <div class="page-header">
+              <h3>
+                订单管理 <small>订单列表</small>
+              </h3>
+              <a href="#" id="add-order" class="btn btn-success">添加订单</a>
+              <a href="#" id="batch-add-order" class="btn btn-success">批量添加订单</a>
+        </div>
+        <div class="inner-showback">
+            <!-- Split button -->
+            <div class="btn-group">
+              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                查看品类 <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" >
+                <volist name='father_list'  id='ApplianceFather' key='kc' >
+                  <li><a href="#" value='{$ApplianceFather.appliance_id}'>{$ApplianceFather.name}</a></li>
+                </volist>
+              </ul>
+            </div>               
+        </div><!-- /showback -->
+          <table id="Table-Result" class="table table-strtable table-striped table-bordered table-condensed">
+            <thead>
+              <tr>
+                <th>序号</th>
+                <th>订单编号</th>
+                <th>订单类型</th>
+                <th>用户电话</th>
+                <th>商户名称</th>
+                <th>用工姓名</th>
+                <th>电器品类</th>
+                <th>支付状态</th>
+                <th>订单状态</th>
+                <th>订单日期</th>
+                <th>订单地址</th>
+                <th><i class=" fa fa-edit"></i>操作</th>
+              </tr>
+            </thead>
+            <tbody>
+                <volist name='ordetrList' id='ol' key='kc' >
+                  <tr class="list-users">
+                    <td>{$kc}</td>
+                    <td>{$ol.order_code}</td>
+                    <if condition="($ol.order_type eq '清洗养护')">
+                      <td><span class="label label-warning label-mini">{$ol.order_type}</span></td>
+                    <elseif condition="($ol.order_type eq '安装')"/>
+                      <td><span class="label label-success label-mini">{$ol.order_type}</span></td>
+                    <elseif condition="($ol.order_type eq '保内维修')"/>
+                      <td><span class="label label-info label-mini">{$ol.order_type}</span></td>
+                    <else />
+                      <td><span class="label label-primary label-mini">{$ol.order_type}</span></td>
+                    </if>
+                    <td>{$ol.user_phone}</td>
+                    <td>{$ol.mer_name}</td>
+                    <td>{$ol.staff_name}</td>
+                    <td>{$ol.appliance_name}</td>
+                    <td>{$ol.order_pay_state}</td>
+                    <td>{$ol.order_complete_state}</td>
+                    <td>{$ol.order_time}</td>
+                    <td>{$ol.address}</td>
+                    <td>
+                      <button class="btn btn-warning btn-xs" class="view-detail" onclick="viweDetail({$ol.order_id}); return false"><i class="fa fa-eye"></i> 查看</button>
+                    </td>
+                  </tr>
+                </volist>
+              </tbody>
+            </table>
+            <div id="Pagination" class="tcdPageCode">
+                            
+            </div> 
+          </div>
+        </div>
+    </div>
+<script src="__ASSETS__/js/jquery.page.js"></script>
+<script src="__ASSETS__/js/jquery.fancybox.js"></script>
+<script type="text/javascript">
+    $("#add-order").click(function(){
+      $("#wrapper").load("__MODULE__/Appliance/addpar");
+    });
+
+
+    function viweDetail(order_id){
+      $("#wrapper").load("__MODULE__/order/detail",{order_id: order_id});
+    }
+
+
+ 
+      $(function(){
+    //这是一个非常简单的demo实例，让列表元素分页显示
+    //回调函数的作用是显示对应分页的列表项内容
+    //回调函数在用户每次点击分页链接的时候执行
+    //参数page_index{int整型}表示当前的索引页
+        var totalpage = {$pages};
+        var current ={$current};
+        $(".tcdPageCode").createPage({
+            pageCount:totalpage,
+            current: current,
+            backFn:function(p){
+                //console.log(p);
+                loadpage(p);
+            }
+        });
+
+    });
+
+  function loadpage(p){
+    $("#wrapper").load("__MODULE__/Order/index", {page:p});
+  }
+</script>
