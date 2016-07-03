@@ -65,11 +65,31 @@ class OrderController extends CommonController {
     $orderLogic = new l\OrderLogic();
     $orderDetail=$orderLogic->getOrderDetail($orderID);
     //addErrorLog('customer','detail','customer',$customerID);
-    
+
     $this->assign('conditon',$condition);
     $this->assign('orderDetail',$orderDetail);
 
     $this->display();
   }
+
+
+  /*
+  *添加订单页面
+  */
+  public function addView() {
+
+    $applianceLogic = new l\ApplianceLogic();
+    $applianceFatherList=$applianceLogic->getApplianceFatherList();
+    foreach($applianceFatherList as $father){
+      $child=$applianceLogic->getApplianceList($father['appliance_id'],1,30);
+      $father['child']=$child['datas'];
+    }
+    S('appliances',$applianceFatherList);  
+
+
+
+    $this->display();
+  }
+
 
 }

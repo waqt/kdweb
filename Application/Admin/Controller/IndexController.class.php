@@ -18,6 +18,7 @@ class IndexController extends CommonController {
     $role = model('Role')->find(session('user_info.role'));
     //$role = model('Role')->find(session('user_info.role_id'));
     //$_SESSION['user_info']['name'] = $role['name'];
+
     $this->assign('top_menu', $top_menu);
     $this->assign('left_menu', $left_menu);
     $this->assign('user_info', session('user_info'));

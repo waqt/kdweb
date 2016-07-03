@@ -55,6 +55,9 @@
 	//服务商获取商户列表接口
 	const MER_GET_MERCHANT_URL  =  'web-merchants/myself-list';
 
+	//服务商员工列表接口
+	const GET_MER_STAFF_LIST  =  'web-merchants/staff-lists';
+
 
 	/*
 	* 品牌管理
@@ -94,4 +97,16 @@
 
 	//服务商获取订单列表接口
 	const GET_ORDER_DETAIL  =  'web-orders/order-detail-info';
+
+	/*
+	* 销售商管理
+	*/
+	//获取销售商列表
+	const ADMIN_GET_SALES_LIST  =  'web-saleors/admin-saleor-lists';
+
+	//获取销售商列表
+	const SALES_GET_SALES_LIST  =  'web-saleors/saleor-lists';
+
+	//添加销售商
+	const ADD_SALES_URL  =  'web-saleors/add-saleor';
 ?>

@@ -1,0 +1,39 @@
+<h4><i class="fa fa-angle-right"></i> 员工列表</h4>
+	<table id="Table-Result" class="table table-strtable table-striped table-bordered table-condensed">
+        <thead>
+            <tr>
+            	<th>序号</th>
+                <th>员工姓名</th>
+				<th>员工联系电话</th>
+				<th>员工认证状态</th>
+				<th><i class=" fa fa-eye"></i>员工详情</th>
+            </tr>
+        </thead>
+        <tbody>
+			<volist name='staffList' id='staff' key='key' >
+				<tr class="list-users">
+					<td>{$key}</td>
+					<td>{$staff.staff_name}</td>
+					<td>{$staff.phone}</td>
+					<if condition="($staff.state eq '已认证')">
+						<td>
+							<span class="label label-success label-mini">{$staff.state}</span>
+						</td>
+					<else />
+						<td>
+							<span class="label label-warning label-mini">{$staff.state}</span>
+						</td>
+					</if>
+					<td>
+						<button class="btn btn-warning btn-xs view-staff-detail" value="{$staff.staff_id}"><i class="fa fa-eye"></i>查看</button>
+					</td>
+				</tr>
+			</volist>
+        </tbody>
+	</table>
+<script type="text/javascript">
+	 var mer_id={$mer_id};
+     $(".view-staff-detail").click(function() { 
+           	$("#staff-list").load("__MODULE__/Merchant/staffDetail",{staff_id: $(this).val(), mer_id: mer_id});
+       });
+</script>

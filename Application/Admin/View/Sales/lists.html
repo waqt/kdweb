@@ -1,0 +1,88 @@
+<link rel="stylesheet" href="__ASSETS__/css/tcdPageCode.css"/>
+<div class="span9">
+    <div class="row-fluid">
+        <div class="page-header">
+              <h3>
+                销售商管理 <small>销售商列表</small>
+              </h3>
+              <a href="#" id="add-sales" class="btn btn-success">添加销售商</a>
+        </div>
+          <table id="Table-Result" class="table table-strtable table-striped table-bordered table-condensed">
+            <thead>
+              <tr>
+                <th>序号</th>
+                <th>销售商名称</th>
+                <th>销售商电话</th>
+                <th>地址</th>
+                <th><i class=" fa fa-edit"></i>操作</th>
+              </tr>
+            </thead>
+            <tbody>
+                <volist name='sales_list' id='sales' key='kc' >
+                  <tr class="list-users">
+                    <td>{$kc}</td>
+                    <td>{$sales.real_name}</td>
+                    <td>{$sales.phone}</td>
+                    <td>{$sales.address}</td>
+                    <td>
+                      <div class="btn-group">
+                        <a class="btn btn-mini dropdown-toggle"
+                          data-toggle="dropdown" href="#">Actions <span
+                          class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                          <li><a class="view-detail" href=""
+                            onclick="viweDetail({$ol.order_id}); return false"><i
+                              class="fa fa-eye"></i> 查看</a></li>
+                          <li><a href=""
+                            onclick="edit(${p.productOrderKey },${p.isEnable});return false"><i
+                              class="fa fa-pencil"></i> 编辑</a></li>
+                          <li><a href="" onclick="del(${p.productOrderKey });return false"><i class="fa fa-trash-o"></i> 删除</a></li>
+                        </ul>
+                      </div>
+                    </td>
+                  </tr>
+                </volist>
+              </tbody>
+            </table>
+            <div id="Pagination" class="tcdPageCode">
+                            
+            </div> 
+          </div>
+        </div>
+    </div>
+<script src="__ASSETS__/js/jquery.page.js"></script>
+<script type="text/javascript">
+    $("#add-sales").click(function(){
+      $("#wrapper").load("__MODULE__/Sales/addView");
+    });
+
+
+    function viweDetail(order_id){
+      $("#wrapper").load("__MODULE__/order/detail",{order_id: order_id});
+    }
+
+
+   /*********** 
+      $(function(){
+    //这是一个非常简单的demo实例，让列表元素分页显示
+    //回调函数的作用是显示对应分页的列表项内容
+    //回调函数在用户每次点击分页链接的时候执行
+    //参数page_index{int整型}表示当前的索引页
+        var totalpage = {$pages};
+        var current ={$current};
+        $(".tcdPageCode").createPage({
+            pageCount:totalpage,
+            current: current,
+            backFn:function(p){
+                //console.log(p);
+                loadpage(p);
+            }
+        });
+
+    });
+
+  function loadpage(p){
+    $("#wrapper").load("__MODULE__/Order/index", {page:p});
+  }
+  *******************/
+</script>

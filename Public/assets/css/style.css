@@ -2586,3 +2586,7 @@ display:;
     display:inline-block;
 }
 
+.add-form-half{
+    width: 35%;
+    display:inline-block;
+}

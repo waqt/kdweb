@@ -59,11 +59,7 @@ class MerchantController extends CommonController {
 
     
     $role= session('user_info.role');
-    /**********
-    $module=MODULE_NAME;
-    $action=ACTION_NAME;
-    $menu_logic = new l\MenuLogic();
-    **************/
+
     $this->assign('role',$role);
     $this->assign('merchant',$merchant_data);
 
@@ -93,6 +89,37 @@ class MerchantController extends CommonController {
     $data['status']=$result['status'];
     $data['message']=$result['message'];
     $this->ajaxReturn($data,'JSON');  
+  }
+
+  public function staffDetail() {
+    $merchantID=I('mer_id');
+    $staffID= I('staff_id');
+
+    $merchantLogic = new l\MerchantLogic();
+    $staffData=$merchantLogic->getStaffList($merchantID);
+
+    $staffList=$staffData['datas'];
+
+    $role= session('user_info.role');
+    $this->assign('role',$role);
+    $this->assign('staffList',$staffList);
+    $this->assign('mer_id',$merchantID);
+    $this->display();
+  }
+
+  public function staffList() {
+    $merchantID=I('mer_id');
+
+    $merchantLogic = new l\MerchantLogic();
+    $staffData=$merchantLogic->getStaffList($merchantID);
+
+    $staffList=$staffData['datas'];
+
+    $role= session('user_info.role');
+    $this->assign('role',$role);
+    $this->assign('staffList',$staffList);
+    $this->assign('mer_id',$merchantID);
+    $this->display();
   }
 
   public function applyAuth() {

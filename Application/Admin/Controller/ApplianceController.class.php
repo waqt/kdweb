@@ -94,6 +94,7 @@ class ApplianceController extends CommonController {
               $middle_logo=C('OSS_FILE_PREFIX').'/'.$img_name3;
               $result=$applianceLogic->addAppliance($applianceName, $fid, $big_logo,
                                  $small_logo, $middle_logo);
+              S('appliances',NULL);
               $data['success'] = true;
               $data['message'] = $result['message'];
               $this->ajaxReturn($data,'JSON');
@@ -105,6 +106,7 @@ class ApplianceController extends CommonController {
     $id=I('appliance_id');
     $applianceLogic = new l\ApplianceLogic();
     $result=$applianceLogic->delAppliance($id);
+    S('appliances',NULL);
     $data['message']=$result['message'];
     $this->ajaxReturn($data,'JSON');
   }

@@ -68,6 +68,7 @@ class BrandController extends CommonController {
               $data['success'] = true;
               $data['message'] = $result['message'];
               $this->ajaxReturn($data,'JSON');
+              S('brands',NULL);
             }else{
               $data['success'] = false;
               $data['message'] = '图片上传失败';
@@ -79,6 +80,7 @@ class BrandController extends CommonController {
           $data['success'] = true;
           $data['message'] = $result['message'];
           $this->ajaxReturn($data,'JSON');
+          S('brands',NULL);
         }
       }
     }
@@ -90,5 +92,6 @@ class BrandController extends CommonController {
     $result=$brandLogic->delBrand($id);
     $data['message']=$result['message'];
     $this->ajaxReturn($data,'JSON');
+    S('brands',NULL);
   }
 }

@@ -100,6 +100,7 @@
 						<a class="preview" href="{$merchant.header_opposite_ID}"  title="IMG Reference"><img class="fancyzoom" src="{$merchant.header_opposite_ID}" width="200"  /></a>
 						</h4>
 				</div>
+				</br>
 				<div class="goleft ml">
 						<h4>
 						<i class="fa fa-file-image-o"></i> 营业执照:
@@ -116,7 +117,7 @@
 					<h2>品牌授权信息 </h2>
 			</div>
 			<div class="content-panel pn">
-				<div class="goleft ml">
+				<div class="goleft ml" id="brand-console">
 						<h4>
 							品牌授权状态：
 							<span  class="badge bg-info">{$merchant.brand_state}</span>
@@ -125,7 +126,59 @@
 						</h4>
 						</br>
 				</div>
-				<div class="goleft ml" id="brand-list">
+				<div class="goleft ml collapse in" id="brand-list">
+				</div>
+			</div>
+		</div>
+
+				<!-- 员工信息 -->
+		<div class="row-fluid">
+			<div class="page-header-detail">
+					<h2>员工信息 </h2>
+			</div>
+			<div class="content-panel pn">
+				<div class="goleft ml" id="staff-console">
+						<h4>
+							旗下员工数： {$merchant.staff_nums} |
+								<button class="btn btn-warning view-apply" id="view-staff" value="{$merchant.mer_id}">
+									<i class="fa fa-eye"></i>查看员工列表
+								</button>
+						</h4>
+				</div>
+				<div class="goleft ml collapse in" id="staff-list">
+				</div>
+			</div>
+		</div>
+		
+		<!-- 技能信息 -->
+		<div class="row-fluid">
+			<div class="page-header-detail">
+					<h2>技能信息 </h2>
+			</div>
+			<div class="content-panel pn">
+				<div class="goleft ml" id="technology-console">
+					<button class="btn btn-warning" data-toggle="collapse" data-target="#tecnology-list">
+						<i class="fa fa-sort-amount-desc"></i> 收起展开
+					</button>
+				</div>
+				<div class="goleft ml collapse in" id="tecnology-list">
+					<h4><i class="fa fa-angle-right"></i> 技能列表</h4>
+					<table id="Table-Result" class="table table-strtable table-striped table-bordered table-condensed">
+        				<thead>
+            				<tr>
+            					<th>序号</th>
+                				<th>技能品类</th>
+            				</tr>
+        				</thead>
+        				<tbody>
+							<volist name='merchant.tecnology' id='tecnology' key='key' >
+							<tr class="list-users">
+								<td>{$key}</td>
+								<td>{$tecnology.appliance_name}</td>
+							</tr>
+							</volist>
+        				</tbody>
+					</table>
 				</div>
 			</div>
 		</div>
@@ -139,6 +192,16 @@
 
       $("#view-apply").click(function() { 
            $("#brand-list").load("__MODULE__/BrandAuth/brandApplyList",{merchant_id: $(this).val()});
+           if($("#pack-up-brand").length==0){
+            $("#brand-console").append("<button class='btn btn-theme' id='pack-up-brand' data-toggle='collapse' data-target='#brand-list'><i class='fa fa-sort-amount-desc'></i> 收起</button>");
+            }
+        });
+
+      $("#view-staff").click(function() { 
+           $("#staff-list").load("__MODULE__/Merchant/staffList",{mer_id: $(this).val()});
+           if($("#pack-up-staff").length==0){
+           $("#staff-console").append("<button class='btn btn-theme' data-toggle='collapse' id='pack-up-staff' data-target='#staff-list'><i class='fa fa-sort-amount-desc'></i> 收起</button>");
+           }
         });
 
       $("#agree-auth").click(function(){

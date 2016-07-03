@@ -133,11 +133,11 @@ class BrandAuthController extends CommonController {
     $merId=I('mer_id');
 
     $brandAuthLogic = new l\BrandAuthLogic();
-    $brandLogic = new l\BrandLogic();
-
-    $brandList=$brandLogic->getAllBrandList();
     $achieveBrandList=$brandAuthLogic->getAchieveBrandList($merId);
+    
 
+    $initialLogic = new l\InitialLogic();
+    $brandList=$initialLogic->getAllBrands();
 
     $role= session('user_info.role');
     $this->assign('apply_id',$applyId);
