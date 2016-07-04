@@ -76,18 +76,19 @@ class OrderController extends CommonController {
   /*
   *添加订单页面
   */
-  public function addView() {
+  public function addStepOne() {
 
-    $applianceLogic = new l\ApplianceLogic();
-    $applianceFatherList=$applianceLogic->getApplianceFatherList();
-    foreach($applianceFatherList as $father){
-      $child=$applianceLogic->getApplianceList($father['appliance_id'],1,30);
-      $father['child']=$child['datas'];
-    }
-    S('appliances',$applianceFatherList);  
+    $initialLogic = new l\InitialLogic();
 
+    $applianceList = $initialLogic->getAllAppliances();
+    $brandList = $initialLogic->getAllBrands();
+    $salesList = $initialLogic->getAllSales();
 
+    $this->assign('applianceList',$applianceList);
+    $this->assign('brandList',$brandList);
+    $this->assign('salesList',$salesList);
 
+   
     $this->display();
   }
 

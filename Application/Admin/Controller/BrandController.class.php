@@ -55,7 +55,7 @@ class BrandController extends CommonController {
          $brandName=I('brand-name');
          $brandLogo = $_FILES['brand-logo'];
 
-         $img_name= "brand/pic/".uniqid().$brandLogo['name'];
+         $img_name= "brand/pic/".uniqid().str_replace(' ','',$brandLogo['name']);
 
          $filepath=UploadBeforeOss($brandLogo);   //上传图片到服务器，获取服务器文件路径
          $brandLogic = new l\BrandLogic();

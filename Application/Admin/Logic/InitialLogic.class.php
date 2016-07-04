@@ -53,13 +53,12 @@ class InitialLogic extends BaseLogic {
     public function getAllSales() {
     //电器品类初始化
         if(! S('sales')){
-            $applianceLogic = new l\ApplianceLogic();
-            $applianceFatherList=$applianceLogic->getApplianceFatherList();
-            foreach($applianceFatherList as $father){
-                $child=$applianceLogic->getApplianceList($father['appliance_id'],1,30);
-                $father['child']=$child['datas'];
-            }
-            S('sales',$applianceFatherList);  
+            $limit = 0;
+            $salesLogic = new l\SalesLogic();
+            $salesData=$salesLogic->getSalesList($condition, , $limit);
+            $sales_list=$salesData['datas'];
+            
+            S('sales',$sales_list);  
         }
         return S('sales');
     }  

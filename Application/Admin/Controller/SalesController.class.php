@@ -21,7 +21,7 @@ class SalesController extends CommonController {
       $salesLogic = new l\SalesLogic();
 
 
-      $salesData=$salesLogic->getSalesList($condition);
+      $salesData=$salesLogic->getSalesList($condition, $page, $limit);
 
 
       $sales_list=$salesData['datas'];
@@ -55,7 +55,7 @@ class SalesController extends CommonController {
         $salesLogo = $_FILES['logo'];
 
 
-         $logoName= "sales/pic/".uniqid().$salesLogo['name'];
+         $logoName= "sales/pic/".uniqid().str_replace(' ','',$salesLogo['name']);
 
          $filepath=UploadBeforeOss($salesLogo);   //上传图片到服务器，获取服务器文件路径
          $salesLogic = new l\SalesLogic();
