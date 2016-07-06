@@ -31,8 +31,6 @@ class ApplianceTroubleController extends CommonController {
       $list_count=$troubleData['allcount'];
       $pages=ceil($list_count/$limit);
 
-      //addErrorLog('appliance','loginc','current',$current);
-
       $data['error_code']=$applianceTroubleLogic->getErrorCode();
       $data['error_message']=$applianceTroubleLogic->getErrorMessage();
 

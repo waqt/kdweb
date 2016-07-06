@@ -102,5 +102,23 @@ class InitialLogic extends BaseLogic {
             S('troubles',$troubleMap); 
         }
         return S('troubles');
-    }   
+    }
+
+        /**
+     * 从缓存中读取故障数据   
+     * @return array
+     */
+    public function getLeftMenus() {
+    //电器品类初始化
+        //S('leftmenus',null);
+        if(! S('leftmenus')){
+            $menu_logic = new l\MenuLogic();
+            $left_menu = $menu_logic->getAccessibleLeftMenu();
+            foreach($left_menu as &$lm){
+                $lm['child_menu']=$menu_logic->getAccessibleLeftChildMenu($lm['id']);
+            }
+            S('leftmenus',$left_menu); 
+        }
+        return S('leftmenus');
+    }     
 }

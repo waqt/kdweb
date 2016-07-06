@@ -111,11 +111,15 @@
 	//服务商获取订单列表接口
 	const MER_GET_ORDER_URL  =  'web-orders/merchant-order-lists';
 
-	//服务商获取订单列表接口
+	//销售商获取订单列表接口
 	const SALE_GET_ORDER_URL  =  'web-orders/saleor-order-lists';
 
-	//服务商获取订单列表接口
+	//订单详情接口
 	const GET_ORDER_DETAIL  =  'web-orders/order-detail-info';
+
+	//订单详情接口
+	const ADD_ORDER_URL   =  'web-orders/insert-order';
+
 
 	/*
 	* 销售商管理

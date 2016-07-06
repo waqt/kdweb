@@ -76,7 +76,7 @@ class OrderController extends CommonController {
   /*
   *添加订单页面
   */
-  public function addStepOne() {
+  public function addView() {
 
     $initialLogic = new l\InitialLogic();
 
@@ -101,6 +101,71 @@ class OrderController extends CommonController {
 
    
     $this->display();
+  }
+
+
+  public function add(){
+         $initialLogic = new l\InitialLogic();
+         $brandList = $initialLogic->getAllBrands();
+         $salesList = $initialLogic->getAllSales();
+
+         $brandName= I('brandName');
+         $brandID=$brandList['Map'][$brandName];
+
+         $salesName= I('salesName');
+         $salesID = $salesList['Map'][$salesName];
+
+
+         $break_pic = $_FILES['break_pics'];
+         $bill_pic =  $_FILES['billphoto'];
+
+         if($break_pic != '' && $break_pic !=null){
+            $break_photo_name= "order/pic/breakphoto/".uniqid().str_replace(' ','',$break_pic['name']);
+            $filepath=UploadBeforeOss( $break_pic);
+            if(!ImgOssUpload($break_photo_name,$filepath)){
+              $data['success'] = false;
+              $data['message'] = '图片上传失败';
+              $data['error_code'] = 10002;
+              $this->ajaxReturn($data,'JSON');
+            } 
+         }
+         if($bill_pic != '' && $bill_pic !=null){
+            $bill_photo_name = "order/pic/billphoto/".uniqid().str_replace(' ','',$bill_pic['name']);
+            $filepath=UploadBeforeOss($bill_pic);
+            if(!ImgOssUpload($bill_photo_name,$filepath)){
+              $data['success'] = false;
+              $data['message'] = '图片上传失败';
+              $data['error_code'] = 10002;
+              $this->ajaxReturn($data,'JSON');
+            } 
+         }
+
+         $break_pics=C('OSS_FILE_PREFIX').'/'.$break_photo_name;
+         $invoice_pic=C('OSS_FILE_PREFIX').'/'.$bill_photo_name;
+
+         $order['send_type']=I('order_type');
+         $order['appliance_id']=I('appliance-father');
+         $order['uappliance_id']=I('appliance');
+         $order['brand_id']=$brandID;
+         $order['servicetime']=I('servicetime');
+         $order['phone']=I('customerPhone');
+         $order['username']=I('customerName');
+         $order['address']=I('prov')."-".I('city')."-".I('dist')."-".I('address')."-".I('doorNumber');
+         $order['is_auto']=I('pushMethod');
+         $order['mer_only_code']=I('merchant_code');
+         $order['buy_time']=I('buytime');
+         $order['invoice']=I('billNumber');
+         $order['buy_mer_id']=$salesID;
+         $order['break_describe']=I('break_describe');
+         $order['invoice_pic'] = $invoice_pic;
+         $order['break_pics'] = $break_pics;
+
+         $orderLogic = new l\OrderLogic();
+         $result=$orderLogic->addOrder($order);
+         $data['success'] = true;
+         $data['status']= $result['status'];
+         $data['message'] = $result['message'];
+         $this->ajaxReturn($data,'JSON');
   }
 
 

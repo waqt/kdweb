@@ -8,11 +8,17 @@ use Admin\Logic as l;
 class IndexController extends CommonController {
   public function index(){
     // 获取顶部可访问菜单
+    $initialLogic = new l\InitialLogic();
+
+    $left_menu = $initialLogic->getLeftMenus();
+
+    /**************
     $menu_logic = new l\MenuLogic();
     $left_menu = $menu_logic->getAccessibleLeftMenu();
     foreach($left_menu as &$lm){
        $lm['child_menu']=$menu_logic->getAccessibleLeftChildMenu($lm['id']);
     }
+    *********/
     $top_menu[0]= array("class" => "fa fa-tasks","ul" =>"dropdown-menu extended tasks-bar","number" => "4");
     $top_menu[1]= array("class" => "fa fa-envelope-o","ul" =>"dropdown-menu extended inbox","number" => "5");
     $role = model('Role')->find(session('user_info.role'));

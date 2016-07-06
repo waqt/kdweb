@@ -13,8 +13,8 @@
                       <div class="form-group ui-widget">
                           <label class="col-sm-2 control-label">业务类型 <span class="text-red">*</span></label>
                           <div class="col-sm-2">
-                            <select class="form-control" name="order-type" id="order-type">
-                              <option selected="selected" value='' class="display-none"></option>
+                            <select class="form-control" name="order_type" id="order_type">
+                              <option selected="selected" value="" class="display-none"></option>
                               <option  value=2 class="display-none">保内维修</option>
                               <option  value=4 class="display-none">安装</option>
                             </select>
@@ -68,11 +68,14 @@
 
                       <div class="form-group ui-widget">
                         <label class="col-sm-2 control-label">用户电话 <span class="text-red">*</span></label>
-                        <div class="col-sm-3">
+                        <div class="col-sm-2">
                             <input type="text" AUTOCOMPLETE="off" name="customerPhone" id="customerPhone" class="form-control">
                         </div>
-                        <div class="col-sm-1"></div>
-                        <label class="col-sm-2  control-label" for="servicetime">预约时间 <span class="text-red">*</span></label>
+                        <label class="col-sm-1 control-label">用户名称 </label>
+                        <div class="col-sm-2">
+                            <input type="text" AUTOCOMPLETE="off" name="customerName" id="customerName" class="form-control">
+                        </div>
+                        <label class="col-sm-1  control-label" for="servicetime">预约时间 <span class="text-red">*</span></label>
                         <div class="col-sm-3">
                             <input type="text" AUTOCOMPLETE="off" name="servicetime" id="servicetime" class="form-control">
                         </div>
@@ -80,16 +83,16 @@
 
 
                       <div class="form-group ui-widget">
-                        <label class="col-sm-2  control-label">用户地址 <span class="text-red">*</span></label>
-                        <div id="city">
+                        <label class="col-sm-2  control-label" id="custom-address">用户地址 <span class="text-red">*</span></label>
+                        <div id="cityselect">
                           <div class="col-sm-2" >
-                              <select class="form-control prov" name="prov" ></select>  
+                              <select class="form-control prov" name="prov" id="prov"></select>  
                           </div>
                           <div class="col-sm-2" >
-                             <select class="form-control city" name="city" disabled="disabled"></select>   
+                             <select class="form-control city" name="city" id="city" disabled="disabled"></select>   
                           </div>
                           <div class="col-sm-2" >
-                             <select class="form-control dist" name="dist" disabled="disabled"></select>   
+                             <select class="form-control dist" name="dist"  id="dist" disabled="disabled"></select>   
                           </div>
                         </div>
                       </div>
@@ -127,21 +130,30 @@
                       </div>
 
                       <div class="form-group ui-widget">
-                         <label class="col-sm-2  control-label" for="billphoto">是否指定网点 <span class="text-red">*</span></label>
+                         <label class="col-sm-2  control-label" id="choice-mer">是否指定网点 <span class="text-red">*</span></label>
                           <div class="radio col-sm-6">
                             <label class="col-sm-3">
-                              <input type="radio" name="optionsRadios" id="auto" value="1" checked> 自动推送
+                              <input type="radio" name="pushMethod" id="pushMethod" value=1 checked='checked'> 自动推送
                             </label>
                             <label class="col-sm-3">
-                              <input type="radio" name="optionsRadios" id="manual" value="0"> 手动指定网点
+                              <input type="radio" name="pushMethod" id="pushMethod2"  value=0 > 手动指定网点
                             </label>
+                        </div>
+                      </div>
+
+                      <div id="merchant-controll" >
+                        <div class="form-group ui-widget">
+                          <label class="col-sm-2  control-label">网点代码 <span class="text-red">*</span></label>
+                          <div class="col-sm-10">
+                              <input type="text" AUTOCOMPLETE="off" name="merchant_code" id="merchant_code"  placeholder="100051" class="form-control">
+                          </div>
                         </div>
                       </div>
 
 
 						          <div class="form-actions centered">
-								          <input type="button"  id="next-step"
-									       class="btn btn-success btn-large" value="下一步" /> <a class="btn"
+								          <input type="button"  id="button-submit"
+									       class="btn btn-success btn-large" value="提交" /> <a class="btn"
 									       href="#" onclick="cancel()">取消</a>
 						          </div>
 					         </form>
@@ -162,6 +174,7 @@
 
 	$(document).ready(function(){
       $("#trouble-controll").hide();
+      $("#merchant-controll").hide();
       $('#button-submit').click(function(){
             $('#myForm').ajaxSubmit(options);
               return false;
@@ -218,13 +231,24 @@
   });
 
   //订单类型为保内维修时，显示故障描述输入
-  $("#order-type").change(function(){
-     if($("#order-type").val()==2){
+  $("#order_type").change(function(){
+     if($("#order_type").val()==2){
         $("#trouble-controll").show();
      }else{
         $("#trouble-controll").hide();
      }
   });
+
+  /************/
+  $(".radio").change(function(){
+      if($('input:radio[name="pushMethod"]:checked').val()==0){
+          $("#merchant-controll").show();
+      }
+      if($('input:radio[name="pushMethod"]:checked').val()==1){
+          $("#merchant-controll").hide();
+      }
+  });
+  /*************/
 
   //设置时间选择器
   $("#servicetime").datetimepicker({
@@ -254,17 +278,47 @@
   });
 
   //设置城市选择
-  $("#city").citySelect({
+  $("#cityselect").citySelect({
       nodata:"none",
       required:false
   }); 
 
+  var options = {  
+      //target: 'data',          //把服务器返回的内容放入id为output的元素中      
+      beforeSubmit: validate,  //提交前的回调函数
+      //success: showResponse,
+      /*************/  
+      success: function(data){
+        if(data['status'] != 200){
+          alert(data['message']);
+        }else if(data['status'] == 200){
+          alert(data['message']); 
+          $("#wrapper").load("__MODULE__/Order");
+        }
+      },      //提交后的回调函数  
+    /*****************/
+      url: '__MODULE__/Order/add',                 //默认是form的action， 如果申明，则会覆盖  
+      type: 'post',               //默认是form的method（get or post），如果申明，则会覆盖  
+      dataType: 'json',           //html(默认), xml, script, json...接受服务端返回的类型  
+      //clearForm: true,          //成功提交后，清除所有表单元素的值  
+      //resetForm: true,          //成功提交后，重置所有表单元素的值  
+      timeout: 3000               //限制请求的时间，当请求大于3秒后，跳出请求  
+  }
     
   function validate() { //
-		  var order_type = $("#order_type").val();
+		  var order_type = $("#order_type").val()
      	var appliance_name = $("#appliance-child").val();
      	var brand_name = $("#brandName").val();
      	var sales_name = $("#salesName").val();
+      var customerPhone =$("#customerPhone").val();
+      var servicetime = $("#servicetime").val();
+      var prov = $("#prov").val();
+      var city = $("#city").val();
+      var dist = $("#dist").val();
+      var address =$("#address").val();
+      var pushMethod =$('input:radio[name="pushMethod"]:checked').val();
+      var merchant_code = $("#merchant_code").val();
+      console.log(order_type);
      	if(order_type == ""){
      			$("#order_type").tips({
 					side : 2,
@@ -290,8 +344,42 @@
 					time : 3
 				});
 				return false;
-     	}
-      return true;
+     	}else if(customerPhone == ""){
+          $("#customerPhone").tips({
+          side : 2,
+          msg : '请填写用户电话',
+          bg : '#AE81FF',
+          time : 3
+        });
+        return false;
+      }
+      else if(servicetime == ""){
+          $("#servicetime").tips({
+          side : 2,
+          msg : '请选择服务时间',
+          bg : '#AE81FF',
+          time : 3
+        });
+        return false;
+      }
+      else if(prov == "" || city=="" || dist=="" || address==""){
+          $("#custom-address").tips({
+          side : 2,
+          msg : '请完整填写用户地址',
+          bg : '#AE81FF',
+          time : 3
+        });
+        return false;
+      }else if( pushMethod==0 && merchant_code== ""){
+          console.log(pushMethod);
+          $("#merchant_code").tips({
+          side : 2,
+          msg : '请输入需要推送的网点代码',
+          bg : '#AE81FF',
+          time : 3
+        });
+        return false;
+      }
     }     
 
     

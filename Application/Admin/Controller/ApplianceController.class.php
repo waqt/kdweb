@@ -61,7 +61,7 @@ class ApplianceController extends CommonController {
             $img_name1= "appliance/pic/shd_img/".uniqid().str_replace(' ','',$img1['name']);
             $filepath1=UploadBeforeOss($img1);
             if(!ImgOssUpload($img_name1,$filepath1)){
-              $data['success'] = false;
+              $data['status'] = 300;
               $data['message'] = '图片上传失败';
               $data['error_code'] = 10002;
               $this->ajaxReturn($data,'JSON');
@@ -71,7 +71,7 @@ class ApplianceController extends CommonController {
             $img_name2 = "appliance/pic/shd_little_img/".uniqid().str_replace(' ','',$img2['name']);
             $filepath2=UploadBeforeOss($img2);
             if(!ImgOssUpload($img_name2,$filepath2)){
-              $data['success'] = false;
+              $data['status'] = 300;
               $data['message'] = '图片上传失败';
               $data['error_code'] = 10002;
               $this->ajaxReturn($data,'JSON');
@@ -81,7 +81,7 @@ class ApplianceController extends CommonController {
             $img_name3 = "appliance/pic/yhd_img/".uniqid().str_replace(' ','',$img3['name']);
             $filepath3=UploadBeforeOss($img3);
             if(!ImgOssUpload($img_name3,$filepath3)){
-              $data['success'] = false;
+              $data['status'] = 300;
               $data['message'] = '图片上传失败';
               $data['error_code'] = 10002;
               $this->ajaxReturn($data,'JSON');
@@ -95,7 +95,7 @@ class ApplianceController extends CommonController {
               $result=$applianceLogic->addAppliance($applianceName, $fid, $big_logo,
                                  $small_logo, $middle_logo);
               S('appliances',NULL);
-              $data['success'] = true;
+              $data['status']= $result['status'];
               $data['message'] = $result['message'];
               $this->ajaxReturn($data,'JSON');
         }

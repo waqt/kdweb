@@ -108,16 +108,16 @@ class OrderLogic extends BaseLogic {
 
 
      /**
-     * 同意商户认证
-     * @param Int $merchant_id 商户id       
+     * 添加订单
+     * @param object $order 订单对象       
      * @return array
      */
-    public function agreeMerchantAuth($merchant_id) {
-        $data['mer_id']          =$merchant_id;                            //商户ID                         //分页单页显示行数
+    public function addOrder($order) {
+        $data          =$order;                            //订单对象                       //分页单页显示行数
         $data['token']           =session('user_info.token');
 
         // API URL 管理员获取列表URL 与 商户获取列表URL
-        $req_url=BASE_URL.AGREE_MERCHANT_AUTH;
+        $req_url=BASE_URL.ADD_ORDER_URL;
         try{
             $result=request_post($req_url,$data);
             $result=json_decode($result,true);
@@ -131,27 +131,4 @@ class OrderLogic extends BaseLogic {
         return $result;
     }
 
-    /**
-     * 拒绝商户认证
-     * @param Int $merchant_id 商户id       
-     * @return array
-     */
-    public function refuseMerchantAuth($merchant_id) {
-        $data['mer_id']          =$merchant_id;                            //商户ID                         //分页单页显示行数
-        $data['token']           =session('user_info.token');
-
-        // API URL 管理员获取列表URL 与 商户获取列表URL
-        $req_url=BASE_URL.REFUSE_MERCHANT_AUTH;
-        try{
-            $result=request_post($req_url,$data);
-            $result=json_decode($result,true);
-        }
-        catch(\Exception $e){
-            print $e->getMessage();
-            exit();
-        } 
-        $this->errorCode = $result['status'];
-        $this->errorMessage = $result['message'];
-        return $result;
-    }
 }
