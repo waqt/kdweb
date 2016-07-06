@@ -49,7 +49,8 @@ class SalesController extends CommonController {
         $sales['account']=I('account');
         $sales['password'] = I('password');
         $sales['phone'] = I('phone');
-        $sales['real_name'] = I('name');
+        $sales['real_name'] = I('real_name');
+        $sales['saleor_name'] = I('saleor_name');
         $sales['address'] = I('address');
         $sales['describe'] = I('describe');
         $salesLogo = $_FILES['logo'];

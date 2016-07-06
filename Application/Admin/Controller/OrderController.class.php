@@ -81,12 +81,23 @@ class OrderController extends CommonController {
     $initialLogic = new l\InitialLogic();
 
     $applianceList = $initialLogic->getAllAppliances();
+
+
     $brandList = $initialLogic->getAllBrands();
     $salesList = $initialLogic->getAllSales();
 
-    $this->assign('applianceList',$applianceList);
-    $this->assign('brandList',$brandList);
-    $this->assign('salesList',$salesList);
+    $brandNameList = json_encode($brandList['NameList']);
+
+    $salesNameList = json_encode($salesList['NameList']);
+
+    $applianceFather=$applianceList['father'];
+    $applianceChildMap=json_encode($applianceList['child']);
+
+
+    $this->assign('applianceFather',$applianceFather);
+    $this->assign('applianceChildMap',$applianceChildMap);
+    $this->assign('brandNameList',$brandNameList);
+    $this->assign('salesNameList',$salesNameList);
 
    
     $this->display();

@@ -77,6 +77,37 @@ class ApplianceLogic extends BaseLogic {
         return $father_list;
     }  
 
+    /**
+     * 获取电器品类(子类)列表     
+     * @return array
+     */
+    public function getApplianceSonList($father_id) {
+        
+        $data['f_id']            =$father_id;
+        $data['token']           =session('user_info.token');
+        $req_url=BASE_URL.APPLIANCE_SON_LIST_URL;
+
+        try{
+            $result=request_post($req_url,$data);
+            $result=json_decode($result,true);
+        }
+        catch(\Exception $e){
+            print $e->getMessage();
+            exit();
+        } 
+        $this->errorCode = $result['status'];
+        $this->errorMessage = $result['message'];
+        $list = $result['data'];
+        /****************
+        $data['module'] = MODULE_NAME;
+        $data['action'] = ACTION_NAME;
+        $data['dataname'] = "father_list";
+        $data['data'] = $father_list;
+        addErrorLog($data['action'],$data['module'],$data['dataname'],$data['data']);
+        ***************/
+        return $list;
+    } 
+
 
     /**
      * 删除电器品类
@@ -118,7 +149,6 @@ class ApplianceLogic extends BaseLogic {
         $data['small_logo']  =$input_name2; 
         $data['middle_logo'] =$input_name3; 
         $data['token']       =session('user_info.token');
-        addErrorLog('ApplianceLogic','add','data',$data);
         $req_url=BASE_URL.ADD_APPLIANCE_URL;
 
         try{

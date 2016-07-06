@@ -1,3 +1,4 @@
+<link href="__ASSETS__/js/datetimepicker/bootstrap-datetimepicker.min.css" rel="stylesheet">
 <link href="__ASSETS__/css/fileinput.css" rel="stylesheet">
 <script src="__ASSETS__/js/admin/fileinput.js"></script>
 <script src="__ASSETS__/js/jquery.form.min.js"></script>
@@ -6,210 +7,251 @@
           	<div class="row mt">
           		<div class="col-lg-12">
           		   <div class="form-panel">
-					 <form class="form-horizontal style-form" id="myForm"  method="post">
-                      <div class="form-group">
-                        <label class="col-sm-2 col-sm-2 control-label">业务类型</label>
-                        <div class="col-sm-10">
-                          <select class="form-control" name="order-type" id="order-type">
-                            <option  value=2 class="display-none">保内维修</option>
-                            <option  value=4 class="display-none">安装</option>
-                          </select>
+					         <form class="form-horizontal style-form" id="myForm"  method="post">
+
+
+                      <div class="form-group ui-widget">
+                          <label class="col-sm-2 control-label">业务类型 <span class="text-red">*</span></label>
+                          <div class="col-sm-2">
+                            <select class="form-control" name="order-type" id="order-type">
+                              <option  value=2 class="display-none">保内维修</option>
+                              <option  value=4 class="display-none">安装</option>
+                            </select>
+                          </div>
+                          <div class="col-sm-2 ui-widget"></div>
+                          <label class="col-sm-2 control-label">电器品类 <span class="text-red">*</span></label>
+                          <div class="col-sm-2">
+                            <select class="form-control appliance-father" name="appliance-father" >
+                            <volist name='applianceFather'  id='father' key='kc' >
+                                <option value='{$father.appliance_id}'>{$father.name}</option>
+                            </volist>
+                            </select>
+                          </div>
+                          <div class="col-sm-2">
+                            <select class="form-control appliance-child" name="appliance" id="appliance-child">
+                            </select>
+                          </div>
+                      </div>
+
+
+                      <div class="form-group ui-widget">
+                        <label class="col-sm-2 control-label" for="brandName">电器品牌 <span class="text-red">*</span></label>
+                        <div class="col-sm-3">
+                            <input type="text" AUTOCOMPLETE="off" name="brandName" id="brandName" class="form-control">
+                            <div class="col-sm-3" id="brandName-text"></div>
+                        </div>
+                        <div class="col-sm-1"></div>
+                        <label class="col-sm-2  control-label" for="salesName">销售商名称 </label>
+                        <div class="col-sm-3">
+                            <input type="text" AUTOCOMPLETE="off" name="salesName" id="salesName" class="form-control">
+                            <div class="col-sm-3" id="salesName-text"></div>
                         </div>
                       </div>
-                          <div class="form-group ">
-                              <label class="col-sm-2 col-sm-2 control-label">密码</label>
-                              <div class="col-sm-10 add-form-half">
-                                  <input type="text" onfocus="this.type='password'" AUTOCOMPLETE="off" name="password" id="password" class="form-control">
-                              </div>
-                          </div>
-                          <div class="form-group ">
-                              <label class="col-sm-2 col-sm-2 control-label">确认密码</label>
-                              <div class="col-sm-10 add-form-half">
-                                  <input type="text" onfocus="this.type='password'"  AUTOCOMPLETE="off" name="repassword" id="repassword" class="form-control">
-                              </div>
-                          </div>
-                          <div class="form-group ">
-                              <label class="col-sm-2 col-sm-2 control-label ">销售商电话</label>
-                              <div class="col-sm-10 add-form-half ">
-                                  <input type="text" AUTOCOMPLETE="off" name="phone" id="phone" class="form-control ">
-                              </div>
-                          </div>
-                          <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">销售商名称</label>
-                              <div class="col-sm-10">
-                                  <input type="text" AUTOCOMPLETE="off" name="name" id="name" class="form-control ">
-                              </div>
-                          </div>
-						  <div class="form-group">
-								<label class="col-sm-2 col-sm-2 control-label" for="photo">logo</label>
-								<div class="col-sm-10 ">
-                   					 <input  name="logo" id="logo" class="form-control file file-0" type="file">
-                   			    </div>
-						  </div>
-						  <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">地址</label>
-                              <div class="col-sm-10">
-                                  <input type="text" AUTOCOMPLETE="off" name="address" id="address" class="form-control ">
-                              </div>
-                          </div>
-                      	  <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">销售商介绍</label>
-                              <div class="col-sm-10">
-                                  <textarea rows="5" AUTOCOMPLETE="off" name="describe" id="describe" class="form-control ">
-                                  </textarea>
-                              </div>
-                          </div>
-						<div class="form-actions">
-								<input type="button"  id="button-submit"
-									class="btn btn-success btn-large" value="保存" /> <a class="btn"
-									href="#" onclick="cancel()">取消</a>
-						</div>
-					</form>
-				 </div>
-				</div>
-			</div>
-<script type="text/javascript" language="javascript">	
-    $("#file-0").fileinput({
-        'allowedFileExtensions' : ['jpg', 'png','gif'],
-        'showUpload': true,
-    });
-        $("#file-0").on('fileselectnone', function() {
-            alert("HUH! No Files");
-     });
 
 
-    function cancel(){
-			$("#wrapper").load("__MODULE__/Sales/lists");
-	     }
+                      <div class="form-group ui-widget">
+                        <label class="col-sm-2 control-label">用户电话 <span class="text-red">*</span></label>
+                        <div class="col-sm-3">
+                            <input type="text" AUTOCOMPLETE="off" name="customerPhone" id="customerPhone" class="form-control">
+                        </div>
+                        <div class="col-sm-1"></div>
+                        <label class="col-sm-2  control-label" for="servicetime">预约时间 <span class="text-red">*</span></label>
+                        <div class="col-sm-3">
+                            <input type="text" AUTOCOMPLETE="off" name="servicetime" id="servicetime" class="form-control">
+                        </div>
+                      </div>
+
+
+                      <div class="form-group ui-widget">
+                        <label class="col-sm-2  control-label">用户地址 <span class="text-red">*</span></label>
+                        <div id="city">
+                          <div class="col-sm-2" >
+                              <select class="form-control prov" name="prov" ></select>  
+                          </div>
+                          <div class="col-sm-2" >
+                             <select class="form-control city" name="city" disabled="disabled"></select>   
+                          </div>
+                          <div class="col-sm-2" >
+                             <select class="form-control dist" name="dist" disabled="disabled"></select>   
+                          </div>
+                        </div>
+                      </div>
+
+
+                      <div class="form-group ui-widget">
+                          <label class="col-sm-2  control-label">详细地址 <span class="text-red">*</span></label>
+                          <div class="col-sm-3">
+                              <input type="text" AUTOCOMPLETE="off" name="address" id="address"  placeholder="朝晖路88号颐高创业大厦" class="form-control">
+                          </div>
+                          <div class="col-sm-1"></div>
+                          <label class="col-sm-2  control-label" for="doorNumber">门牌号 </label>
+                          <div class="col-sm-3">
+                            <input type="text" AUTOCOMPLETE="off" name="doorNumber" id="doorNumber"  placeholder="11楼1105" class="form-control">
+                          </div>
+                      </div>
+
+                      <div class="form-group ui-widget">
+                        <label class="col-sm-2 control-label">发票号 </label>
+                        <div class="col-sm-3">
+                            <input type="text" AUTOCOMPLETE="off" name="billNumber" id="billNumber" class="form-control">
+                        </div>
+                        <div class="col-sm-1"></div>
+                        <label class="col-sm-2  control-label" for="buytime">购买时间 </label>
+                        <div class="col-sm-3">
+                            <input type="text" AUTOCOMPLETE="off" name="buytime" id="buytime" class="form-control">
+                        </div>
+                      </div>
+
+                      <div class="form-group ui-widget">
+                         <label class="col-sm-2  control-label" for="billphoto">发票照片 </label>
+                         <div class="col-sm-6">
+                             <input  name="billphoto" id="billphoto" class="form-control file file-0" type="file">
+                         </div>
+                      </div>
+
+						          <div class="form-actions centered">
+								          <input type="button"  id="next-step"
+									       class="btn btn-success btn-large" value="下一步" /> <a class="btn"
+									       href="#" onclick="cancel()">取消</a>
+						          </div>
+					         </form>
+				        </div>
+				      </div>
+			     </div>
+<script type="text/javascript" src="__ASSETS__/js/jquery-ui/jquery-ui.min.js"></script>
+<script type="text/javascript" src="__ASSETS__/js/cityselect/jquery.cityselect.js"></script>
+<script type="text/javascript" src="__ASSETS__/js/datetimepicker/bootstrap-datetimepicker.min.js"></script>
+<script type="text/javascript" language="javascript">
+  var childMap={$applianceChildMap};
+  var brandNameList ={$brandNameList};
+  var salesNameList ={$salesNameList}; 	
+
+  function cancel(){
+			$("#wrapper").load("__MODULE__/Order/index");
+	 }
 
 	$(document).ready(function(){
-    	$('#button-submit').click(function(){
-           $('#myForm').ajaxSubmit(options);
-            return false;
-		});
-    }); 
+      $('#button-submit').click(function(){
+            $('#myForm').ajaxSubmit(options);
+              return false;
+		    });
+    });
 
+    //品牌名称自动补全
+    $( "#brandName" ).autocomplete({
+          appendTo: "#brandName-text",
+          autoFocus: true,
+          delay: 50,
+          minLength: 0,
+          position: {
+            my : "left top", 
+            at: "left bottom",
+            collision: "none"
+          },
+         source: brandNameList
+      }).focus(function() {
+            $(this).autocomplete("search", $(this).val());
+      });
 
-	var options = {  
-   		//target: 'data',          //把服务器返回的内容放入id为output的元素中      
-   		beforeSubmit: validate,  //提交前的回调函数
-   		//success: showResponse,
-   		/*************/  
-   		success: function(data){
-				if(data['success']==false){
-						if(data['error_code']==10001){
-								$("#shd-photo").tips({
-									side : 1,
-									msg : data['message'],
-									bg : '#FF5080',
-									time : 15
-								});
-							}
-						if(data['error_code']==10002){
-								alert(data['message']);
-						}	
-				}else if(data['success']==true){
-					alert(data['message']);	
-					$("#wrapper").load("__MODULE__/Sales/lists");
-				}
-			},      //提交后的回调函数  
-		/*****************/
-   		url: '__MODULE__/Sales/add',                 //默认是form的action， 如果申明，则会覆盖  
-   		type: 'post',               //默认是form的method（get or post），如果申明，则会覆盖  
-   		dataType: 'json',           //html(默认), xml, script, json...接受服务端返回的类型  
-   		//clearForm: true,          //成功提交后，清除所有表单元素的值  
-   		//resetForm: true,          //成功提交后，重置所有表单元素的值  
-   		timeout: 3000               //限制请求的时间，当请求大于3秒后，跳出请求  
-	}
+      //销售商名称自动补全
+      $( "#salesName" ).autocomplete({
+          appendTo: "#salesName-text",
+          autoFocus: true,
+          delay: 50,
+          minLength: 0,
+          position: {
+            my : "left top", 
+            at: "left bottom",
+            collision: "none"
+          },
+         source: salesNameList
+      }).focus(function() {
+            $(this).autocomplete("search", $(this).val());
+      });
+
+  // 电器品类二级联动
+  $(".appliance-father").change(function(){
+
+     // 先清空第二个
+      var checkValue=$(".appliance-father").val();
+      var childList= childMap[checkValue];
+      console.log("childList="+childMap[checkValue][0]['name']);
+      $(".appliance-child").empty();
+
+     // 实际的应用中，这里的option一般都是用循环生成多个了
+      for(var i=0, l=childList.length; i<l; i++){
+        var option = $("<option>").val(childList[i]['appliance_id']).text(childList[i]['name']);
+        $(".appliance-child").append(option);
+      }
+  });
+
+  //设置时间选择器
+  $("#servicetime").datetimepicker({
+        format: "yyyy-mm-dd hh:ii",
+        minuteStep: 30,
+        autoclose: true,
+        todayBtn: true,
+        minView: 'hour'
+  });
+
+    //设置时间选择器
+  $("#buytime").datetimepicker({
+        format: "yyyy-mm-dd",
+        autoclose: true,
+        todayBtn: true,
+        minView: 'month'
+  });
+
+  //图片上传控件初始化
+  $("#file-0").fileinput({
+       language: 'zh',
+         allowedFileExtensions : ['jpg', 'png','gif'],
+         showUpload: true,
+  });
+        $("#file-0").on('fileselectnone', function() {
+            alert("HUH! No Files");
+  });
+
+  //设置城市选择
+  $("#city").citySelect({
+      nodata:"none",
+      required:false
+  }); 
+
     
-    function validate() { //
-    	var myreg = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/; 
-		var account = $("#account").val();
-     	var password = $("#password").val();
-     	var repassword = $("#repassword").val();
-     	var name = $("#name").val();
-     	var phone = $("#phone").val();
-     	var address = $("#address").val();
-     	if(account == ""){
-     			$("#account").tips({
+  function validate() { //
+		  var order_type = $("#order_type").val();
+     	var appliance_name = $("#appliance-child").val();
+     	var brand_name = $("#brandName").val();
+     	var sales_name = $("#salesName").val();
+     	if(order_type == ""){
+     			$("#order_type").tips({
 					side : 2,
-					msg : '用户名不得为空',
+					msg : '请选择业务类型',
 					bg : '#AE81FF',
 					time : 3
 				});
 				return false;
-     	}else if(!myreg.test(account)){
-     		    $("#account").tips({
+     	}else if(appliance_name == ""){
+     			$("#appliance-child").tips({
 					side : 2,
-					msg : '请使用手机号作为用户名',
-					bg : '#AE81FF',
-					time : 3
-				});
-				return false;
-     	}
-     	else if(password.length <6){
-     			$("#password").tips({
-					side : 2,
-					msg : '密码不得小于6位',
-					bg : '#AE81FF',
-					time : 3
-				});
-				return false;
-     	}else if(repassword != password){
-     			$("#repassword").tips({
-					side : 2,
-					msg : '输入的密码不一致',
-					bg : '#AE81FF',
-					time : 3
-				});
-				return false;
-     	}else if(phone == ""){
-     			$("#phone").tips({
-					side : 2,
-					msg : '请输入销售商联系电话',
+					msg : '请选择电器品类',
 					bg : '#AE81FF',
 					time : 3
 				});
 				return false;
      	}
-     	else if(name == ""){
-     			$("#name").tips({
+     	else if(brand_name == ""){
+     			$("#brandName").tips({
 					side : 2,
-					msg : '请输入销售商名称',
-					bg : '#AE81FF',
-					time : 3
-				});
-				return false;
-     	}else if(address == ""){
-     			$("#address").tips({
-					side : 2,
-					msg : '请输入销售商地址',
+					msg : '请选择电器品牌',
 					bg : '#AE81FF',
 					time : 3
 				});
 				return false;
      	}
+      return true;
     }     
-  
-	function showRequest(formData, jqForm, options){  
-   		//formData: 数组对象，提交表单时，Form插件会以Ajax方式自动提交这些数据，格式如：[{name:user,value:val },{name:pwd,value:pwd}]  
-   		//jqForm:   jQuery对象，封装了表单的元素     
-   		//options:  options对象  
-   		var queryString = $.param(formData);   //name=1&address=2  
-   		var formElement = jqForm[0];              //将jqForm转换为DOM对象  
-   		//var address = formElement.address.value;  //访问jqForm的DOM元素  
-   		console.log(formData);
-   		return true;  //只要不返回false，表单都会提交,在这里可以对表单元素进行验证  
-	};  
-  
-	function showResponse(responseText, statusText){  
-   		//dataType=xml  
-   		var name = $('name', responseXML).text();  
-   		var address = $('address', responseXML).text();
-   		console.log(responseText); 
-   		$("#xmlout").html(name + "  " + address);  
-   		//dataType=json  
-   		$("#jsonout").html(data.name + "  " + data.address);  
-	};  
+
     
 </script>

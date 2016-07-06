@@ -1,0 +1,138 @@
+<script src="__ASSETS__/js/jquery.form.min.js"></script>
+<script type="text/javascript" src="__JS__/jquery.tips.js"></script>
+	<h3><i class="fa fa-angle-right"></i> 添加故障</h3>
+          	<div class="row mt">
+          		<div class="col-lg-12">
+          		   <div class="form-panel">
+					         <form class="form-horizontal style-form" id="myForm"  method="post">
+                      <div class="form-group ui-widget">
+                          <label class="col-sm-2 control-label">电器大类 <span class="text-red">*</span></label>
+                          <div class="col-sm-2">
+                            <select class="form-control appliance-father" name="appliance-father" >
+                            <option selected="selected" value='' class="display-none"></option>
+                            <volist name='applianceFather'  id='father' key='kc' >
+                                <option value='{$father.appliance_id}'>{$father.name}</option>
+                            </volist>
+                            </select>
+                          </div>
+                          <div class="col-sm-2"></div>
+                          <label class="col-sm-2 control-label">电器小类 </label>
+                          <div class="col-sm-2">
+                            <select class="form-control appliance-child" name="appliance-child" id="appliance-child">
+                            </select>
+                          </div>
+                      </div>
+                      <div class="form-group ui-widget">
+                          <label class="col-sm-2 control-label">故障名称 <span class="text-red">*</span></label>
+                          <div class="col-sm-3">
+                            <input type="text" AUTOCOMPLETE="off" name="troubleName" id="troubleName" class="form-control">
+                          </div>
+                      </div>
+                      <div class="goleft ml" id="trouble-list">
+                      </div>
+						          <div class="form-actions centered">
+								          <input type="button"  id="button-submit"
+									       class="btn btn-success btn-large" value="保存" /> <a class="btn"
+									       href="#" onclick="cancel()">取消</a>
+						          </div>
+					         </form>
+				        </div>
+
+				      </div>
+			     </div>
+
+<script type="text/javascript" language="javascript">
+  var childMap={$applianceChildMap};
+
+  function cancel(){
+			$("#wrapper").load("__MODULE__/ApplianceTrouble/index");
+	 }
+
+	$(document).ready(function(){
+      $('#button-submit').click(function(){
+            $('#myForm').ajaxSubmit(options);
+              return false;
+		    });
+  });
+
+  var options = {  
+      //target: 'data',          //把服务器返回的内容放入id为output的元素中      
+      beforeSubmit: validate,  //提交前的回调函数
+      //success: showResponse,
+      /*************/  
+      success: function(data){
+        if(data['success']==false){
+            if(data['error_code']==10001){
+                $("#shd-photo").tips({
+                  side : 1,
+                  msg : data['message'],
+                  bg : '#FF5080',
+                  time : 15
+                });
+              }
+            if(data['error_code']==10002){
+                alert(data['message']);
+            } 
+        }else if(data['success']==true){
+          alert(data['message']); 
+          $("#wrapper").load("__MODULE__/ApplianceTrouble");
+        }
+      },      //提交后的回调函数  
+    /*****************/
+      url: '__MODULE__/ApplianceTrouble/add',                 //默认是form的action， 如果申明，则会覆盖  
+      type: 'post',               //默认是form的method（get or post），如果申明，则会覆盖  
+      dataType: 'json',           //html(默认), xml, script, json...接受服务端返回的类型  
+      //clearForm: true,          //成功提交后，清除所有表单元素的值  
+      //resetForm: true,          //成功提交后，重置所有表单元素的值  
+      timeout: 3000               //限制请求的时间，当请求大于3秒后，跳出请求  
+  }
+
+    
+  function validate() { //
+		  var father_id = $(".appliance-father").val();
+     	var break_name = $("#troubleName").val();
+     	if(father_id == ""){
+     			$(".appliance-father").tips({
+					side : 2,
+					msg : '请选择电器品类',
+					bg : '#AE81FF',
+					time : 3
+				});
+				return false;
+     	}else if(break_name == ""){
+     			$("#troubleName").tips({
+					side : 2,
+					msg : '请添加故障名称',
+					bg : '#AE81FF',
+					time : 3
+				});
+				return false;
+     	}
+    }
+
+      // 电器品类二级联动
+  $(".appliance-father").change(function(){
+
+     // 先清空第二个
+      var father_id=$(".appliance-father").val();
+      var childList= childMap[father_id];
+
+      $("#trouble-list").load("__MODULE__/ApplianceTrouble/troubleList",{father_id:father_id});
+      $(".appliance-child").empty();
+
+     // 实际的应用中，这里的option一般都是用循环生成多个了
+      $(".appliance-child").append("<option selected='selected' value='' class='display-none'></option>");
+      for(var i=0, l=childList.length; i<l; i++){
+        var option = $("<option>").val(childList[i]['appliance_id']).text(childList[i]['name']);
+        $(".appliance-child").append(option);
+      }
+  });
+
+  $(".appliance-child").change(function(){
+      var child_id=$(".appliance-child").val();
+      var father_id=$(".appliance-father").val();
+      $("#trouble-list").load("__MODULE__/ApplianceTrouble/troubleList",{father_id:father_id, son_id:child_id});
+  });     
+
+    
+</script>

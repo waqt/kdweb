@@ -19,8 +19,27 @@
 	//获取电器品类（父类)接口
 	const APPLIANCE_FATHER_LIST_URL = 'web-appliance/appliance-father-list';
 
+	//获取电器品类（子类)接口
+	const APPLIANCE_SON_LIST_URL = 'web-appliance/appliance-son-list';
+
 	//添加电器品类
 	const ADD_APPLIANCE_URL = 'web-appliance/insert-appliance';
+
+
+	/**
+	 *电器故障管理
+	*/
+	//电器故障列表
+	const TROUBLE_LIST_URL  =  'web-breaks/breaks-list';
+
+	//删除电器故障
+	const DELETE_TROUBLE_URL  =  'web-breaks/delete-break';
+
+	//添加电器故障
+	const ADD_TROUBLE_URL  =  'web-breaks/insert-break';
+
+	//编辑电器故障
+	const EDIT_TROUBLE_URL  =  'web-breaks/update-break';
 
 	/*
 	* 商户管理

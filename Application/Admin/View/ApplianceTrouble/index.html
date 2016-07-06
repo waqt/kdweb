@@ -3,42 +3,40 @@
     <div class="row-fluid">
         <div class="page-header">
               <h3>
-                销售商管理 <small>销售商列表</small>
+                电器管理 <small>故障列表</small>
               </h3>
-              <a href="#" id="add-sales" class="btn btn-success">添加销售商</a>
+              <a href="#" id="add-appliance-trouble" class="btn btn-success">添加电器故障</a>
         </div>
+        <div class="inner-showback">
+            <!-- Split button -->             
+        </div><!-- /showback -->
           <table id="Table-Result" class="table table-strtable table-striped table-bordered table-condensed">
             <thead>
               <tr>
                 <th>序号</th>
-                <th>销售商名称</th>
-                <th>负责人姓名</th>
-                <th>销售商电话</th>
-                <th>地址</th>
+                <th>故障名称</th>
+                <th>电器大类</th>
+                <th>电器小类</th>
                 <th><i class=" fa fa-edit"></i>操作</th>
               </tr>
             </thead>
             <tbody>
-                <volist name='sales_list' id='sales' key='kc' >
+                <volist name='trouble_list' id='al' key='kc' >
                   <tr class="list-users">
                     <td>{$kc}</td>
-                    <td>{$sales.saleor_name}</td>
-                    <td>{$sales.real_name}</td>
-                    <td>{$sales.phone}</td>
-                    <td>{$sales.address}</td>
+                    <td>{$al.break_name}</td>
+                    <td>{$al.f_name}</td>
+                    <td>{$al.s_name}</td>
                     <td>
                       <div class="btn-group">
                         <a class="btn btn-mini dropdown-toggle"
                           data-toggle="dropdown" href="#">Actions <span
                           class="caret"></span></a>
                         <ul class="dropdown-menu">
-                          <li><a class="view-detail" href=""
-                            onclick="viweDetail({$ol.order_id}); return false"><i
-                              class="fa fa-eye"></i> 查看</a></li>
                           <li><a href=""
-                            onclick="edit(${p.productOrderKey },${p.isEnable});return false"><i
+                            onclick="editTrouble({$al.break_id});return false"><i
                               class="fa fa-pencil"></i> 编辑</a></li>
-                          <li><a href="" onclick="del(${p.productOrderKey });return false"><i class="fa fa-trash-o"></i> 删除</a></li>
+                          <li><a href="" onclick="delTrouble({$al.break_id});return false"><i class="fa fa-trash-o"></i> 删除</a></li>
                         </ul>
                       </div>
                     </td>
@@ -53,17 +51,32 @@
         </div>
     </div>
 <script src="__ASSETS__/js/jquery.page.js"></script>
+<script src="__ASSETS__/js/jquery.fancybox.js"></script>
 <script type="text/javascript">
-    $("#add-sales").click(function(){
-      $("#wrapper").load("__MODULE__/Sales/addView");
+    $(document).ready(function() {
+        $("a.preview").fancybox();
+     });
+
+    $("#add-appliance-trouble").click(function(){
+      $("#wrapper").load("__MODULE__/ApplianceTrouble/addView");
     });
 
 
-    function viweDetail(order_id){
-      $("#wrapper").load("__MODULE__/order/detail",{order_id: order_id});
+    function delTrouble(break_id){
+        if (!confirm("确认要删除？")) {
+            window.event.returnValue = false;
+        }else{
+          $.post(
+            '__MODULE__/ApplianceTrouble/del',
+          {
+            "break_id":break_id,
+          },
+          function(data){
+            alert(data['message']);
+             $("#wrapper").load("__MODULE__/ApplianceTrouble");
+          });
+        }
     }
-
-
 
       $(function(){
     //这是一个非常简单的demo实例，让列表元素分页显示
@@ -84,7 +97,6 @@
     });
 
   function loadpage(p){
-    $("#wrapper").load("__MODULE__/Order/lists", {page:p});
+    $("#wrapper").load("__MODULE__/ApplianceTrouble/index", {page:p});
   }
-
 </script>

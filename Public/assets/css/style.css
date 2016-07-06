@@ -2590,3 +2590,12 @@ display:;
     width: 35%;
     display:inline-block;
 }
+
+.add-form-30{
+    width: 25%;
+    display:inline-block;
+}
+
+.text-red{
+    color: #FF0000;
+}

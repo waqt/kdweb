@@ -8,43 +8,49 @@
           		   <div class="form-panel">
 					 <form class="form-horizontal style-form" id="myForm"  method="post">
                           <div class="form-group ">
-                              <label class="col-sm-2 col-sm-2 control-label ">用户名</label>
+                              <label class="col-sm-2 col-sm-2 control-label ">用户名 <span class="text-red">*</span></label>
                               <div class="col-sm-10 add-form-half ">
                                   <input type="text" AUTOCOMPLETE="off" name="account" id="account" class="form-control ">
                               </div>
                           </div>
                           <div class="form-group ">
-                              <label class="col-sm-2 col-sm-2 control-label">密码</label>
+                              <label class="col-sm-2 col-sm-2 control-label">密码 <span class="text-red">*</span></label>
                               <div class="col-sm-10 add-form-half">
                                   <input type="text" onfocus="this.type='password'" AUTOCOMPLETE="off" name="password" id="password" class="form-control">
                               </div>
                           </div>
                           <div class="form-group ">
-                              <label class="col-sm-2 col-sm-2 control-label">确认密码</label>
+                              <label class="col-sm-2 col-sm-2 control-label">确认密码 <span class="text-red">*</span></label>
                               <div class="col-sm-10 add-form-half">
                                   <input type="text" onfocus="this.type='password'"  AUTOCOMPLETE="off" name="repassword" id="repassword" class="form-control">
                               </div>
                           </div>
                           <div class="form-group ">
-                              <label class="col-sm-2 col-sm-2 control-label ">销售商电话</label>
+                              <label class="col-sm-2 col-sm-2 control-label ">销售商电话 <span class="text-red">*</span></label>
                               <div class="col-sm-10 add-form-half ">
                                   <input type="text" AUTOCOMPLETE="off" name="phone" id="phone" class="form-control ">
                               </div>
                           </div>
-                          <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">销售商名称</label>
+                           <div class="form-group">
+                              <label class="col-sm-2 col-sm-2 control-label">销售商名称 <span class="text-red">*</span></label>
                               <div class="col-sm-10">
-                                  <input type="text" AUTOCOMPLETE="off" name="name" id="name" class="form-control ">
+                                  <input type="text" AUTOCOMPLETE="off" name="saleor_name" id="saleor_name" class="form-control ">
                               </div>
                           </div>
-						  <div class="form-group">
-								<label class="col-sm-2 col-sm-2 control-label" for="photo">logo</label>
-								<div class="col-sm-10 ">
-                   					 <input  name="logo" id="logo" class="form-control file file-0" type="file">
-                   			    </div>
-						  </div>
-						  <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">地址</label>
+                          <div class="form-group">
+                              <label class="col-sm-2 col-sm-2 control-label">负责人姓名 <span class="text-red">*</span></label>
+                              <div class="col-sm-10">
+                                  <input type="text" AUTOCOMPLETE="off" name="real_name" id="real_name" class="form-control ">
+                              </div>
+                          </div>
+						              <div class="form-group">
+								              <label class="col-sm-2 col-sm-2 control-label" for="photo">logo</label>
+								              <div class="col-sm-10 ">
+                   					    <input  name="logo" id="logo" class="form-control file file-0" type="file">
+                   			      </div>
+						              </div>
+						              <div class="form-group">
+                              <label class="col-sm-2 col-sm-2 control-label">地址 <span class="text-red">*</span></label>
                               <div class="col-sm-10">
                                   <input type="text" AUTOCOMPLETE="off" name="address" id="address" class="form-control ">
                               </div>
@@ -124,7 +130,7 @@
 		var account = $("#account").val();
      	var password = $("#password").val();
      	var repassword = $("#repassword").val();
-     	var name = $("#name").val();
+     	var saleor_name = $("#saleor_name").val();
      	var phone = $("#phone").val();
      	var address = $("#address").val();
      	if(account == ""){
@@ -169,8 +175,8 @@
 				});
 				return false;
      	}
-     	else if(name == ""){
-     			$("#name").tips({
+     	else if(saleor_name == ""){
+     			$("#saleor_name").tips({
 					side : 2,
 					msg : '请输入销售商名称',
 					bg : '#AE81FF',

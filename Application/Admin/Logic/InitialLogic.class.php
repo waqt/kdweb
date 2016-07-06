@@ -23,9 +23,16 @@ class InitialLogic extends BaseLogic {
         if(! S('brands')){
             $brandLogic = new l\BrandLogic();
             $brandList=$brandLogic->getAllBrandList();
-            S('brands',$brandList); 
+            for($i= 0; $i< count($brandList); $i++){
+                $brandName=$brandList[$i]['brand_name'];
+                $brandNameList[$i]=$brandName;
+                $brandNameMap[$brandName]=$brandList[$i]['brand_id'];
+            }
+            $brandMap['NameList']=$brandNameList;
+            $brandMap['Map']=$brandNameMap;
+            S('brands',$brandMap); 
         }
-        return s('brands');
+        return S('brands');
     }
 
     /**
@@ -38,10 +45,15 @@ class InitialLogic extends BaseLogic {
             $applianceLogic = new l\ApplianceLogic();
             $applianceFatherList=$applianceLogic->getApplianceFatherList();
             foreach($applianceFatherList as $father){
-                $child=$applianceLogic->getApplianceList($father['appliance_id'],1,30);
-                $father['child']=$child['datas'];
+                $fatherId=$father['appliance_id'];
+                $child=$applianceLogic->getApplianceSonList($fatherId);
+                //addErrorLog("initial","initiallogic","eachchild",$child);
+                $childMap[$fatherId]=$child;
             }
-            S('appliances',$applianceFatherList);  
+            $applianceMap['father']= $applianceFatherList;
+            $applianceMap['child']= $childMap;
+            //addErrorLog("initial","initiallogic","allchild",$childMap['43']);
+            S('appliances',$applianceMap);  
         }
         return S('appliances');
     }
@@ -52,13 +64,20 @@ class InitialLogic extends BaseLogic {
      */
     public function getAllSales() {
     //电器品类初始化
+        S('sales',null);
         if(! S('sales')){
-            $limit = 0;
             $salesLogic = new l\SalesLogic();
-            $salesData=$salesLogic->getSalesList($condition, , $limit);
+            $salesData=$salesLogic->getSalesList($condition, null , 0);
             $sales_list=$salesData['datas'];
-            
-            S('sales',$sales_list);  
+
+            for($i= 0; $i< count($sales_list); $i++){
+                $salesName=$sales_list[$i]['saleor_name'];
+                $salesNameList[$i]=$salesName;
+                $salesNameMap[$salesName]=$sales_list[$i]['saleor_id'];
+            }
+            $salesMap['NameList']=$salesNameList;
+            $salesMap['Map']=$salesNameMap;
+            S('sales',$salesMap); 
         }
         return S('sales');
     }  
