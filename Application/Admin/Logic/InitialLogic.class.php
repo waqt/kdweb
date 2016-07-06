@@ -64,7 +64,6 @@ class InitialLogic extends BaseLogic {
      */
     public function getAllSales() {
     //电器品类初始化
-        S('sales',null);
         if(! S('sales')){
             $salesLogic = new l\SalesLogic();
             $salesData=$salesLogic->getSalesList($condition, null , 0);
@@ -80,5 +79,28 @@ class InitialLogic extends BaseLogic {
             S('sales',$salesMap); 
         }
         return S('sales');
-    }  
+    }
+
+
+    /**
+     * 从缓存中读取故障数据   
+     * @return array
+     */
+    public function getAllTroubles() {
+    //电器品类初始化
+        S('troubles',null);
+        if(! S('troubles')){
+            $applianceTroubleLogic = new l\ApplianceTroubleLogic();
+            $troubleData=$applianceTroubleLogic->getTroubleList($condition, $page, $limit);
+            $trouble_list=$salesData['datas'];
+
+            for($i= 0; $i< count($trouble_list); $i++){
+                $applianceName=$trouble_list[$i]['f_name'];
+                $troubleMap[$applianceName]['break_name']=$trouble_list[$i]['break_name'];
+                $troubleMap[$applianceName]['break_id']=$trouble_list[$i]['break_id'];
+            }
+            S('troubles',$troubleMap); 
+        }
+        return S('troubles');
+    }   
 }

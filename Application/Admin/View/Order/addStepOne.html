@@ -14,6 +14,7 @@
                           <label class="col-sm-2 control-label">业务类型 <span class="text-red">*</span></label>
                           <div class="col-sm-2">
                             <select class="form-control" name="order-type" id="order-type">
+                              <option selected="selected" value='' class="display-none"></option>
                               <option  value=2 class="display-none">保内维修</option>
                               <option  value=4 class="display-none">安装</option>
                             </select>
@@ -22,6 +23,7 @@
                           <label class="col-sm-2 control-label">电器品类 <span class="text-red">*</span></label>
                           <div class="col-sm-2">
                             <select class="form-control appliance-father" name="appliance-father" >
+                            <option selected="selected" value='' class="display-none"></option>
                             <volist name='applianceFather'  id='father' key='kc' >
                                 <option value='{$father.appliance_id}'>{$father.name}</option>
                             </volist>
@@ -31,6 +33,21 @@
                             <select class="form-control appliance-child" name="appliance" id="appliance-child">
                             </select>
                           </div>
+                      </div>
+
+                      <div id="trouble-controll" >
+                        <div class="form-group ui-widget">
+                          <label class="col-sm-2  control-label">故障描述 </label>
+                          <div class="col-sm-10">
+                              <input type="text" AUTOCOMPLETE="off" name="break_describe" id="break_describe"  placeholder="洗衣机转轮无法工作" class="form-control">
+                          </div>
+                        </div>
+                        <div class="form-group ui-widget">
+                         <label class="col-sm-2  control-label" for="break_pics">故障照片 </label>
+                         <div class="col-sm-6">
+                             <input  name="break_pics" id="break_pics" class="form-control file file-0" type="file">
+                         </div>
+                        </div>
                       </div>
 
 
@@ -109,6 +126,19 @@
                          </div>
                       </div>
 
+                      <div class="form-group ui-widget">
+                         <label class="col-sm-2  control-label" for="billphoto">是否指定网点 <span class="text-red">*</span></label>
+                          <div class="radio col-sm-6">
+                            <label class="col-sm-3">
+                              <input type="radio" name="optionsRadios" id="auto" value="1" checked> 自动推送
+                            </label>
+                            <label class="col-sm-3">
+                              <input type="radio" name="optionsRadios" id="manual" value="0"> 手动指定网点
+                            </label>
+                        </div>
+                      </div>
+
+
 						          <div class="form-actions centered">
 								          <input type="button"  id="next-step"
 									       class="btn btn-success btn-large" value="下一步" /> <a class="btn"
@@ -131,6 +161,7 @@
 	 }
 
 	$(document).ready(function(){
+      $("#trouble-controll").hide();
       $('#button-submit').click(function(){
             $('#myForm').ajaxSubmit(options);
               return false;
@@ -175,14 +206,24 @@
      // 先清空第二个
       var checkValue=$(".appliance-father").val();
       var childList= childMap[checkValue];
-      console.log("childList="+childMap[checkValue][0]['name']);
+      //console.log("childList="+childMap[checkValue][0]['name']);
       $(".appliance-child").empty();
 
+      $(".appliance-child").append("<option selected='selected' value='' class='display-none'></option>");
      // 实际的应用中，这里的option一般都是用循环生成多个了
       for(var i=0, l=childList.length; i<l; i++){
         var option = $("<option>").val(childList[i]['appliance_id']).text(childList[i]['name']);
         $(".appliance-child").append(option);
       }
+  });
+
+  //订单类型为保内维修时，显示故障描述输入
+  $("#order-type").change(function(){
+     if($("#order-type").val()==2){
+        $("#trouble-controll").show();
+     }else{
+        $("#trouble-controll").hide();
+     }
   });
 
   //设置时间选择器
