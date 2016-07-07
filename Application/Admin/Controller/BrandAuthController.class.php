@@ -136,8 +136,8 @@ class BrandAuthController extends CommonController {
     $achieveBrandList=$brandAuthLogic->getAchieveBrandList($merId);
     
 
-    $initialLogic = new l\InitialLogic();
-    $brandList=$initialLogic->getAllBrands();
+    $brandLogic = new l\BrandLogic();
+    $brandList=$brandLogic->getAllBrandList();
 
     $role= session('user_info.role');
     $this->assign('apply_id',$applyId);

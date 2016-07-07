@@ -119,9 +119,12 @@ class OrderController extends CommonController {
          $break_pic = $_FILES['break_pics'];
          $bill_pic =  $_FILES['billphoto'];
 
+         $break_pics= null;
+         $invoice_pic = null;
          if($break_pic != '' && $break_pic !=null){
             $break_photo_name= "order/pic/breakphoto/".uniqid().str_replace(' ','',$break_pic['name']);
             $filepath=UploadBeforeOss( $break_pic);
+            $break_pics=C('OSS_FILE_PREFIX').'/'.$break_photo_name;
             if(!ImgOssUpload($break_photo_name,$filepath)){
               $data['success'] = false;
               $data['message'] = '图片上传失败';
@@ -132,6 +135,7 @@ class OrderController extends CommonController {
          if($bill_pic != '' && $bill_pic !=null){
             $bill_photo_name = "order/pic/billphoto/".uniqid().str_replace(' ','',$bill_pic['name']);
             $filepath=UploadBeforeOss($bill_pic);
+            $invoice_pic=C('OSS_FILE_PREFIX').'/'.$bill_photo_name;
             if(!ImgOssUpload($bill_photo_name,$filepath)){
               $data['success'] = false;
               $data['message'] = '图片上传失败';
@@ -139,9 +143,6 @@ class OrderController extends CommonController {
               $this->ajaxReturn($data,'JSON');
             } 
          }
-
-         $break_pics=C('OSS_FILE_PREFIX').'/'.$break_photo_name;
-         $invoice_pic=C('OSS_FILE_PREFIX').'/'.$bill_photo_name;
 
          $order['send_type']=I('order_type');
          $order['appliance_id']=I('appliance-father');
@@ -159,6 +160,10 @@ class OrderController extends CommonController {
          $order['break_describe']=I('break_describe');
          $order['invoice_pic'] = $invoice_pic;
          $order['break_pics'] = $break_pics;
+
+         $data = json_encode($order);
+
+         addErrorLog("Order","add","address",$data);
 
          $orderLogic = new l\OrderLogic();
          $result=$orderLogic->addOrder($order);

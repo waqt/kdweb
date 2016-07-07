@@ -55,7 +55,7 @@
 	$(".chose-brand").click(function(){
 		var brandId=$(this).attr('id');
 		var brandName=$(this).attr('value');
-		$("#my-list").after("<div class='achieve-list'><input name='chkItem' class='list-child' checked='checked' type='checkbox' value='"+brandId+"'/><span  class='label label-success'>"+brandName+"</span></div>");
+		$("#my-list").after("<div class='achieve-list'><input name='chkItem' class='list-child' checked='checked' type='checkbox' value='"+brandId+"'/> <span  class='label label-success'>"+brandName+"</span></div>");
 	});
 
 	$("#save-brand").click(function(){

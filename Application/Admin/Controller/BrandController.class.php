@@ -59,29 +59,24 @@ class BrandController extends CommonController {
 
          $filepath=UploadBeforeOss($brandLogo);   //上传图片到服务器，获取服务器文件路径
          $brandLogic = new l\BrandLogic();
-
+         $logoUrl=null;
         if($brandLogo != ''){
             //上传文件到OSS
             if(ImgOssUpload($img_name, $filepath)){
               $logoUrl=C('OSS_FILE_PREFIX').'/'.$img_name;
-              $result=$brandLogic->addBrand($brandName,$logoUrl);
-              $data['status'] = 300;
-              $data['message'] = $result['message'];
-              $this->ajaxReturn($data,'JSON');
-              S('brands',NULL);
             }else{
               $data['status'] = 300;
               $data['message'] = '图片上传失败';
               $data['error_code'] = 10002;
               $this->ajaxReturn($data,'JSON');
           }
-        }else{
-          $result=$brandLogic->addBrand($brandName);
-          $data['status'] = $result['status'];
-          $data['message'] = $result['message'];
-          S('brands',NULL);
-          $this->ajaxReturn($data,'JSON');
         }
+        $result=$brandLogic->addBrand($brandName,$logoUrl);
+        $data['status'] = $result['status'];
+        $data['message'] = $result['message'];
+        S('brands',NULL);
+        $this->ajaxReturn($data,'JSON');
+
       }
     }
   

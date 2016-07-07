@@ -19,6 +19,7 @@
     <link href="__ASSETS__/css/fancybox/jquery.fancybox.css" rel="stylesheet">
     <link href="__ASSETS__/css/style-responsive.css" rel="stylesheet">
     <link href="__ASSETS__/js/jquery-ui/jquery-ui.min.css" rel="stylesheet">
+    <link href="__ASSETS__/js/datetimepicker/bootstrap-datetimepicker.css" rel="stylesheet">
 
     <!-- <script src="__ASSETS__/js/chart-master/Chart.js"></script> -->
     <script src="__ASSETS__/js/jquery-1.8.3.min.js"></script>
@@ -77,7 +78,12 @@
     <script src="__ASSETS__/js/jquery.scrollTo.min.js"></script>
     <script src="__ASSETS__/js/jquery.nicescroll.js" type="text/javascript"></script>
     <script src="__ASSETS__/js/jquery.sparkline.js"></script>
-    
+    <script src="__ASSETS__/js/admin/fileinput.js"></script>
+    <script src="__ASSETS__/js/jquery.form.min.js"></script>
+    <script src="__JS__/jquery.tips.js"></script>
+    <script src="__ASSETS__/js/jquery-ui/jquery-ui.min.js"></script>
+    <script src="__ASSETS__/js/cityselect/jquery.cityselect.js"></script>
+    <script src="__ASSETS__/js/datetimepicker/bootstrap-datetimepicker.min.js"></script>
 
 
     <!--common script for all pages-->
@@ -91,6 +97,7 @@
             var link=$(this).attr("value");
             //console.log(link);
             $("#wrapper").load("__MODULE__/"+link);
+            //window.open("__MODULE__/"+link,'testLoad','');
          });             
 
         //检查菜单是否有子菜单，若没有则获取页面

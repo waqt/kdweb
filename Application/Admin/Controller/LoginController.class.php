@@ -32,7 +32,7 @@ class LoginController extends Controller {
 			}else{
 				$data['success']=false;
 				$data['error_code']='500';
-				$data['errorMsg']='网络异常';
+				$data['errorMsg']=$login_logic->getErrorMessage();
 			}
 			$this->ajaxReturn($data,'JSON');
 		} else {
