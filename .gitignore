@@ -2,3 +2,5 @@
 .gitignore  
 #显示指定忽略名称为main的文件  
 /Runtime
+#忽略上传文件
+/Uploads

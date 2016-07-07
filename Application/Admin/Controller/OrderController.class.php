@@ -161,15 +161,16 @@ class OrderController extends CommonController {
          $order['invoice_pic'] = $invoice_pic;
          $order['break_pics'] = $break_pics;
 
-         $data = json_encode($order);
+         //$data = json_encode($order);
 
-         addErrorLog("Order","add","address",$data);
+         //addErrorLog("Order","add","address",$data);
 
          $orderLogic = new l\OrderLogic();
          $result=$orderLogic->addOrder($order);
          $data['success'] = true;
          $data['status']= $result['status'];
          $data['message'] = $result['message'];
+         addErrorLog("order","add","result",$data);
          $this->ajaxReturn($data,'JSON');
   }
 
