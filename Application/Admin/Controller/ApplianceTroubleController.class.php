@@ -80,7 +80,7 @@ class ApplianceTroubleController extends CommonController {
     $result=$applianceTroubleLogic->addTrouble($trouble);
 
     S('troubles',NULL);
-    $data['success'] = true;
+    $data['status'] = $result['status'];
     $data['message']=$result['message'];
     $this->ajaxReturn($data,'JSON');
   }

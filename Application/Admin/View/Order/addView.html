@@ -160,7 +160,8 @@
 <script type="text/javascript" language="javascript">
   var childMap={$applianceChildMap};
   var brandNameList ={$brandNameList};
-  var salesNameList ={$salesNameList}; 	
+  var salesNameList ={$salesNameList};
+  var lock = false; 	
 
   function cancel(){
 			$("#wrapper").load("__MODULE__/Order/index");
@@ -285,8 +286,12 @@
       success: function(data){
         if(data['status'] != 200){
           alert("status:"+data['status']+"message:"+data['message']);
+          lock =false;
+          $("#button-submit").attr("disabled",false); 
         }else if(data['status'] == 200){
-          alert(data['message']); 
+          alert(data['message']);
+          lock =false;
+          $("#button-submit").attr("disabled",false);  
           $("#wrapper").load("__MODULE__/Order");
         }
       },      //提交后的回调函数  
@@ -312,7 +317,6 @@
       var address =$("#address").val();
       var pushMethod =$('input:radio[name="pushMethod"]:checked').val();
       var merchant_code = $("#merchant_code").val();
-      console.log(order_type);
      	if(order_type == ""){
      			$("#order_type").tips({
 					side : 2,
@@ -374,6 +378,8 @@
         });
         return false;
       }
+      lock = true;
+      $("#button-submit").attr("disabled",true); 
     }     
 
     

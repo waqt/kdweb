@@ -2582,7 +2582,7 @@ display:;
 }
 
 .order-detail-list h4{
-    width: 30%;
+    width: 40%;
     display:inline-block;
 }
 
@@ -2598,4 +2598,14 @@ display:;
 
 .text-red{
     color: #FF0000;
+}
+
+.loading {
+  position: absolute;
+  z-index: 10000;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: url(...) center center;
 }

@@ -55,32 +55,26 @@ class SalesController extends CommonController {
         $sales['describe'] = I('describe');
         $salesLogo = $_FILES['logo'];
 
+        $logoUrl = null;
 
-         $logoName= "sales/pic/".uniqid().str_replace(' ','',$salesLogo['name']);
+        $salesLogic = new l\SalesLogic();
 
-         $filepath=UploadBeforeOss($salesLogo);   //上传图片到服务器，获取服务器文件路径
-         $salesLogic = new l\SalesLogic();
-
-        if($salesLogo != ''){
+        if($salesLogo != '' && $salesLogo !=null){
+            $filepath=UploadBeforeOss( $salesLogo);
+            $logoName= "sales/pic/".uniqid().str_replace(' ','',$salesLogo['name']);
+            $logoUrl=C('OSS_FILE_PREFIX').'/'.$logoName;
             //上传文件到OSS
-            if(ImgOssUpload($logoName, $filepath)){
-              $logoUrl=C('OSS_FILE_PREFIX').'/'.$logoName;
-              $result=$salesLogic->addSales($sales,$logoUrl);
-              $data['success'] = true;
-              $data['message'] = $result['message'];
-              $this->ajaxReturn($data,'JSON');
-            }else{
-              $data['success'] = false;
+            if(!ImgOssUpload($logoName, $filepath)){
+              $data['status'] = 300;
               $data['message'] = '图片上传失败';
               $data['error_code'] = 10002;
               $this->ajaxReturn($data,'JSON');
-          }
-        }else{
-          $result=$salesLogic->addSales($sales);
-          $data['success'] = true;
+            }
+        }
+          $result=$salesLogic->addSales($sales,$logoUrl);
+          $data['status'] = $result['status'];
           $data['message'] = $result['message'];
           $this->ajaxReturn($data,'JSON');
-        }
       }
   
 }

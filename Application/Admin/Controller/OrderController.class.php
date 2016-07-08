@@ -126,7 +126,7 @@ class OrderController extends CommonController {
             $filepath=UploadBeforeOss( $break_pic);
             $break_pics=C('OSS_FILE_PREFIX').'/'.$break_photo_name;
             if(!ImgOssUpload($break_photo_name,$filepath)){
-              $data['success'] = false;
+              $data['status'] = 300;
               $data['message'] = '图片上传失败';
               $data['error_code'] = 10002;
               $this->ajaxReturn($data,'JSON');
@@ -137,7 +137,7 @@ class OrderController extends CommonController {
             $filepath=UploadBeforeOss($bill_pic);
             $invoice_pic=C('OSS_FILE_PREFIX').'/'.$bill_photo_name;
             if(!ImgOssUpload($bill_photo_name,$filepath)){
-              $data['success'] = false;
+              $data['status'] = 300;
               $data['message'] = '图片上传失败';
               $data['error_code'] = 10002;
               $this->ajaxReturn($data,'JSON');

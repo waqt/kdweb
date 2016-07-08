@@ -50,6 +50,8 @@
 				</div>
 			</div>
 <script type="text/javascript" language="javascript">	
+    var lock = false; 
+
     $("#file-0").fileinput({
         'allowedFileExtensions' : ['jpg', 'png','gif'],
         'showUpload': true,
@@ -71,9 +73,13 @@
    		/*************/  
    		success: function(data){
         		if(data['status'] != 200){
-          			alert(data['message']);
+          		alert(data['message']);
+              lock =false;
+              $("#button-submit").attr("disabled",false); 
         		}else if(data['status'] == 200){
-          			alert(data['message']); 
+          		alert(data['message']);
+              lock =false;
+              $("#button-submit").attr("disabled",false);  
           		$("#wrapper").load("__MODULE__/Appliance");
         	   }
 			},      //提交后的回调函数  
@@ -126,6 +132,8 @@
 				});
 				return false;
      	}
+      lock = true;
+      $("#button-submit").attr("disabled",true); 
     }     
   
 	function showRequest(formData, jqForm, options){  
