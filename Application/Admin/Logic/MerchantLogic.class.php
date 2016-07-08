@@ -26,18 +26,11 @@ class MerchantLogic extends BaseLogic {
      * @param int $limit 每页显示的条数         
      * @return array
      */
-    public function getMerchantList($area=null, $authorize_state=null, $appliance_id=null,
-                                    $phone=null, $onlycode=null, $brand_name=null,$page=1,
-                                    $limit=10) {
+    public function getMerchantList($merchant=null, $page=1, $limit=10) {
         if($page=='' || $page==null){
             $page=1;
         }
-        $data['area']            =$area;                            //商户所在地区，省市区
-        $data['authorize_state'] =$authorize_state;                 //商户认证状态，1认证中 2已认证 3拒绝认证
-        $data['appliance_id']    =$appliance_id;                    //商户技能品类id
-        $data['phone']           =$phone;                           //商户注册电话
-        $data['onlycode']        =$onlycode;                        //商户唯一标识码
-        $data['brand_name']      =$brand_name;                      //商户授权品牌
+        $data = $merchant;
         $data['page']            =$page;                            //分页页码
         $data['limit']           =$limit;                           //分页单页显示行数
         $data['token']           =session('user_info.token');

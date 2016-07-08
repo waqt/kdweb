@@ -55,7 +55,7 @@ class BrandController extends CommonController {
          $brandName=I('brand-name');
          $brandLogo = $_FILES['brand-logo'];
 
-         $img_name= "brand/pic/".uniqid().str_replace(' ','',$brandLogo['name']);
+         $img_name= "brand/pic/".uniqid().strrchr($brandLogo['name'],46);
 
          $filepath=UploadBeforeOss($brandLogo);   //上传图片到服务器，获取服务器文件路径
          $brandLogic = new l\BrandLogic();
@@ -80,6 +80,40 @@ class BrandController extends CommonController {
       }
     }
   
+    /**
+     * 获取品牌授权商户  
+     * @return array
+  */  
+  public function brandMerchant(){
+      $merchant['brand_id'] = I('brand_id');
+      $page = I('page');
+
+      $initialLogic = new l\InitialLogic();
+      $brandList = $initialLogic->getAllBrands();
+
+      $brand_name = array_search($merchant['brand_id'], $brandList['Map']); 
+      $limit = 10;
+
+      $merchantLogic = new l\MerchantLogic();
+      //API 获取商户数据
+      $merchant_data=$merchantLogic->getMerchantList($merchant, $page, $limit);
+
+      $merchant_list=$merchant_data['datas'];
+      $list_count=$merchant_data['allcount'];
+      $current=$merchant_data['current'];               //当前页
+      $pages=ceil($list_count/$limit); 
+
+
+      //addErrorLog('appliance','loginc','current',$current);
+      $this->assign('brandName',$brand_name);
+      $this->assign('brandID',$merchant['brand_id']);
+      $this->assign('merchant_list', $merchant_list);
+      $this->assign('pages',$pages);
+      $this->assign('current', $current);
+      $this->assign('list_count',$list_count);
+      $this->display();
+  }
+
 
   public function del() {
     $id=I('brand_id');

@@ -20,19 +20,19 @@ class MerchantController extends CommonController {
   *商户列表
   */
   public function lists(){
-      $area = I('area');
-      $authorize_state = I('authorize_state');
-      $appliance_id = I('appliance_id');
-      $phone = I('phone');
-      $onlycode = I('onlycode');
-      $brand_name = I('brand_name');
+      $merchant['area'] = I('area');
+      $merchant['authorize_state'] = I('authorize_state');
+      $merchant['appliance_id'] = I('appliance_id');
+      $merchant['phone'] = I('phone');
+      $merchant['onlycode'] = I('onlycode');
+      $merchant['brand_name'] = I('brand_name');
       $page = I('page');
       $limit = 10;
       
 
       $merchantLogic = new l\MerchantLogic();
       //API 获取商户数据
-      $merchant_data=$merchantLogic->getMerchantList($area, $authorize_state, $appliance_id, $phone, $onlycode, $brand_name, $page, $limit);
+      $merchant_data=$merchantLogic->getMerchantList($merchant, $page, $limit);
       $merchant_list=$merchant_data['datas'];
       $list_count=$merchant_data['allcount'];
       $current=$merchant_data['current'];               //当前页

@@ -1,0 +1,67 @@
+<link rel="stylesheet" href="__ASSETS__/css/tcdPageCode.css"/>
+<div class="span9">
+	<div class="row-fluid">
+		<div class="page-header">
+				<h3>
+					品牌授权商家 | 品牌名称： <span  class="label label-info"> {$brandName} </span>
+				</h3>
+		</div>
+		<div class="row-fluid col-lg-12">
+            <table id="Table-Result" class="table table-strtable table-striped table-bordered table-condensed">
+              <thead>
+                <tr>
+                <th>商户名称</th>
+                <th>商户电话</th>
+                <th>标识码</th>
+                <th>地址</th>
+                </tr>
+              </thead>
+              <tbody>
+                <volist name='merchant_list' id='ml' key='kc' >
+                  <tr class="list-users">
+                    <td>{$ml.mer_name}</td>
+                    <td>{$ml.herader_phone}</td>
+                    <td>{$ml.identification_code}</td>
+                    <td>{$ml.address}</td>
+                  </tr>
+                </volist>
+              </tbody>
+            </table>
+            <div id="Pagination" class="tcdPageCode">
+                            
+            </div> 
+            <button class="btn btn-info  apply-auth" id="retrun-back" onclick="cancel()"><i class="fa fa-hand-o-right"></i>返回</button>
+		</div>
+	</div>
+</div>
+<div class="theme-popover-mask"></div>
+<script src="__ASSETS__/js/jquery.page.js"></script>
+<script type="text/javascript" language="javascript">
+  var brand_id= {$brandID};
+
+  function cancel(){
+      $("#wrapper").load("__MODULE__/Brand");
+   }
+
+  $(function(){
+    //这是一个非常简单的demo实例，让列表元素分页显示
+    //回调函数的作用是显示对应分页的列表项内容
+    //回调函数在用户每次点击分页链接的时候执行
+    //参数page_index{int整型}表示当前的索引页
+    var totalpage = {$pages};
+    var current = {$current};
+      $(".tcdPageCode").createPage({
+          pageCount:totalpage,
+          current:current,
+          backFn:function(p){
+              loadpage(p);
+          }
+      });
+
+  });
+
+  function loadpage(p){
+    $("#wrapper").load("__MODULE__/Brand/brandMerchant",{page:p, brand_id: brand_id});
+  }
+
+</script>

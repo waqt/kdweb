@@ -62,7 +62,7 @@ class ApplianceController extends CommonController {
          $middle_logo=null; 
 
          if($img1 != '' && $img1 !=null){
-            $img_name1= "appliance/pic/shd_img/".uniqid().str_replace(' ','',$img1['name']);
+            $img_name1= "appliance/pic/shd_img/".uniqid().strrchr($img1['name'],46);
             $filepath1=UploadBeforeOss($img1);
             $big_logo=C('OSS_FILE_PREFIX').'/'.$img_name1;
             if(!ImgOssUpload($img_name1,$filepath1)){
@@ -73,7 +73,7 @@ class ApplianceController extends CommonController {
             } 
          }
          if($img2 != '' && $img2 !=null){
-            $img_name2 = "appliance/pic/shd_little_img/".uniqid().str_replace(' ','',$img2['name']);
+            $img_name2 = "appliance/pic/shd_little_img/".uniqid().strrchr($img2['name'],46);
             $filepath2=UploadBeforeOss($img2);
             $small_logo=C('OSS_FILE_PREFIX').'/'.$img_name2;
             if(!ImgOssUpload($img_name2,$filepath2)){
@@ -84,7 +84,7 @@ class ApplianceController extends CommonController {
             } 
          }
          if($img3 != '' && $img3 !=null){
-            $img_name3 = "appliance/pic/yhd_img/".uniqid().str_replace(' ','',$img3['name']);
+            $img_name3 = "appliance/pic/yhd_img/".uniqid().strrchr($img3['name'],46);
             $filepath3=UploadBeforeOss($img3);
             $middle_logo=C('OSS_FILE_PREFIX').'/'.$img_name3;
             if(!ImgOssUpload($img_name3,$filepath3)){

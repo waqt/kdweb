@@ -82,16 +82,8 @@
         }
     }
 
-    function findMerchant(brand_id){
-          $.post(
-            '__MODULE__/Brand/del',
-          {
-            "brand_id":brand_id,
-          },
-          function(data){
-             alert(data['message']);
-             $("#wrapper").load("__MODULE__/Brand");
-          });
+    function findMerchant(brand_id,brand_name){
+          $("#wrapper").load("__MODULE__/Brand/brandMerchant",{brand_id:brand_id});
     }
 
       $(function(){

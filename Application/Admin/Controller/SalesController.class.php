@@ -61,7 +61,7 @@ class SalesController extends CommonController {
 
         if($salesLogo != '' && $salesLogo !=null){
             $filepath=UploadBeforeOss( $salesLogo);
-            $logoName= "sales/pic/".uniqid().str_replace(' ','',$salesLogo['name']);
+            $logoName= "sales/pic/".uniqid().strrchr($salesLogo['name'],46);
             $logoUrl=C('OSS_FILE_PREFIX').'/'.$logoName;
             //上传文件到OSS
             if(!ImgOssUpload($logoName, $filepath)){
