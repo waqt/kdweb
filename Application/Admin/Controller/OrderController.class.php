@@ -150,7 +150,7 @@ class OrderController extends CommonController {
          $order['brand_id']=$brandID;
          $order['servicetime']=I('servicetime');
          $order['phone']=I('customerPhone');
-         $order['username']=I('customerName');
+         $order['user_name']=I('customerName');
          $order['address']=I('prov')."-".I('city')."-".I('dist')."-".I('address')."-".I('doorNumber');
          $order['is_auto']=I('pushMethod');
          $order['mer_only_code']=I('merchant_code');

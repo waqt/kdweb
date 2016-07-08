@@ -82,6 +82,18 @@
         }
     }
 
+    function findMerchant(brand_id){
+          $.post(
+            '__MODULE__/Brand/del',
+          {
+            "brand_id":brand_id,
+          },
+          function(data){
+             alert(data['message']);
+             $("#wrapper").load("__MODULE__/Brand");
+          });
+    }
+
       $(function(){
     //这是一个非常简单的demo实例，让列表元素分页显示
     //回调函数的作用是显示对应分页的列表项内容
