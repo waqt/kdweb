@@ -68,8 +68,8 @@ class InitialLogic extends BaseLogic {
             $salesLogic = new l\SalesLogic();
             $salesData=$salesLogic->getSalesList($condition, null , 0);
             $sales_list=$salesData['datas'];
-
-            for($i= 0; $i< count($sales_list); $i++){
+            $count=count($sales_list);
+            for($i= 0; $i< $count; $i++){
                 $salesName=$sales_list[$i]['saleor_name'];
                 $salesNameList[$i]=$salesName;
                 $salesNameMap[$salesName]=$sales_list[$i]['saleor_id'];
@@ -88,13 +88,13 @@ class InitialLogic extends BaseLogic {
      */
     public function getAllTroubles() {
     //电器品类初始化
-        S('troubles',null);
+        //S('troubles',null);
         if(! S('troubles')){
             $applianceTroubleLogic = new l\ApplianceTroubleLogic();
             $troubleData=$applianceTroubleLogic->getTroubleList($condition, $page, $limit);
             $trouble_list=$salesData['datas'];
-
-            for($i= 0; $i< count($trouble_list); $i++){
+            $count=count($trouble_list);
+            for($i= 0; $i< $count; $i++){
                 $applianceName=$trouble_list[$i]['f_name'];
                 $troubleMap[$applianceName]['break_name']=$trouble_list[$i]['break_name'];
                 $troubleMap[$applianceName]['break_id']=$trouble_list[$i]['break_id'];

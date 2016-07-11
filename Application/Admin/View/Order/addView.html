@@ -145,6 +145,9 @@
                               <input type="text" AUTOCOMPLETE="off" name="merchant_code" id="merchant_code"  placeholder="100051" class="form-control">
                           </div>
                         </div>
+                        <div class="centered" id="merchant-list">
+                        </div>
+
                       </div>
 
 
@@ -234,16 +237,20 @@
      }
   });
 
-  /************/
+  //选择是否自动推送，若手动推送提示输入品牌授权商家id
   $(".radio").change(function(){
       if($('input:radio[name="pushMethod"]:checked').val()==0){
           $("#merchant-controll").show();
+          if($( "#brandName" ).val()!=''){
+            var brand_name= $( "#brandName" ).val();
+            $("#merchant-list").load("__MODULE__/Brand/listBrandMerchant",{brand_name:brand_name});
+          }
       }
       if($('input:radio[name="pushMethod"]:checked').val()==1){
           $("#merchant-controll").hide();
       }
   });
-  /*************/
+  
 
   //设置时间选择器
   $("#servicetime").datetimepicker({

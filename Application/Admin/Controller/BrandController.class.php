@@ -114,6 +114,30 @@ class BrandController extends CommonController {
       $this->display();
   }
 
+  /**
+     * 添加订单时获取品牌授权商户  
+     * @return array
+  */  
+  public function listBrandMerchant(){
+      $brand_name=I('brand_name');
+
+      $initialLogic = new l\InitialLogic();
+      $brandList = $initialLogic->getAllBrands();
+      $merchant['brand_id']=$brandList['Map'][$brand_name];
+
+      $merchantLogic = new l\MerchantLogic();
+      //API 获取商户数据
+      $merchant_data=$merchantLogic->getMerchantList($merchant, null , 0);
+
+      $merchant_list=$merchant_data['datas'];
+
+
+      //addErrorLog('appliance','loginc','current',$current);
+      $this->assign('brandName',$brand_name);
+      $this->assign('merchant_list', $merchant_list);
+      $this->display();
+  }
+
 
   public function del() {
     $id=I('brand_id');
