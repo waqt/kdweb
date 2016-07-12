@@ -120,6 +120,13 @@
 	//订单详情接口
 	const ADD_ORDER_URL   =  'web-orders/insert-order';
 
+	//管理员获取退单列表接口
+	const ADMIN_GET_CHARGEBACK_URL  =  'web-orders/admin-back-order-lists';
+
+	//退单详情接口
+	const GET_ORDER_BACK_DETAIL  =  'web-orders/admin-back-order-detail';
+
+
 
 	/*
 	* 销售商管理

@@ -14,9 +14,9 @@ use Admin\Logic as l;
 class OrderController extends CommonController {
 
   /*
-  *用户列表
+  *订单列表
   */
-  public function index(){
+  public function lists(){
       /********
       $order_type  = I('order_type');         //订单业务类型
       $order_state = I('order_state');        //订单状态
@@ -122,7 +122,7 @@ class OrderController extends CommonController {
          $break_pics= null;
          $invoice_pic = null;
          if($break_pic != '' && $break_pic !=null){
-            $break_photo_name= "order/pic/breakphoto/".uniqid().str_replace(' ','',$break_pic['name']);
+            $break_photo_name= "order/pic/breakphoto/".uniqid().strrchr($break_pic['name'],46);
             $filepath=UploadBeforeOss( $break_pic);
             $break_pics=C('OSS_FILE_PREFIX').'/'.$break_photo_name;
             if(!ImgOssUpload($break_photo_name,$filepath)){
@@ -133,7 +133,7 @@ class OrderController extends CommonController {
             } 
          }
          if($bill_pic != '' && $bill_pic !=null){
-            $bill_photo_name = "order/pic/billphoto/".uniqid().str_replace(' ','',$bill_pic['name']);
+            $bill_photo_name = "order/pic/billphoto/".uniqid().strrchr($bill_pic['name'],46);
             $filepath=UploadBeforeOss($bill_pic);
             $invoice_pic=C('OSS_FILE_PREFIX').'/'.$bill_photo_name;
             if(!ImgOssUpload($bill_photo_name,$filepath)){
@@ -172,6 +172,66 @@ class OrderController extends CommonController {
          $data['message'] = $result['message'];
          addErrorLog("order","add","result",$data);
          $this->ajaxReturn($data,'JSON');
+  }
+
+
+  /*
+  *退单列表
+  */
+  public function chargeback(){
+      /********
+      $order_type  = I('order_type');         //订单业务类型
+      $order_state = I('order_state');        //订单状态
+      $appliance   = I('appliance');          //订单品类
+      $pay_state   = I('pay_state');          //订单支付状态
+      $brand       = I('brand');              //电器品牌
+      $city        = I('city');               //订单所在区域
+      $order_code  = I('order_code');         //订单编号
+      $user_phone  = I('user_phone');         //用户手机号
+      $mer_phone   = I('mer_phone');          //商户手机号
+      $staff_phone = I('staff_phone');        //师傅手机号
+      $buy_address = I('buy_address');        //购买地址（销售商）
+      ***********/
+      $condition   = I('condition');
+      $page        = I('page');
+      $limit       = 10;
+
+      $condition['page'] =$page;
+      
+
+      $orderLogic = new l\OrderLogic();
+      //API 获取用户数据
+      $backData=$orderLogic->getChargeBack($condition, $page, $limit);
+
+      $backList=$backData['datas'];
+      $list_count=$backData['allcount'];
+      $current=$backData['current'];               //当前页
+      $pages=ceil($list_count/$limit); 
+      
+      
+      $this->assign('condition', $condition);
+      $this->assign('backList', $backList);
+      $this->assign('pages',$pages);
+      $this->assign('current', $current);
+      $this->assign('list_count',$list_count);
+      $this->display();
+  }
+
+  /*
+  *订单详情
+  */
+  public function backdetail() {
+    $backID=I('back_id');
+    $condition   = I('condition');
+
+    $orderLogic = new l\OrderLogic();
+    $orderDetail=$orderLogic->getOrderBackDetail($backID);
+    //addErrorLog('customer','detail','customer',$customerID);
+
+    $this->assign('conditon',$condition);
+    $this->assign('orderDetail',$orderDetail);
+
+    $this->display();
   }
 
 

@@ -1,0 +1,56 @@
+<div class="span9">
+    <div class="row-fluid">
+		
+		<!-- 退单详情 -->		  
+		<div class="row-fluid">
+			<div class="page-header-detail">
+				<h2>退单详情 </h2>
+			</div>
+			</br>
+			<div class="content-panel pn">
+				<div class="goleft ml">
+					<div class="order-detail-list">
+						<h4>
+							订单类型：{$orderDetail.back_type}
+						</h4>
+						<h4>
+							订单总价：{$orderDetail.total_price}
+						</h4>
+					</div>
+					</br>
+					<div class="order-detail-list">
+						<h4>
+							<i class="fa fa-phone"></i> 用户电话：{$orderDetail.mobile}
+						</h4>
+						<h4>
+							<i class="fa fa-home"></i> 用户地址：{$orderDetail.address}
+						</h4>
+					</div>
+					</br>
+					<h4>退单原因：{$orderDetail.back_reason}</h4></br>
+					<h4>申请退款金额：{$orderDetail.back_price}</h4></br>
+					<h4>故障原因：{$orderDetail.back_reason}</h4></br>
+					<h4>服务总结：{$orderDetail.comment}</h4></br>
+					<div class="order-detail-list">
+				 		<h4>服务商家：{$orderDetail.mer_name}</h4>
+				 		<h4>服务师傅：{$orderDetail.staff_name}</h4>		
+				  		<h4>商家电话：{$orderDetail.mer_phone}</h4>
+				 	</div>
+				 	</br>
+				 	<div class="order-detail-list">
+				 		<h4>商家是否同意退款：{$orderDetail.back_mer_state}</h4>
+				 		<h4>商家拒绝理由：{$orderDetail.refund_reason}</h4>		
+				 	</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</div>
+<script src="__ASSETS__/js/jquery.fancybox.js"></script>
+<script type="text/javascript">
+
+	function viewMerchant(mer_id){
+      $("#wrapper").load("__MODULE__/Merchant/detail",{merchant_id: mer_id});
+    } 
+</script>

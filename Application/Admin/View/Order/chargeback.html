@@ -1,0 +1,105 @@
+<link rel="stylesheet" href="__ASSETS__/css/tcdPageCode.css"/>
+<div class="span9">
+    <div class="row-fluid">
+        <div class="page-header">
+              <h3>
+                订单管理 <small>退单列表</small>
+              </h3>
+        </div>
+        <div class="inner-showback">
+            <!-- Split button -->             
+        </div><!-- /showback -->
+          <table id="Table-Result" class="table table-strtable table-striped table-bordered table-condensed">
+            <thead>
+              <tr>
+                <th>序号</th>
+                <th>订单编号</th>
+                <th>订单日期</th>
+                <th>订单类型</th>
+                <th>师傅姓名</th>
+                <th>商户名称</th>
+                <th>商户电话</th>
+                <th>订单总价</th>
+                <th>退款金额</th>
+                <th>支付方式</th>
+                <th>商户意见</th>
+                <th><i class=" fa fa-edit"></i>操作</th>
+              </tr>
+            </thead>
+            <tbody>
+                <volist name='backList' id='ol' key='kc' >
+                  <tr class="list-users">
+                    <td>{$kc}</td>
+                    <td>{$ol.order_code}</td>
+                    <td>{$ol.order_type}</td>
+                    <td>{$ol.order_time}</td>
+                    <td>{$ol.staff_name}</td>
+                    <td>{$ol.mer_name}</td>
+                    <td>{$ol.mer_phone}</td>
+                    <td>{$ol.total_price}</td>
+                    <td>{$ol.back_price}</td>
+                    <td>{$ol.pay_type}</td>
+                    <if condition="($ol.back_mer_state eq '同意退单')">
+                      <td><span class="label label-info label-mini">{$ol.back_mer_state}</span></td>
+                    <else />
+                      <td><span class="label label-primary label-mini">{$ol.back_mer_state}</span></td>
+                    </if>
+                    <td>
+                      <div class="btn-group">
+                        <a class="btn btn-mini dropdown-toggle"
+                          data-toggle="dropdown" href="#">查看详情 <span
+                          class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                          <li><a class="view-detail" href=""
+                            onclick="viweDetail({$ol.back_id}); return false"><i
+                              class="fa fa-eye"></i> 查看退单</a></li>
+                          <li><a href=""
+                            onclick="viewOrderDetail({$ol.order_id});return false"><i
+                              class="fa fa-pencil"></i> 查看原订单</a></li>
+                        </ul>
+                      </div>
+                    </td>
+                  </tr>
+                </volist>
+              </tbody>
+            </table>
+            <div id="Pagination" class="tcdPageCode">
+                            
+            </div> 
+          </div>
+        </div>
+    </div>
+<script src="__ASSETS__/js/jquery.page.js"></script>
+<script type="text/javascript">
+    function viweDetail(back_id){
+      $("#wrapper").load("__MODULE__/order/backdetail",{back_id: back_id});
+    }
+
+    function viewOrderDetail(order_id){
+      $("#wrapper").load("__MODULE__/order/detail",{order_id: order_id});
+    }
+
+
+ 
+      $(function(){
+    //这是一个非常简单的demo实例，让列表元素分页显示
+    //回调函数的作用是显示对应分页的列表项内容
+    //回调函数在用户每次点击分页链接的时候执行
+    //参数page_index{int整型}表示当前的索引页
+        var totalpage = {$pages};
+        var current ={$current};
+        $(".tcdPageCode").createPage({
+            pageCount:totalpage,
+            current: current,
+            backFn:function(p){
+                //console.log(p);
+                loadpage(p);
+            }
+        });
+
+    });
+
+  function loadpage(p){
+    $("#wrapper").load("__MODULE__/Order/chargeback", {page:p});
+  }
+</script>

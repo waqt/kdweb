@@ -29,7 +29,7 @@
                 <th>订单类型</th>
                 <th>用户电话</th>
                 <th>商户名称</th>
-                <th>用工姓名</th>
+                <th>师傅姓名</th>
                 <th>电器品类</th>
                 <th>支付状态</th>
                 <th>订单状态</th>
@@ -105,6 +105,6 @@
     });
 
   function loadpage(p){
-    $("#wrapper").load("__MODULE__/Order/index", {page:p});
+    $("#wrapper").load("__MODULE__/Order/lists", {page:p});
   }
 </script>

@@ -110,7 +110,7 @@ class InitialLogic extends BaseLogic {
      */
     public function getLeftMenus() {
     //电器品类初始化
-        //S('leftmenus',null);
+        S('leftmenus',null);
         if(! S('leftmenus')){
             $menu_logic = new l\MenuLogic();
             $left_menu = $menu_logic->getAccessibleLeftMenu();

@@ -167,7 +167,7 @@
   var lock = false; 	
 
   function cancel(){
-			$("#wrapper").load("__MODULE__/Order/index");
+			$("#wrapper").load("__MODULE__/Order/lists");
 	 }
 
 	$(document).ready(function(){
@@ -299,7 +299,7 @@
           alert(data['message']);
           lock =false;
           $("#button-submit").attr("disabled",false);  
-          $("#wrapper").load("__MODULE__/Order");
+          $("#wrapper").load("__MODULE__/Order/lists");
         }
       },      //提交后的回调函数  
     /*****************/
