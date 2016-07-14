@@ -139,4 +139,10 @@
 
 	//添加销售商
 	const ADD_SALES_URL  =  'web-saleors/add-saleor';
+
+	//删除销售商
+	const DEL_SALES_URL  =  'web-saleors/delete-saleor';
+
+	//编辑销售商
+	const EDIT_SALES_URL  =  'web-saleors/updated-saleor';
 ?>

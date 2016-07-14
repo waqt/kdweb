@@ -65,7 +65,7 @@ class CustomRbac extends Rbac {
         $table['role']." as role,".
         $table['access']." as access ,".
         $table['node']." as node ".
-        "where {$roleId}=role.id and access.role_id=role.id and role.status=1 and access.node_id=node.id and node.status=1 ";
+        "where role.id={$roleId} and access.role_id=role.id and role.status=1 and access.node_id=node.id and node.status=1 ";
         $node_list =   $dao->query($sql);
         $access =  array();
         foreach ($node_list as $key => $value) {

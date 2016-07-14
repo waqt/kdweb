@@ -29,7 +29,7 @@ class SalesController extends CommonController {
       $current=$salesData['current'];               //当前页
       $pages=ceil($list_count/$limit); 
 
-      addErrorLog('sales','lists','sales_list',$sales_list);
+      //addErrorLog('sales','lists','sales_list',$sales_list);
 
       $data['error_code']=$salesLogic->getErrorCode();
       $data['error_message']=$salesLogic->getErrorMessage();
@@ -46,7 +46,7 @@ class SalesController extends CommonController {
   }  
 
   public function add(){
-        $sales['account']=I('account');
+        $sales['email']=I('email');
         $sales['password'] = I('password');
         $sales['phone'] = I('phone');
         $sales['real_name'] = I('real_name');
@@ -74,7 +74,17 @@ class SalesController extends CommonController {
           $result=$salesLogic->addSales($sales,$logoUrl);
           $data['status'] = $result['status'];
           $data['message'] = $result['message'];
+          S('sales',NULL);
           $this->ajaxReturn($data,'JSON');
       }
+
+    public function del() {
+      $id=I('saleor_id');
+      $saleslogic = new l\SalesLogic();
+      $result=$saleslogic->delSaleor($id);
+      S('sales',NULL);
+      $data['message']=$result['message'];
+      $this->ajaxReturn($data,'JSON');
+  }
   
 }

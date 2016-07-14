@@ -160,6 +160,7 @@
 				        </div>
 				      </div>
 			     </div>
+<script src="__ASSETS__/js/sweetalert/js/sweet-alert.min.js"></script>
 <script type="text/javascript" language="javascript">
   var childMap={$applianceChildMap};
   var brandNameList ={$brandNameList};
@@ -292,11 +293,13 @@
       /*************/  
       success: function(data){
         if(data['status'] != 200){
-          alert("status:"+data['status']+"message:"+data['message']);
+          sweetAlert("添加失败", data['message'], "error");
+          //alert("status:"+data['status']+"message:"+data['message']);
           lock =false;
           $("#button-submit").attr("disabled",false); 
         }else if(data['status'] == 200){
-          alert(data['message']);
+          sweetAlert("Good job!", data['message'], "success");
+          //alert(data['message']);
           lock =false;
           $("#button-submit").attr("disabled",false);  
           $("#wrapper").load("__MODULE__/Order/lists");

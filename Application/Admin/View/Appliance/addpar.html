@@ -49,6 +49,7 @@
 				 </div>
 				</div>
 			</div>
+<script src="__ASSETS__/js/sweetalert/js/sweet-alert.min.js"></script>
 <script type="text/javascript" language="javascript">	
     var lock = false; 
 
@@ -73,11 +74,11 @@
    		/*************/  
    		success: function(data){
         		if(data['status'] != 200){
-          		alert(data['message']);
+          		sweetAlert("添加失败", data['message'], "error");
               lock =false;
               $("#button-submit").attr("disabled",false); 
         		}else if(data['status'] == 200){
-          		alert(data['message']);
+          		sweetAlert("Good job!", data['message'], "success");
               lock =false;
               $("#button-submit").attr("disabled",false);  
           		$("#wrapper").load("__MODULE__/Appliance");

@@ -35,12 +35,15 @@ class MerchantLogic extends BaseLogic {
         $data['limit']           =$limit;                           //分页单页显示行数
         $data['token']           =session('user_info.token');
 
+        \Think\Log::record('ADMIN_AUTH_KEY IS '.$_SESSION[C('ADMIN_AUTH_KEY')].'in getMerchantList');
+
         // API URL 管理员获取列表URL 与 商户获取列表URL
         if(!empty($_SESSION[C('ADMIN_AUTH_KEY')])){
             $req_url=BASE_URL.ADMIN_GET_MERCHANT_URL;
         }else{
             $req_url=BASE_URL.MER_GET_MERCHANT_URL;
         }
+         \Think\Log::record('req_url IS '.$req_url.'in getMerchantList');
         try{
             $result=request_post($req_url,$data);
             $result=json_decode($result,true);

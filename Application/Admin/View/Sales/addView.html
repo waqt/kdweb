@@ -8,7 +8,7 @@
                           <div class="form-group ">
                               <label class="col-sm-2 col-sm-2 control-label ">用户名 <span class="text-red">*</span></label>
                               <div class="col-sm-10 add-form-half ">
-                                  <input type="text" AUTOCOMPLETE="off" name="account" id="account" class="form-control ">
+                                  <input type="text" AUTOCOMPLETE="off" name="email" id="email" placeholder="xxx@example.com" class="form-control ">
                               </div>
                           </div>
                           <div class="form-group ">
@@ -69,6 +69,7 @@
 				 </div>
 				</div>
 			</div>
+<script src="__ASSETS__/js/sweetalert/js/sweet-alert.min.js"></script>
 <script type="text/javascript" language="javascript">
     var lock = false; 
 
@@ -85,7 +86,7 @@
 			$("#wrapper").load("__MODULE__/Sales/lists");
 	     }
 
-	$(document).ready(function(){
+	 $(document).ready(function(){
     	$('#button-submit').click(function(){
            $('#myForm').ajaxSubmit(options);
             return false;
@@ -100,11 +101,11 @@
    		/*************/  
    		success: function(data){
 				if(data['status']!=200){
-          alert(data['message']);
+          sweetAlert("添加失败", data['message'], "error");
           lock =false;
           $("#button-submit").attr("disabled",false); 
 				}else if(data['status']==200){
-					alert(data['message']);	
+					sweetAlert("Good job!", data['message'], "success");
           lock =false;
           $("#button-submit").attr("disabled",false); 
 					$("#wrapper").load("__MODULE__/Sales/lists");
@@ -121,29 +122,30 @@
     
     function validate() { //
     	var myreg = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/; 
-		  var account = $("#account").val();
+      var accountreg =  /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+		  var account = $("#email").val();
      	var password = $("#password").val();
      	var repassword = $("#repassword").val();
      	var saleor_name = $("#saleor_name").val();
      	var phone = $("#phone").val();
      	var address = $("#address").val();
      	if(account == ""){
-     			$("#account").tips({
+     			$("#email").tips({
 					side : 2,
 					msg : '用户名不得为空',
 					bg : '#AE81FF',
 					time : 3
 				});
 				return false;
-     	}else if(!myreg.test(account)){
-     		    $("#account").tips({
-					side : 2,
-					msg : '请使用手机号作为用户名',
-					bg : '#AE81FF',
-					time : 3
-				});
-				return false;
-     	}
+     	}else if(!accountreg.test(account)){
+          $("#email").tips({
+          side : 2,
+          msg :'邮箱格式不正确',
+          bg : '#AE81FF',
+          time : 3
+        });
+        return false;
+      }
      	else if(password.length <6){
      			$("#password").tips({
 					side : 2,

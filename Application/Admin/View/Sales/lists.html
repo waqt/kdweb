@@ -12,6 +12,7 @@
               <tr>
                 <th>序号</th>
                 <th>销售商名称</th>
+                <th>销售商账号</th>
                 <th>负责人姓名</th>
                 <th>销售商电话</th>
                 <th>地址</th>
@@ -23,6 +24,7 @@
                   <tr class="list-users">
                     <td>{$kc}</td>
                     <td>{$sales.saleor_name}</td>
+                    <td>{$sales.email}</td>
                     <td>{$sales.real_name}</td>
                     <td>{$sales.phone}</td>
                     <td>{$sales.address}</td>
@@ -38,7 +40,7 @@
                           <li><a href=""
                             onclick="edit(${p.productOrderKey },${p.isEnable});return false"><i
                               class="fa fa-pencil"></i> 编辑</a></li>
-                          <li><a href="" onclick="del(${p.productOrderKey });return false"><i class="fa fa-trash-o"></i> 删除</a></li>
+                          <li><a href="" onclick="del({$sales.saleor_id});return false"><i class="fa fa-trash-o"></i> 删除</a></li>
                         </ul>
                       </div>
                     </td>
@@ -53,14 +55,32 @@
         </div>
     </div>
 <script src="__ASSETS__/js/jquery.page.js"></script>
+<script src="__ASSETS__/js/sweetalert/js/sweet-alert.min.js"></script>
 <script type="text/javascript">
     $("#add-sales").click(function(){
       $("#wrapper").load("__MODULE__/Sales/addView");
     });
 
 
-    function viweDetail(order_id){
-      $("#wrapper").load("__MODULE__/order/detail",{order_id: order_id});
+    function viweDetail(saleor_id){
+      $("#wrapper").load("__MODULE__/Sales/detail",{saleor_id: saleor_id});
+    }
+
+    function del(saleor_id){
+        if (!confirm("确认要删除？")) {
+            window.event.returnValue = false;
+        }else{
+          console.log(saleor_id);
+          $.post(
+            '__MODULE__/Sales/del',
+          {
+            "saleor_id":saleor_id,
+          },
+          function(data){
+            alert(data['message']);
+             $("#wrapper").load("__MODULE__/Sales/lists");
+          });
+        }
     }
 
 

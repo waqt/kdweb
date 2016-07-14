@@ -164,7 +164,7 @@ class Rbac {
                 if(C('USER_AUTH_TYPE')==2) {
                     //加强验证和即时验证模式 更加安全 后台权限修改可以即时生效
                     //通过数据库进行访问检查
-                    $accessList = self::getAccessList($_SESSION[C('USER_AUTH_KEY')]);
+                    $accessList = CustomRbac::getCustomAccessList($_SESSION[C('USER_AUTH_KEY')],$_SESSION['user_info']['role']);
                 }else {
                     // 如果是管理员或者当前操作已经认证过，无需再次认证
                     if( $_SESSION[$accessGuid]) {

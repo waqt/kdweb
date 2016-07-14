@@ -90,16 +90,16 @@ class LoginLogic extends BaseLogic {
             {
                 // 登录状态session
                 session(array('name'=>C('USER_AUTH_KEY'),'expire'=>3600));
-                session(C('USER_AUTH_KEY'),$authInfo['role']);
+                session(C('USER_AUTH_KEY'),$authInfo['admin_id']);
                 // 用户信息session
                 session('user_info',$authInfo);
                 if($authInfo['role']==3000) {
                     //记录超级管理员角色
-                    session('administrator', true);
+                    session(C('ADMIN_AUTH_KEY'), true);
                 }else{
-                    session('administrator', false);
+                    session(C('ADMIN_AUTH_KEY'), false);
                 }
-                CUSTOMRABC::saveCustomAccessList($authInfo['id'],$authInfo['role']);
+                CUSTOMRABC::saveCustomAccessList($authInfo['admin_id'],$authInfo['role']);
                 //$data['status'] = $verifyResult['status'];
                 //$data['userid'] = $authInfo['id'];
                 //M('Log')->add($data);

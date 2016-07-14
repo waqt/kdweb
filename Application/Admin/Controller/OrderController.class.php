@@ -46,7 +46,6 @@ class OrderController extends CommonController {
       $current=$orderData['current'];               //当前页
       $pages=ceil($list_count/$limit); 
       
-      
       $this->assign('condition', $condition);
       $this->assign('ordetrList', $ordetrList);
       $this->assign('pages',$pages);
@@ -161,16 +160,16 @@ class OrderController extends CommonController {
          $order['invoice_pic'] = $invoice_pic;
          $order['break_pics'] = $break_pics;
 
-         //$data = json_encode($order);
+         $logdata = json_encode($order);
 
-         //addErrorLog("Order","add","address",$data);
+         //addErrorLog("Order","add","address",$logdata);
 
          $orderLogic = new l\OrderLogic();
          $result=$orderLogic->addOrder($order);
          $data['success'] = true;
          $data['status']= $result['status'];
          $data['message'] = $result['message'];
-         addErrorLog("order","add","result",$data);
+         //addErrorLog("order","add","result",$data);
          $this->ajaxReturn($data,'JSON');
   }
 

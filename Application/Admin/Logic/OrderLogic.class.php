@@ -35,17 +35,7 @@ class OrderLogic extends BaseLogic {
         if($page=='' || $page==null){
             $page=1;
         }
-        $data['order_type']  =$condition['order_type'];                   
-        $data['order_state'] =$condition['order_state'];                 
-        $data['appliance']   =$condition['appliance'];                   
-        $data['pay_state']   =$condition['pay_state'];                       
-        $data['brand']       =$condition['brand'];                      
-        $data['city']        =$condition['city'];                      
-        $data['order_code']  =$condition['order_code'];                   
-        $data['user_phone']  =$condition['user_phone'];                 
-        $data['mer_phone']   =$condition['mer_phone'];                     
-        $data['staff_phone'] =$condition['staff_phone'];                   
-        $data['buy_address'] =$condition['buy_address'];                     
+        $data  =$condition;                                      
         $data['page']        =$page;                            //分页页码
         $data['limit']       =$limit;                           //分页单页显示行数
         $data['token']       =session('user_info.token');
@@ -131,8 +121,8 @@ class OrderLogic extends BaseLogic {
         return $result;
     }
 
-       /**
-     * 获取订单列表
+    /**
+     * 获取退单列表
      * @param String $order_code  订单号码
      * @param String $mer_phone   商户电话  
      * @param String $user_phone  客户电话
@@ -144,9 +134,7 @@ class OrderLogic extends BaseLogic {
         if($page=='' || $page==null){
             $page=1;
         }
-        $data['order_code']  =$condition['order_code'];                               
-        $data['mer_phone']   =$condition['mer_phone'];                     
-        $data['user_phone'] =$condition['user_phone'];                                
+        $data、  =$condition;                                                             
         $data['page']        =$page;                            //分页页码
         $data['limit']       =$limit;                           //分页单页显示行数
         $data['token']       =session('user_info.token');
