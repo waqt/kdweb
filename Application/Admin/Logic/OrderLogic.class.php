@@ -45,11 +45,11 @@ class OrderLogic extends BaseLogic {
         {
             $req_url=BASE_URL.ADMIN_GET_ORDER_URL;
         }
-        else if($_SESSION[C('USER_AUTH_KEY')]=='2001')
+        else if(session('user_info.role')=='2001')
         {
             $req_url=BASE_URL.MER_GET_ORDER_URL;
         }
-        else if($_SESSION[C('USER_AUTH_KEY')]=='3002')
+        else if(session('user_info.role')=='3002')
         {
             $req_url=BASE_URL.SALE_GET_ORDER_URL;
         }

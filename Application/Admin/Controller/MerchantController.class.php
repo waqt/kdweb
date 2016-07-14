@@ -33,7 +33,7 @@ class MerchantController extends CommonController {
       $merchantLogic = new l\MerchantLogic();
       //API 获取商户数据
       $merchant_data=$merchantLogic->getMerchantList($merchant, $page, $limit);
-      if(!empty($_SESSION[C('ADMIN_AUTH_KEY')])){
+      
         $merchant_list=$merchant_data['datas'];
         $list_count=$merchant_data['allcount'];
         $current=$merchant_data['current'];               //当前页
@@ -42,9 +42,7 @@ class MerchantController extends CommonController {
         $this->assign('pages',$pages);
         $this->assign('current', $current);
         $this->assign('list_count',$list_count);
-      }else{
-        $merchant_list=$merchant_data;
-      } 
+      
       //addErrorLog("Merchant","list","merchantList",$merchant_list);
       $data['error_code']=$merchantLogic->getErrorCode();
       $data['error_message']=$merchantLogic->getErrorMessage();
