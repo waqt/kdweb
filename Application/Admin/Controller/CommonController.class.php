@@ -65,7 +65,8 @@ class CommonController extends Controller {
 			if (C('RBAC_ERROR_PAGE')) {
 				// 定义权限错误页面
 				$this->assign('jumpUrl', __MODULE__ . C('RBAC_ERROR_PAGE'));
-				$this->error('您没有权限操作该项');
+                $data['auth']=false;
+                $this->ajaxReturn($data,'JSON');
 				//model('Log')->addLog(2);
 				// redirect(C('RBAC_ERROR_PAGE'));
 			} else {

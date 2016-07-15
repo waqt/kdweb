@@ -55,6 +55,7 @@
                     <td>{$al.fathername}</td>
                     <td>
                       <button class="btn btn-warning btn-xs" onclick="delAppliance({$al.appliance_id}); return false"><i class="fa fa-trash-o"></i> 删除</button>
+                      <button class="btn btn-info btn-xs" onclick="editAppliance({$al.appliance_id}); return false"><i class="fa fa-pencil"></i> 编辑</button>
                     </td>
                   </tr>
                 </volist>
@@ -92,6 +93,10 @@
              $("#wrapper").load("__MODULE__/Appliance");
           });
         }
+    }
+
+    function editAppliance(appliance_id){
+        $("#wrapper").load("__MODULE__/Appliance/edit",{appliance_id:appliance_id});
     }
 
       $(function(){
