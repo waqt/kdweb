@@ -160,7 +160,7 @@ class OrderController extends CommonController {
          $order['invoice_pic'] = $invoice_pic;
          $order['break_pics'] = $break_pics;
 
-         $logdata = json_encode($order);
+         //$logdata = json_encode($order);
 
          //addErrorLog("Order","add","address",$logdata);
 

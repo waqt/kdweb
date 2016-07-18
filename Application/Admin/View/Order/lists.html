@@ -76,7 +76,12 @@
 <script src="__ASSETS__/js/jquery.page.js"></script>
 <script type="text/javascript">
     $("#add-order").click(function(){
-      $("#wrapper").load("__MODULE__/Order/addView");
+      $("#wrapper").load("__MODULE__/Order/addView", function(data){
+         if(data['auth']==false){
+            alert('您没有权限进行该操作');
+            return false;
+         }
+      });
     });
 
 

@@ -292,9 +292,9 @@
       //success: showResponse,
       /*************/  
       success: function(data){
+        console.log(data['message']);
         if(data['status'] != 200){
           sweetAlert("添加失败", data['message'], "error");
-          //alert("status:"+data['status']+"message:"+data['message']);
           lock =false;
           $("#button-submit").attr("disabled",false); 
         }else if(data['status'] == 200){

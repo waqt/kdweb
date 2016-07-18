@@ -35,13 +35,14 @@ class MenuLogic extends BaseLogic {
      * 获取左侧一级菜单
      * @return array
      */
-    public function getAccessibleLeftMenu() {
+    public function getAccessibleLeftMenu($role) {
         $menu_model = model('Menu');
         $db_prefix = C('DB_PREFIX');
-        if (session(C('ADMIN_AUTH_KEY'))) {
+        if (session(C('ADMIN_AUTH_KEY'))|| $role==3000) {
             $left_menu = $menu_model->where(array('pid' => 0, 'status' => 1))->order('sort asc, id asc')->select();
         } else {
-            $role_id = session('user_info.role');
+            //$role_id = session('user_info.role');
+            $role_id = $role;
             $sql = "SELECT * FROM %s AS access, %s AS node where node.pid = 0 AND node.id = access.node_id AND access.role_id = %d";
             $left_menu = $menu_model->query(sprintf($sql, $db_prefix . 'access', $db_prefix . 'node', $role_id));
         }
@@ -52,14 +53,15 @@ class MenuLogic extends BaseLogic {
      * 获取左导航可访问子菜单
      * @return array
      */
-    public function getAccessibleLeftChildMenu($pid) {
+    public function getAccessibleLeftChildMenu($pid,$role) {
         $menu_model = model('Menu');
         $db_prefix = C('DB_PREFIX');
         $post_type = array();
-        if (session(C('ADMIN_AUTH_KEY'))) {
+        if (session(C('ADMIN_AUTH_KEY'))|| $role==3000) {
             $menulist = $menu_model->where(array('pid' => $pid,'node_type' => 2, 'status' => 1))->order('sort asc, id asc')->select();
         } else {
-            $role_id = session('user_info.role');
+            //$role_id = session('user_info.role');
+            $role_id = $role;
             $menulist = $menu_model->table('__ACCESS__ as access, __NODE__ as node')
             ->where(array(
                 'node.pid' => $pid,

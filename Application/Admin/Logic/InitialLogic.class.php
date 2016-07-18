@@ -110,15 +110,30 @@ class InitialLogic extends BaseLogic {
      */
     public function getLeftMenus() {
     //电器品类初始化
+        $roleID=session('user_info.role');
         S('leftmenus',null);
         if(! S('leftmenus')){
             $menu_logic = new l\MenuLogic();
+            $roleList= M("role")->field('id')->select();
+            $left_menu=null;
+            foreach($roleList as $role){
+                $role_id=$role['id'];
+                $left_menu[$role_id]=$menu_logic->getAccessibleLeftMenu($role_id);
+                foreach($left_menu[$role_id] as &$lm){
+                    $lm['child_menu']=$menu_logic->getAccessibleLeftChildMenu($lm['id'],$role_id);
+                }
+            }
+            /**********
             $left_menu = $menu_logic->getAccessibleLeftMenu();
             foreach($left_menu as &$lm){
                 $lm['child_menu']=$menu_logic->getAccessibleLeftChildMenu($lm['id']);
             }
             S('leftmenus',$left_menu); 
+            *************/
+            S('leftmenus',$left_menu); 
         }
-        return S('leftmenus');
+        $menu=S('leftmenus');
+        $roleMenu=$menu[$roleID];
+        return $roleMenu;
     }     
 }
