@@ -292,7 +292,6 @@
       //success: showResponse,
       /*************/  
       success: function(data){
-        console.log(data['message']);
         if(data['status'] != 200){
           sweetAlert("添加失败", data['message'], "error");
           lock =false;

@@ -20,6 +20,7 @@ class InitialLogic extends BaseLogic {
      * @return array
      */
     public function getAllBrands() {
+        S('brands',null);
         if(! S('brands')){
             $brandLogic = new l\BrandLogic();
             $brandList=$brandLogic->getAllBrandList();
@@ -41,6 +42,7 @@ class InitialLogic extends BaseLogic {
      */
     public function getAllAppliances() {
     //电器品类初始化
+        S('appliances',null);
         if(! S('appliances')){
             $applianceLogic = new l\ApplianceLogic();
             $applianceFatherList=$applianceLogic->getApplianceFatherList();
@@ -64,6 +66,7 @@ class InitialLogic extends BaseLogic {
      */
     public function getAllSales() {
     //电器品类初始化
+        S('sales',null);
         if(! S('sales')){
             $salesLogic = new l\SalesLogic();
             $salesData=$salesLogic->getSalesList($condition, null , 0);
@@ -88,7 +91,7 @@ class InitialLogic extends BaseLogic {
      */
     public function getAllTroubles() {
     //电器品类初始化
-        //S('troubles',null);
+        S('troubles',null);
         if(! S('troubles')){
             $applianceTroubleLogic = new l\ApplianceTroubleLogic();
             $troubleData=$applianceTroubleLogic->getTroubleList($condition, $page, $limit);
@@ -104,14 +107,14 @@ class InitialLogic extends BaseLogic {
         return S('troubles');
     }
 
-        /**
-     * 从缓存中读取故障数据   
+    /**
+     * 从缓存中读取菜单数据   
      * @return array
      */
     public function getLeftMenus() {
     //电器品类初始化
         $roleID=session('user_info.role');
-        //S('leftmenus',null);
+        S('leftmenus',null);
         if(! S('leftmenus')){
             $menu_logic = new l\MenuLogic();
             $roleList= M("role")->field('id')->select();

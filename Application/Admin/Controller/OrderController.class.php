@@ -169,7 +169,6 @@ class OrderController extends CommonController {
          $data['success'] = true;
          $data['status']= $result['status'];
          $data['message'] = $result['message'];
-         //addErrorLog("order","add","result",$data);
          $this->ajaxReturn($data,'JSON');
   }
 

@@ -1,5 +1,5 @@
 <?php
-include_once 'testConstUrl.php';
+include_once 'proConstUrl.php';
 return array(
 	//'配置项'=>'配置值'
 
