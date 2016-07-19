@@ -98,13 +98,6 @@ class ApplianceLogic extends BaseLogic {
         $this->errorCode = $result['status'];
         $this->errorMessage = $result['message'];
         $list = $result['data'];
-        /****************
-        $data['module'] = MODULE_NAME;
-        $data['action'] = ACTION_NAME;
-        $data['dataname'] = "father_list";
-        $data['data'] = $father_list;
-        addErrorLog($data['action'],$data['module'],$data['dataname'],$data['data']);
-        ***************/
         return $list;
     } 
 
@@ -150,7 +143,7 @@ class ApplianceLogic extends BaseLogic {
         $data['middle_logo'] =$input_name3; 
         $data['token']       =session('user_info.token');
         $req_url=BASE_URL.ADD_APPLIANCE_URL;
-
+        //\Think\Log::record($data['name']);
         try{
             $result=request_post($req_url,$data);
             $result=json_decode($result,true);
