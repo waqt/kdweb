@@ -65,19 +65,17 @@ class CommonController extends Controller {
 			if (C('RBAC_ERROR_PAGE')) {
 				// 定义权限错误页面
 				$this->assign('jumpUrl', __MODULE__ . C('RBAC_ERROR_PAGE'));
-                $data['auth']=false;
-                $this->error($data,ajax);
+                //$data['auth']=false;
+                //$this->error($data,ajax);
                 //$this->ajaxReturn($data,'JSON');
 				//model('Log')->addLog(2);
-				// redirect(C('RBAC_ERROR_PAGE'));
+				redirect(C('RBAC_ERROR_PAGE'));
 			} else {
 				if (C('GUEST_AUTH_ON')) {
 					$this->assign('jumpUrl', PHP_FILE . C('USER_AUTH_GATEWAY'));
 				}
 				// 提示错误信息
-                $data['auth']=false;
-                $this->error($data,ajax);
-				//$this->error(L('_VALID_ACCESS_'));
+				$this->error(L('_VALID_ACCESS_'));
 			}
 		}
 		// 记录操作日志
