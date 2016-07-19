@@ -60,7 +60,7 @@ class InitialLogic extends BaseLogic {
         return S('appliances');
     }
 
-        /**
+    /**
      * 从缓存中读取品类数据   
      * @return array
      */
@@ -89,6 +89,7 @@ class InitialLogic extends BaseLogic {
      * 从缓存中读取故障数据   
      * @return array
      */
+
     public function getAllTroubles() {
     //电器品类初始化
         S('troubles',null);
@@ -111,6 +112,7 @@ class InitialLogic extends BaseLogic {
      * 从缓存中读取菜单数据   
      * @return array
      */
+
     public function getLeftMenus() {
     //电器品类初始化
         $roleID=session('user_info.role');
@@ -136,7 +138,7 @@ class InitialLogic extends BaseLogic {
             S('leftmenus',$left_menu); 
         }
         $menu=S('leftmenus');
-        // \Think\Log::record(json_encode($menu));
+         \Think\Log::record(json_encode($menu));
         $roleMenu=$menu[$roleID];
         return $roleMenu;
     }     
