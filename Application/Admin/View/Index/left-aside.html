@@ -43,12 +43,11 @@
             //当前点击的li加上class
             $("#"+id).addClass('active');
         });
-      </script>
-      <!--头像显示判定-->
-       <script type="text/javascript">
-              jQuery(function(){
-                if($("#user_logo").attr("src")==""){
-                 $("#user_logo").attr("src","__ASSETS__/img/ui-logo.jpg")
-                }
-              });
+
+        $(document).ready(function() { 
+           if($("#user_logo").attr("src")==""){
+                $("#user_logo").attr("src","__ASSETS__/img/ui-logo.jpg")
+              }
+        });
+
       </script> 
