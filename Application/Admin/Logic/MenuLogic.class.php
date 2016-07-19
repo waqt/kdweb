@@ -38,7 +38,7 @@ class MenuLogic extends BaseLogic {
     public function getAccessibleLeftMenu($role) {
         $menu_model = model('Menu');
         $db_prefix = C('DB_PREFIX');
-        if (session(C('ADMIN_AUTH_KEY'))|| $role==3000) {
+        if ($role==3000) {
             $left_menu = $menu_model->where(array('pid' => 0, 'status' => 1))->order('sort asc, id asc')->select();
         } else {
             //$role_id = session('user_info.role');
@@ -57,7 +57,7 @@ class MenuLogic extends BaseLogic {
         $menu_model = model('Menu');
         $db_prefix = C('DB_PREFIX');
         $post_type = array();
-        if (session(C('ADMIN_AUTH_KEY'))|| $role==3000) {
+        if ( $role==3000) {
             $menulist = $menu_model->where(array('pid' => $pid,'node_type' => 2, 'status' => 1))->order('sort asc, id asc')->select();
         } else {
             //$role_id = session('user_info.role');
