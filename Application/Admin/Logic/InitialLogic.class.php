@@ -115,7 +115,7 @@ class InitialLogic extends BaseLogic {
 
     public function getLeftMenus() {
         $roleID=session('user_info.role');
-        S('leftmenus',null);
+        //S('leftmenus',null);
         if(! S('leftmenus')){
             $menu_logic = new l\MenuLogic();
             $roleList= M("role")->field('id')->select();
