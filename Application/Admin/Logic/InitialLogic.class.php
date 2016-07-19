@@ -114,7 +114,6 @@ class InitialLogic extends BaseLogic {
      */
 
     public function getLeftMenus() {
-    //电器品类初始化
         $roleID=session('user_info.role');
         //S('leftmenus',null);
         if(! S('leftmenus')){
