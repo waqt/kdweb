@@ -90,7 +90,7 @@
 	  </div>
 
     <!-- js placed at the end of the document so the pages load faster -->
-    <script src="__ASSETS__/js/jquery.js"></script>
+    <script src="__ASSETS__/js/jquery-3.0.0.min.js"></script>
     <script src="__ASSETS__/js/bootstrap.min.js"></script>
 
     <!--BACKSTRETCH-->
@@ -193,8 +193,8 @@
 		}
 	
 		$(document).ready(function() {
-			changeCode();
-			$("#codeImg").bind("click", changeCode);
+			freshVerify();
+			$("#codeImg").bind("click", freshVerify);
 		});
 
 /*************************
@@ -213,7 +213,7 @@
 		//更换验证码
 		function changeCode() {
 			//$("#codeImg").attr("src", "code.do?t=" + genTimestamp());
-			genTimestamp();
+			//genTimestamp();
 			$("#codeImg").attr(
 				{
 					"src": '__CONTROLLER__/verify/' + Math.random(),
@@ -221,6 +221,9 @@
 				});
 			}
 
+		function freshVerify() {
+            document.getElementById('codeImg').src='__CONTROLLER__/verify/' + Math.random();
+        }
 
 		//客户端校验
 		function check() {
