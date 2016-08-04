@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Dashboard">
+    <meta name="keyword" content="快点, 电器维修, 安装, 售后, 清洗保养, Responsive, Fluid, Retina">
+
+
+    <title>快点后台管理平台</title>
+	<link rel="icon" href="__IMG__/kdlogo.jpg" type="image/x-icon"/>
+    <!-- Bootstrap core CSS -->
+    <link href="__ASSETS__/css/bootstrap.css" rel="stylesheet">
+    <!--external css-->
+    <link href="__ASSETS__/font-awesome/css/font-awesome.css" rel="stylesheet" />
+        
+    <!-- Custom styles for this template -->
+    <link href="__ASSETS__/css/style.css" rel="stylesheet">
+    <link href="__ASSETS__/css/style-responsive.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+      <!-- **********************************************************************************************************************************************************
+      MAIN CONTENT
+      *********************************************************************************************************************************************************** -->
+
+	  <div id="login-page">
+	  	<div class="container">
+	  	
+		      <form class="form-login"  autocomplete="off">
+		        <h2 class="form-login-heading">快点后台管理系统</h2>
+		        <div class="login-wrap">
+		            <input type="text" class="form-control" id="loginname" placeholder="手机号或用户名" autofocus autocomplete="off" />
+		            <br>
+		            <input type="password" class="form-control" id="password" placeholder="请输入密码" autocomplete="off"/>
+		            <br>
+					<input type="text" name="code" id="code" class="form-control" placeholder="请输入验证码" style="width:50%; float: left; " autocomplete="off"/>
+					<img  id="codeImg" style="float:right" alt="点击更换"  class="btn btn-sm btn-default" title="点击更换" src="" />
+					<br>
+				</div>
+				<div class="login-wrap">
+		            	<span class="pull-left">
+		            		<input type="checkbox"  id="saveid" checked="true" />
+		            		记住密码
+		           	 	</span>
+		            	<span class="pull-right">
+		                    <a data-toggle="modal" href="login.html#myModal"> 忘记密码?</a>
+		                </span>
+		        </div>
+		        <div class="login-wrap">
+		        	<button type="button" class="btn btn-theme btn-block" id="login-button"  >
+		        		<i class="fa fa-lock"></i> 
+		        		登录
+		        	</button>
+		            <hr>
+		        </div>
+		
+		          <!-- Modal -->
+		          <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal" class="modal fade">
+		              <div class="modal-dialog">
+		                  <div class="modal-content">
+		                      <div class="modal-header">
+		                          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		                          <h4 class="modal-title">忘记密码 ?</h4>
+		                      </div>
+		                      <div class="modal-body">
+		                          <p>输入你的手机号或者邮箱修改密码.</p>
+		                          <input type="text" name="email" placeholder="Email" autocomplete="off" class="form-control placeholder-no-fix">
+		
+		                      </div>
+		                      <div class="modal-footer">
+		                          <button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
+		                          <button class="btn btn-theme" type="button">提交</button>
+		                      </div>
+		                  </div>
+		              </div>
+		          </div>
+		          <!-- modal -->		
+		      </form>	  	
+	  	
+	  	</div>
+	  </div>
+
+    <!-- js placed at the end of the document so the pages load faster -->
+    <script src="__ASSETS__/js/jquery-3.0.0.min.js"></script>
+    <script src="__ASSETS__/js/bootstrap.min.js"></script>
+
+    <!--BACKSTRETCH-->
+    <!-- You can use an image of whatever size. This script will stretch to fit in any screen size.-->
+    <script type="text/javascript" src="__ASSETS__/js/jquery.backstretch.min.js"></script>
+    <script type="text/javascript" src="__JS__/jquery.cookie.js"></script>
+	<script type="text/javascript" src="__JS__/jquery.tips.js"></script>
+    <script>
+        $.backstretch("__ASSETS__/img/login-bg.jpg", {speed: 500});
+    </script>
+    <script type="text/javascript">
+    	//服务器校验
+		function severCheck(){
+				if(check()){
+				/********
+				saveCookie();
+				var userName="ikuaidian";
+				window.location.href="index.php?s=Admin/Index";
+				***********/
+				var loginname = $("#loginname").val();
+				var password = $("#password").val();
+				var verify = $("#code").val();
+				/***********/
+				$.post(
+					'__CONTROLLER__/checkLogin',
+					{
+						"loginname":loginname,
+						"password":password,
+						"verify":verify
+					},
+					function(data){
+						if(data['success']==false){
+							if(data['error_code']==10001){
+								$("#code").tips({
+									side : 1,
+									msg : data['errorMsg'],
+									bg : '#FF5080',
+									time : 15
+								});
+								$("#code").focus();
+							}else{
+								$("#loginname").tips({
+									side : 1,
+									msg : data['errorMsg'],
+									bg : '#FF5080',
+									time : 15
+								});
+								$("#loginname").focus();
+							}
+						}else if(data['success']==true){
+							saveCookie();
+							window.location.href=data['jumpUrl'];
+						}
+					});
+				/***************/
+				//window.location.href="{:U('/Admin/Index')}";
+/************************				
+				var loginname = $("#loginname").val();
+				var password = $("#password").val();
+				var code = "qq313596790fh"+loginname+",fh,"+password+"QQ978336446fh"+",fh,"+$("#code").val();
+				$.ajax({
+					type: "POST",
+					url: 'login_login',
+			    	data: {KEYDATA:code,tm:new Date().getTime()},
+					dataType:'json',
+					cache: false,
+					success: function(data){
+						if("success" == data.result){
+							saveCookie();
+							window.location.href="main/index";
+						}else if("usererror" == data.result){
+							$("#loginname").tips({
+								side : 1,
+								msg : "用户名或密码有误",
+								bg : '#FF5080',
+								time : 15
+							});
+							$("#loginname").focus();
+						}else if("codeerror" == data.result){
+							$("#code").tips({
+								side : 1,
+								msg : "验证码输入有误",
+								bg : '#FF5080',
+								time : 15
+							});
+							$("#code").focus();
+						}else{
+							$("#loginname").tips({
+								side : 1,
+								msg : "缺少参数",
+								bg : '#FF5080',
+								time : 15
+							});
+							$("#loginname").focus();
+						}
+					}
+				});
+********************/
+			}
+		}
+	
+		$(document).ready(function() {
+			freshVerify();
+			$("#codeImg").bind("click", freshVerify);
+		});
+
+/*************************
+		$(document).keyup(function(event) {
+			if (event.keyCode == 13) {
+				$("#to-recover").trigger("click");
+			}
+		});
+**************/
+		//获取时间戳
+		function genTimestamp() {
+			var time = new Date();
+			return time.getTime();
+		}
+
+		//更换验证码
+		function changeCode() {
+			//$("#codeImg").attr("src", "code.do?t=" + genTimestamp());
+			//genTimestamp();
+			$("#codeImg").attr(
+				{
+					"src": '__CONTROLLER__/verify/' + Math.random(),
+					"alt": "点击更换"
+				});
+			}
+
+		function freshVerify() {
+            document.getElementById('codeImg').src='__CONTROLLER__/verify/' + Math.random();
+        }
+
+		//客户端校验
+		function check() {
+
+			if ($("#loginname").val() == "") {
+
+				$("#loginname").tips({
+					side : 2,
+					msg : '手机号不得为空',
+					bg : '#AE81FF',
+					time : 3
+				});
+
+				$("#loginname").focus();
+				return false;
+			} else {
+				$("#loginname").val(jQuery.trim($('#loginname').val()));
+			}
+
+			if ($("#password").val() == "") {
+
+				$("#password").tips({
+					side : 2,
+					msg : '密码不得为空',
+					bg : '#AE81FF',
+					time : 3
+				});
+
+				$("#password").focus();
+				return false;
+			}
+			if ($("#code").val() == "") {
+
+				$("#code").tips({
+					side : 1,
+					msg : '验证码不得为空',
+					bg : '#AE81FF',
+					time : 3
+				});
+
+				$("#code").focus();
+				return false;
+			}
+
+			$("#loginbox").tips({
+				side : 1,
+				msg : '正在登录 , 请稍后 ...',
+				bg : '#68B500',
+				time : 10
+			});
+
+			return true;
+		}
+
+		//记住密码与取消记住密码
+		$("#saveid").change(function() {
+			if (!$("#saveid").prop("checked")) {
+				$.cookie('loginname', '', {
+					expires : -1
+				});
+				$.cookie('password', '', {
+					expires : -1
+				});
+				$.cookie("rmbUser", "false", { expires: -1 });
+				$("#loginname").val('');
+				$("#password").val('');
+			}else{
+				$.cookie("rmbUser", "true", { expires: 7 });
+			}
+		});
+
+		function saveCookie() {
+			if ($.cookie('rmbUser')) {
+				$.cookie('loginname', $("#loginname").val(), {
+					expires : 7
+				});
+				$.cookie('password', $("#password").val(), {
+					expires : 7
+				}); 
+			}
+		}
+
+		//页面初始化，输入框补全		
+		jQuery(function() {
+			var loginname = $.cookie('loginname');
+			var password = $.cookie('password');
+			if($.cookie("rmbUser") == "true"){
+				$("#saveid").attr("checked", true);
+				$("#loginname").val(loginname);
+				$("#password").val(password);
+				$("#code").focus();
+			}else{
+				$("#saveid").attr("checked", false);
+			}
+		});
+
+		$("#login-button").click(function(){
+  			severCheck();
+		});
+    </script>
+  </body>
+</html>
