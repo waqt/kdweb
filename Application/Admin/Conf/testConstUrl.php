@@ -145,4 +145,20 @@
 
 	//编辑销售商
 	const EDIT_SALES_URL  =  'web-saleors/updated-saleor';
+
+
+	/*
+	* 清洗养护管理
+	*/
+	//获取清洗养护类别列表
+	const GET_CLEANGOODS_LIST  =  'web-clean-goods-kinds/goods-kinds';
+
+	//删除清洗养护品类
+	const DELETE_CLEAN_KIND_URL  =  'web-clean-goods-kinds/delete-good-kind';
+
+	//添加清洗养护品类
+	const ADD_CLEAN_KIND_URL  =  'web-clean-goods-kinds/add-good-kind';
+
+	//编辑清洗养护品类
+	const EDIT_CLEAN_KIND_URL  =  'web-clean-goods-kinds/update-good-kind';
 ?>

@@ -1,0 +1,114 @@
+<link href="__ASSETS__/css/fileinput.css" rel="stylesheet">
+<script src="__ASSETS__/js/admin/fileinput.js"></script>
+	<h3><i class="fa fa-angle-right"></i> 添加清洗保养品类</h3>
+          	<div class="row mt">
+          		<div class="col-lg-12">
+          		   <div class="form-panel">
+					         <form class="form-horizontal style-form" id="myForm"  method="post">
+
+
+                      <div class="form-group ui-widget">
+                          <div class="col-sm-2 ui-widget"></div>
+                          <label class="col-sm-2 control-label">电器品类 <span class="text-red">*</span></label>
+                          <div class="col-sm-2">
+                            <select class="form-control appliance-father" name="appliance-father" >
+                            <option selected="selected" value='' class="display-none"></option>
+                            <volist name='applianceFather'  id='father' key='kc' >
+                                <option value='{$father.appliance_id}'>{$father.name}</option>
+                            </volist>
+                            </select>
+                          </div>
+                          <div class="col-sm-2">
+                            <select class="form-control appliance-child" name="appliance" id="appliance-child">
+                            </select>
+                          </div>
+                      </div>
+
+						          <div class="form-actions centered">
+								          <input type="button"  id="button-submit"
+									       class="btn btn-success btn-large" value="提交" /> <a class="btn"
+									       href="#" onclick="cancel()">取消</a>
+						          </div>
+					         </form>
+				        </div>
+				      </div>
+			     </div>
+<script src="__ASSETS__/js/sweetalert/js/sweet-alert.min.js"></script>
+<script type="text/javascript" language="javascript">
+  var childMap={$applianceChildMap};
+  var lock = false; 	
+
+  function cancel(){
+			$("#wrapper").load("__MODULE__/CleanGoods/lists");
+	 }
+
+	$(document).ready(function(){
+      $('#button-submit').click(function(){
+            $('#myForm').ajaxSubmit(options);
+              return false;
+		    });
+    });
+
+
+  // 电器品类二级联动
+  $(".appliance-father").change(function(){
+
+     // 先清空第二个
+      var checkValue=$(".appliance-father").val();
+      var childList= childMap[checkValue];
+      //console.log("childList="+childMap[checkValue][0]['name']);
+      $(".appliance-child").empty();
+
+      $(".appliance-child").append("<option selected='selected' value='' class='display-none'></option>");
+     // 实际的应用中，这里的option一般都是用循环生成多个了
+      for(var i=0, l=childList.length; i<l; i++){
+        var option = $("<option>").val(childList[i]['appliance_id']).text(childList[i]['name']);
+        $(".appliance-child").append(option);
+      }
+  });
+
+
+  var options = {  
+      //target: 'data',          //把服务器返回的内容放入id为output的元素中      
+      beforeSubmit: validate,  //提交前的回调函数
+      //success: showResponse,
+      /*************/  
+      success: function(data){
+        if(data['status'] != 200){
+          sweetAlert("添加失败", data['message'], "error");
+          lock =false;
+          $("#button-submit").attr("disabled",false); 
+        }else if(data['status'] == 200){
+          sweetAlert("Good job!", data['message'], "success");
+          //alert(data['message']);
+          lock =false;
+          $("#button-submit").attr("disabled",false);  
+          $("#wrapper").load("__MODULE__/CleanGoods/lists");
+        }
+      },      //提交后的回调函数  
+    /*****************/
+      url: '__MODULE__/CleanGoods/addKind',                 //默认是form的action， 如果申明，则会覆盖  
+      type: 'post',               //默认是form的method（get or post），如果申明，则会覆盖  
+      dataType: 'json',           //html(默认), xml, script, json...接受服务端返回的类型  
+      //clearForm: true,          //成功提交后，清除所有表单元素的值  
+      //resetForm: true,          //成功提交后，重置所有表单元素的值  
+      timeout: 3000               //限制请求的时间，当请求大于3秒后，跳出请求  
+  }
+    
+  function validate() { //
+     	var appliance_name = $("#appliance-father").val();
+      if(appliance_name == ""){
+     			$("#appliance-father").tips({
+					side : 2,
+					msg : '请选择电器品类',
+					bg : '#AE81FF',
+					time : 3
+				});
+				return false;
+     	}
+      lock = true;
+      $("#button-submit").attr("disabled",true); 
+    }     
+
+    
+</script>

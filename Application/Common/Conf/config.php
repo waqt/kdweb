@@ -13,7 +13,7 @@
  */
 return array(
     /* 调试配置 */
-    'SHOW_PAGE_TRACE' => false,
+    'SHOW_PAGE_TRACE' => true,
     
     /* URL配置 */
     

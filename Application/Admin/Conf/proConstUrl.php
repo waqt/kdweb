@@ -146,4 +146,10 @@
 
 	//编辑销售商
 	const EDIT_SALES_URL  =  'web-saleors/updated-saleor';
+
+	/*
+	* 清洗养护管理
+	*/
+	//获取清洗养护类别列表
+	const GET_CLEANGOODS_LIST  =  'web-clean-goods-kinds/goods-kinds';
 ?>
