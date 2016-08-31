@@ -92,12 +92,13 @@ class OrderController extends CommonController {
     $applianceFather=$applianceList['father'];
     $applianceChildMap=json_encode($applianceList['child']);
 
+    $role= session('user_info.role');
 
+    $this->assign('role',$role);
     $this->assign('applianceFather',$applianceFather);
     $this->assign('applianceChildMap',$applianceChildMap);
     $this->assign('brandNameList',$brandNameList);
     $this->assign('salesNameList',$salesNameList);
-
    
     $this->display();
   }

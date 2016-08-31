@@ -131,16 +131,18 @@ class ApplianceLogic extends BaseLogic {
      * @param array $appliance_name 品类名称
      * @param array $input_name 商户端图标控件
      * @param array $input_name2 商户端小图标控件
-     * @param array $input_name3 用户端图标控件          
+     * @param array $input_name3 用户端图标控件 
+     * @param array $input_name4 用户端清洗保养图标控件           
      * @return array
      */
-    public function addAppliance($appliance_name, $father_id=null, $input_name=null ,$input_name2=null ,$input_name3=null) {
+    public function addAppliance($appliance_name, $father_id=null, $input_name=null ,$input_name2=null ,$input_name3=null, $input_name4=null) {
 
         $data['name']        =$appliance_name;
         $data['father_id']   =$father_id;
         $data['big_logo']    =$input_name; 
         $data['small_logo']  =$input_name2; 
         $data['middle_logo'] =$input_name3; 
+        $data['middle2_logo'] =$input_name4;
         $data['token']       =session('user_info.token');
         $req_url=BASE_URL.ADD_APPLIANCE_URL;
         //\Think\Log::record($data['name']);

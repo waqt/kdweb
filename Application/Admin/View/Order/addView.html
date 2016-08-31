@@ -54,12 +54,14 @@
                             <input type="text" AUTOCOMPLETE="off" name="brandName" id="brandName" class="form-control">
                             <div class="col-sm-3" id="brandName-text"></div>
                         </div>
-                        <div class="col-sm-1"></div>
-                        <label class="col-sm-2  control-label" for="salesName">销售商名称 </label>
-                        <div class="col-sm-3">
+                        <if condition="($role eq 3000 ) OR ($role eq 2001) ">
+                          <div class="col-sm-1"></div>
+                            <label class="col-sm-2  control-label" for="salesName">销售商名称 </label>
+                          <div class="col-sm-3">
                             <input type="text" AUTOCOMPLETE="off" name="salesName" id="salesName" class="form-control">
                             <div class="col-sm-3" id="salesName-text"></div>
-                        </div>
+                          </div>
+                        </if>
                       </div>
 
 

@@ -56,10 +56,12 @@ class ApplianceController extends CommonController {
          $img1 = $_FILES['shd-photo'];
          $img2 = $_FILES['shd-photo-little'];
          $img3 = $_FILES['yhd-photo'];
+         $img4 = $_FILES['yhd-qxby-photo'];
 
          $big_logo=null;
          $small_logo=null;
-         $middle_logo=null; 
+         $middle_logo=null;
+         $middle2_logo=null; 
 
          if($img1 != '' && $img1 !=null){
             $img_name1= "appliance/pic/shd_img/".uniqid().strrchr($img1['name'],46);
@@ -93,11 +95,22 @@ class ApplianceController extends CommonController {
               $data['error_code'] = 10002;
               $this->ajaxReturn($data,'JSON');
             }  
-         }   
+         }
+        if($img4 != '' && $img4 !=null){
+            $img_name4 = "appliance/pic/yhd_qxby_img/".uniqid().strrchr($img4['name'],46);
+            $filepath4=UploadBeforeOss($img4);
+            $middle2_logo=C('OSS_FILE_PREFIX').'/'.$img_name4;
+            if(!ImgOssUpload($img_name4,$filepath4)){
+              $data['status'] = 300;
+              $data['message'] = '图片上传失败';
+              $data['error_code'] = 10002;
+              $this->ajaxReturn($data,'JSON');
+            }  
+         }    
               $applianceLogic = new l\ApplianceLogic();
               
               $result=$applianceLogic->addAppliance($applianceName, $fid, $big_logo,
-                                 $small_logo, $middle_logo);
+                                 $small_logo, $middle_logo, $middle2_logo);
               S('appliances',NULL);
               $data['status']= $result['status'];
               $data['message'] = $result['message'];
@@ -113,5 +126,12 @@ class ApplianceController extends CommonController {
     S('appliances',NULL);
     $data['message']=$result['message'];
     $this->ajaxReturn($data,'JSON');
+  }
+
+  public function editView(){
+    $appliance['applianceName']=I('applianceName');
+    $this->assign('appliance', $appliance);
+    $this->display();
+    
   }
 }

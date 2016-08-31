@@ -37,11 +37,14 @@ class MerchantLogic extends BaseLogic {
 
 
         // API URL 管理员获取列表URL 与 商户获取列表URL
+        $req_url=BASE_URL.ADMIN_GET_MERCHANT_URL;
+        /********
         if(!empty($_SESSION[C('ADMIN_AUTH_KEY')])){
             $req_url=BASE_URL.ADMIN_GET_MERCHANT_URL;
         }else{
             $req_url=BASE_URL.MER_GET_MERCHANT_URL;
         }
+        **********/
         try{
             $result=request_post($req_url,$data);
             $result=json_decode($result,true);

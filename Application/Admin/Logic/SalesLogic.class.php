@@ -31,13 +31,14 @@ class SalesLogic extends BaseLogic {
         $data['token'] =session('user_info.token');
 
         // API URL 管理员获取列表URL 与 商户获取列表URL
-
+        $req_url=BASE_URL.ADMIN_GET_SALES_LIST;
+        /*********
         if(!empty($_SESSION[C('ADMIN_AUTH_KEY')])){
             $req_url=BASE_URL.ADMIN_GET_SALES_LIST;
         }else{
             $req_url=BASE_URL.SALES_GET_SALES_LIST;
         }
-    
+        ********/
         try{
             $result=request_post($req_url,$data);
             $result=json_decode($result,true);

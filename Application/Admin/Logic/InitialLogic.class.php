@@ -137,7 +137,7 @@ class InitialLogic extends BaseLogic {
             S('leftmenus',$left_menu); 
         }
         $menu=S('leftmenus');
-         \Think\Log::record(json_encode($menu));
+        // \Think\Log::record(json_encode($menu));
         $roleMenu=$menu[$roleID];
         return $roleMenu;
     }     
