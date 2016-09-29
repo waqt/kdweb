@@ -20,10 +20,20 @@ class CompanyController extends CommonController {
       $page = I('page');
       $fl_id = I('fl_id');
       $limit = 10;
+      $map['skill'] = I('skill');;
+      $map['province'] = I('province');
+      $map['city'] = I('city');
+      $map['campus'] = I('campus');
+      $map['address'] = I('address');
+      $map['company_name'] = I('company_name');
+      $map['herader_phone'] = I('herader_phone');
+      $map['brands'] = I('brands');
+      
 
       $companyLogic = new l\CompanyLogic();
+      $applianceLogic = new l\ApplianceLogic();
 
-      $applianceData=$applianceLogic->getApplianceList($fl_id, $page, $limit);
+      $companyData=$companyLogic->getCompanyList($fl_id, $page, $limit, $map);
       $father_list=$applianceLogic->getApplianceFatherList();
 
       $appliance_list=$applianceData['datas'];
